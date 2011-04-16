@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		71B3B6BB1357ADE6002EDD42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BA1357ADE6002EDD42 /* UIKit.framework */; };
+		71B3B6BD1357ADE6002EDD42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BC1357ADE6002EDD42 /* Foundation.framework */; };
+		71B3B6BF1357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BE1357ADE6002EDD42 /* CoreGraphics.framework */; };
+		71B3B6C51357ADE6002EDD42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6C31357ADE6002EDD42 /* InfoPlist.strings */; };
+		71B3B6C81357ADE6002EDD42 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B3B6C71357ADE6002EDD42 /* main.m */; };
+		71B3B6CB1357ADE6002EDD42 /* wordsleuthAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B3B6CA1357ADE6002EDD42 /* wordsleuthAppDelegate.m */; };
+		71B3B6CE1357ADE6002EDD42 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6CC1357ADE6002EDD42 /* MainWindow.xib */; };
+		71B3B6D11357ADE6002EDD42 /* PlayGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B3B6D01357ADE6002EDD42 /* PlayGameController.m */; };
+		71B3B6D41357ADE6002EDD42 /* HighScoresController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B3B6D31357ADE6002EDD42 /* HighScoresController.m */; };
+		71B3B6D71357ADE6002EDD42 /* PlayGame.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6D51357ADE6002EDD42 /* PlayGame.xib */; };
+		71B3B6DA1357ADE6002EDD42 /* HighScores.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6D81357ADE6002EDD42 /* HighScores.xib */; };
+		71B3B6E11357ADE6002EDD42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BA1357ADE6002EDD42 /* UIKit.framework */; };
+		71B3B6E21357ADE6002EDD42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BC1357ADE6002EDD42 /* Foundation.framework */; };
+		71B3B6E31357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BE1357ADE6002EDD42 /* CoreGraphics.framework */; };
+		71B3B6EB1357ADE6002EDD42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6E91357ADE6002EDD42 /* InfoPlist.strings */; };
+		71B3B6EE1357ADE6002EDD42 /* wordsleuthTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */; };
+		71B3B6F01357ADE6002EDD42 /* wordsleuthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */; };
+		71B3B6FA1357B0E5002EDD42 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6F91357B0E5002EDD42 /* Default.png */; };
+		71B3B6FC1357B170002EDD42 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6FB1357B170002EDD42 /* appicon.png */; };
+		71B3B7011357B49B002EDD42 /* tabicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B7001357B49B002EDD42 /* tabicon.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		71B3B6E41357ADE6002EDD42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71B3B6AD1357ADE6002EDD42 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 71B3B6B51357ADE6002EDD42;
+			remoteInfo = wordsleuth;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		71B3B6B61357ADE6002EDD42 /* wordsleuth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wordsleuth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71B3B6BA1357ADE6002EDD42 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		71B3B6BC1357ADE6002EDD42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		71B3B6BE1357ADE6002EDD42 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		71B3B6C21357ADE6002EDD42 /* wordsleuth-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "wordsleuth-Info.plist"; sourceTree = "<group>"; };
+		71B3B6C41357ADE6002EDD42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		71B3B6C61357ADE6002EDD42 /* wordsleuth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wordsleuth-Prefix.pch"; sourceTree = "<group>"; };
+		71B3B6C71357ADE6002EDD42 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		71B3B6C91357ADE6002EDD42 /* wordsleuthAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wordsleuthAppDelegate.h; sourceTree = "<group>"; };
+		71B3B6CA1357ADE6002EDD42 /* wordsleuthAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wordsleuthAppDelegate.m; sourceTree = "<group>"; };
+		71B3B6CD1357ADE6002EDD42 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		71B3B6CF1357ADE6002EDD42 /* PlayGameController.h */ = {isa = PBXFileReference; name = PlayGameController.h; path = wordsleuth/PlayGameController.h; sourceTree = "<group>"; };
+		71B3B6D01357ADE6002EDD42 /* PlayGameController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PlayGameController.m; path = wordsleuth/PlayGameController.m; sourceTree = "<group>"; };
+		71B3B6D21357ADE6002EDD42 /* HighScoresController.h */ = {isa = PBXFileReference; name = HighScoresController.h; path = wordsleuth/HighScoresController.h; sourceTree = "<group>"; };
+		71B3B6D31357ADE6002EDD42 /* HighScoresController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HighScoresController.m; path = wordsleuth/HighScoresController.m; sourceTree = "<group>"; };
+		71B3B6D61357ADE6002EDD42 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PlayGame.xib; sourceTree = "<group>"; };
+		71B3B6D91357ADE6002EDD42 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/HighScores.xib; sourceTree = "<group>"; };
+		71B3B6E01357ADE6002EDD42 /* wordsleuthTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wordsleuthTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71B3B6E81357ADE6002EDD42 /* wordsleuthTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "wordsleuthTests-Info.plist"; sourceTree = "<group>"; };
+		71B3B6EA1357ADE6002EDD42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		71B3B6EC1357ADE6002EDD42 /* wordsleuthTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wordsleuthTests-Prefix.pch"; sourceTree = "<group>"; };
+		71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wordsleuthTests.h; sourceTree = "<group>"; };
+		71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wordsleuthTests.m; sourceTree = "<group>"; };
+		71B3B6F91357B0E5002EDD42 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		71B3B6FB1357B170002EDD42 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
+		71B3B7001357B49B002EDD42 /* tabicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabicon.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		71B3B6B31357ADE6002EDD42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71B3B6BB1357ADE6002EDD42 /* UIKit.framework in Frameworks */,
+				71B3B6BD1357ADE6002EDD42 /* Foundation.framework in Frameworks */,
+				71B3B6BF1357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71B3B6DC1357ADE6002EDD42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71B3B6E11357ADE6002EDD42 /* UIKit.framework in Frameworks */,
+				71B3B6E21357ADE6002EDD42 /* Foundation.framework in Frameworks */,
+				71B3B6E31357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		71B3B6AB1357ADE6002EDD42 = {
+			isa = PBXGroup;
+			children = (
+				71B3B6FD1357B192002EDD42 /* Game view */,
+				71B3B6FE1357B1A2002EDD42 /* High Scores view */,
+				71B3B6FF1357B1B0002EDD42 /* Misc Stuff */,
+				71B3B6C01357ADE6002EDD42 /* wordsleuth */,
+				71B3B6E61357ADE6002EDD42 /* wordsleuthTests */,
+				71B3B6B91357ADE6002EDD42 /* Frameworks */,
+				71B3B6B71357ADE6002EDD42 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		71B3B6B71357ADE6002EDD42 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				71B3B6B61357ADE6002EDD42 /* wordsleuth.app */,
+				71B3B6E01357ADE6002EDD42 /* wordsleuthTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		71B3B6B91357ADE6002EDD42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				71B3B6BA1357ADE6002EDD42 /* UIKit.framework */,
+				71B3B6BC1357ADE6002EDD42 /* Foundation.framework */,
+				71B3B6BE1357ADE6002EDD42 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		71B3B6C01357ADE6002EDD42 /* wordsleuth */ = {
+			isa = PBXGroup;
+			children = (
+				71B3B6C91357ADE6002EDD42 /* wordsleuthAppDelegate.h */,
+				71B3B6CA1357ADE6002EDD42 /* wordsleuthAppDelegate.m */,
+				71B3B6CC1357ADE6002EDD42 /* MainWindow.xib */,
+				71B3B6C11357ADE6002EDD42 /* Supporting Files */,
+			);
+			path = wordsleuth;
+			sourceTree = "<group>";
+		};
+		71B3B6C11357ADE6002EDD42 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				71B3B6C21357ADE6002EDD42 /* wordsleuth-Info.plist */,
+				71B3B6C31357ADE6002EDD42 /* InfoPlist.strings */,
+				71B3B6C61357ADE6002EDD42 /* wordsleuth-Prefix.pch */,
+				71B3B6C71357ADE6002EDD42 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		71B3B6E61357ADE6002EDD42 /* wordsleuthTests */ = {
+			isa = PBXGroup;
+			children = (
+				71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */,
+				71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */,
+				71B3B6E71357ADE6002EDD42 /* Supporting Files */,
+			);
+			path = wordsleuthTests;
+			sourceTree = "<group>";
+		};
+		71B3B6E71357ADE6002EDD42 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				71B3B6E81357ADE6002EDD42 /* wordsleuthTests-Info.plist */,
+				71B3B6E91357ADE6002EDD42 /* InfoPlist.strings */,
+				71B3B6EC1357ADE6002EDD42 /* wordsleuthTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		71B3B6FD1357B192002EDD42 /* Game view */ = {
+			isa = PBXGroup;
+			children = (
+				71B3B6D51357ADE6002EDD42 /* PlayGame.xib */,
+				71B3B6CF1357ADE6002EDD42 /* PlayGameController.h */,
+				71B3B6D01357ADE6002EDD42 /* PlayGameController.m */,
+			);
+			name = "Game view";
+			sourceTree = "<group>";
+		};
+		71B3B6FE1357B1A2002EDD42 /* High Scores view */ = {
+			isa = PBXGroup;
+			children = (
+				71B3B6D81357ADE6002EDD42 /* HighScores.xib */,
+				71B3B6D21357ADE6002EDD42 /* HighScoresController.h */,
+				71B3B6D31357ADE6002EDD42 /* HighScoresController.m */,
+			);
+			name = "High Scores view";
+			sourceTree = "<group>";
+		};
+		71B3B6FF1357B1B0002EDD42 /* Misc Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				71B3B6FB1357B170002EDD42 /* appicon.png */,
+				71B3B6F91357B0E5002EDD42 /* Default.png */,
+				71B3B7001357B49B002EDD42 /* tabicon.png */,
+			);
+			name = "Misc Stuff";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		71B3B6B51357ADE6002EDD42 /* wordsleuth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71B3B6F31357ADE6002EDD42 /* Build configuration list for PBXNativeTarget "wordsleuth" */;
+			buildPhases = (
+				71B3B6B21357ADE6002EDD42 /* Sources */,
+				71B3B6B31357ADE6002EDD42 /* Frameworks */,
+				71B3B6B41357ADE6002EDD42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = wordsleuth;
+			productName = wordsleuth;
+			productReference = 71B3B6B61357ADE6002EDD42 /* wordsleuth.app */;
+			productType = "com.apple.product-type.application";
+		};
+		71B3B6DF1357ADE6002EDD42 /* wordsleuthTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71B3B6F61357ADE6002EDD42 /* Build configuration list for PBXNativeTarget "wordsleuthTests" */;
+			buildPhases = (
+				71B3B6DB1357ADE6002EDD42 /* Sources */,
+				71B3B6DC1357ADE6002EDD42 /* Frameworks */,
+				71B3B6DD1357ADE6002EDD42 /* Resources */,
+				71B3B6DE1357ADE6002EDD42 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71B3B6E51357ADE6002EDD42 /* PBXTargetDependency */,
+			);
+			name = wordsleuthTests;
+			productName = wordsleuthTests;
+			productReference = 71B3B6E01357ADE6002EDD42 /* wordsleuthTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		71B3B6AD1357ADE6002EDD42 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Sparkle Software";
+			};
+			buildConfigurationList = 71B3B6B01357ADE6002EDD42 /* Build configuration list for PBXProject "wordsleuth" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 71B3B6AB1357ADE6002EDD42;
+			productRefGroup = 71B3B6B71357ADE6002EDD42 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				71B3B6B51357ADE6002EDD42 /* wordsleuth */,
+				71B3B6DF1357ADE6002EDD42 /* wordsleuthTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		71B3B6B41357ADE6002EDD42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71B3B6C51357ADE6002EDD42 /* InfoPlist.strings in Resources */,
+				71B3B6CE1357ADE6002EDD42 /* MainWindow.xib in Resources */,
+				71B3B6D71357ADE6002EDD42 /* PlayGame.xib in Resources */,
+				71B3B6DA1357ADE6002EDD42 /* HighScores.xib in Resources */,
+				71B3B6FA1357B0E5002EDD42 /* Default.png in Resources */,
+				71B3B6FC1357B170002EDD42 /* appicon.png in Resources */,
+				71B3B7011357B49B002EDD42 /* tabicon.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71B3B6DD1357ADE6002EDD42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71B3B6EB1357ADE6002EDD42 /* InfoPlist.strings in Resources */,
+				71B3B6EE1357ADE6002EDD42 /* wordsleuthTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		71B3B6DE1357ADE6002EDD42 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		71B3B6B21357ADE6002EDD42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71B3B6C81357ADE6002EDD42 /* main.m in Sources */,
+				71B3B6CB1357ADE6002EDD42 /* wordsleuthAppDelegate.m in Sources */,
+				71B3B6D11357ADE6002EDD42 /* PlayGameController.m in Sources */,
+				71B3B6D41357ADE6002EDD42 /* HighScoresController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71B3B6DB1357ADE6002EDD42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71B3B6F01357ADE6002EDD42 /* wordsleuthTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		71B3B6E51357ADE6002EDD42 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 71B3B6B51357ADE6002EDD42 /* wordsleuth */;
+			targetProxy = 71B3B6E41357ADE6002EDD42 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		71B3B6C31357ADE6002EDD42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71B3B6C41357ADE6002EDD42 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		71B3B6CC1357ADE6002EDD42 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71B3B6CD1357ADE6002EDD42 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		71B3B6D51357ADE6002EDD42 /* PlayGame.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71B3B6D61357ADE6002EDD42 /* en */,
+			);
+			name = PlayGame.xib;
+			path = wordsleuth;
+			sourceTree = "<group>";
+		};
+		71B3B6D81357ADE6002EDD42 /* HighScores.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71B3B6D91357ADE6002EDD42 /* en */,
+			);
+			name = HighScores.xib;
+			path = wordsleuth;
+			sourceTree = "<group>";
+		};
+		71B3B6E91357ADE6002EDD42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71B3B6EA1357ADE6002EDD42 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		71B3B6F11357ADE6002EDD42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		71B3B6F21357ADE6002EDD42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		71B3B6F41357ADE6002EDD42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wordsleuth/wordsleuth-Prefix.pch";
+				INFOPLIST_FILE = "wordsleuth/wordsleuth-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		71B3B6F51357ADE6002EDD42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wordsleuth/wordsleuth-Prefix.pch";
+				INFOPLIST_FILE = "wordsleuth/wordsleuth-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		71B3B6F71357ADE6002EDD42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/wordsleuth.app/wordsleuth";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wordsleuthTests/wordsleuthTests-Prefix.pch";
+				INFOPLIST_FILE = "wordsleuthTests/wordsleuthTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		71B3B6F81357ADE6002EDD42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/wordsleuth.app/wordsleuth";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wordsleuthTests/wordsleuthTests-Prefix.pch";
+				INFOPLIST_FILE = "wordsleuthTests/wordsleuthTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		71B3B6B01357ADE6002EDD42 /* Build configuration list for PBXProject "wordsleuth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71B3B6F11357ADE6002EDD42 /* Debug */,
+				71B3B6F21357ADE6002EDD42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71B3B6F31357ADE6002EDD42 /* Build configuration list for PBXNativeTarget "wordsleuth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71B3B6F41357ADE6002EDD42 /* Debug */,
+				71B3B6F51357ADE6002EDD42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71B3B6F61357ADE6002EDD42 /* Build configuration list for PBXNativeTarget "wordsleuthTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71B3B6F71357ADE6002EDD42 /* Debug */,
+				71B3B6F81357ADE6002EDD42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 71B3B6AD1357ADE6002EDD42 /* Project object */;
+}

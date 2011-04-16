@@ -32,6 +32,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *afterTextField;
 
 - (IBAction)guessMade:(id)sender;
+- (IBAction)gaveUp:(id)sender;
 
 
 - (void)checkGuess:(NSString *)guess;

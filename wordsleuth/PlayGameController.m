@@ -105,6 +105,15 @@
     
 }
 
+- (IBAction)gaveUp:(id)sender {
+    // user gave up, just tell them the answer
+    
+    NSString *msg = [NSString stringWithFormat:@"The word of the day is '%@'.  Better luck next time!", word];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No luck, eh?" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil];
+    [alertView show];
+
+}
+
 - (void)checkGuess:(NSString *)guess {
     
     BOOL wrong = FALSE;
@@ -187,36 +196,18 @@
 - (void)guessIsCorrect {
     // do all the you-win stuff.
     NSLog(@"winner winner chicken dinner");
+    
+    NSString *try;
+    if (numGuesses == 1) 
+        try = @"try";
+    else
+        try = @"tries";
+        
+    NSString *msg = [NSString stringWithFormat:@"You guessed '%@' correctly in %d %@.", word, numGuesses, try];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You got it!" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Brag", nil];
+    [alertView show];
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    NSUInteger row = indexPath.row;
-    NSString *cellId = [NSString stringWithFormat:@"guess%d", row];
-    NSLog(@"cellId==%@", cellId);
-                        
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    
-    if (cell == nil) {
-        
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-    }
-    
-    cell.textLabel.text = [guesses objectAtIndex:indexPath.row];
-    
-    //cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
-    
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    NSLog(@"numberOfRowsInSection");
-    return [guesses count];
-}
 
 @end

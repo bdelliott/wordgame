@@ -49,8 +49,8 @@
     [super viewDidLoad];
 
     numGuessesLabel.text = [NSString stringWithFormat:@"%d guesses so far:", numGuesses];
-    beforeTextField.text = @"";
-    afterTextField.text = @"";
+    beforeTextField.text = @"???";
+    afterTextField.text = @"???";
     
     [guessTextField becomeFirstResponder];
 }
@@ -95,8 +95,13 @@
     [super dealloc];
 }
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    // stop keyboard from being dismissing when the Done button is touched
+    return NO;
+}
+
 - (IBAction)guessMade:(id)sender {
-    NSLog(@"user made a guess and dismissed keyboard");
+    NSLog(@"user made a guess");
     
     NSString *guess = guessTextField.text;
     guess = [guess lowercaseString];

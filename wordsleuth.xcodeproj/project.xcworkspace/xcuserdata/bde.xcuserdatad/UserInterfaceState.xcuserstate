@@ -3644,8 +3644,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>324673767.74477899</real>
-		<string>{1527, 1637}</string>
+		<real>324787296.97291702</real>
+		<string>{1527, 2210}</string>
 		<string>{2626, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -6254,7 +6254,11 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
+<<<<<<< local
+		<string>Yesterday at 2:09 PM</string>
+=======
 		<string>Today at 7:31 PM</string>
+>>>>>>> other
 		<integer>106</integer>
 		<string>wordsleuth</string>
 		<dict>
@@ -6768,6 +6772,9 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>131</integer>
+=======
 					<integer>565</integer>
 				</dict>
 			</array>
@@ -6776,29 +6783,53 @@
 				<dict>
 					<key>CF$UID</key>
 					<integer>120</integer>
+>>>>>>> other
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>109</integer>
+=======
 					<integer>566</integer>
+>>>>>>> other
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>603</integer>
+=======
 					<integer>594</integer>
+>>>>>>> other
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>627</integer>
+=======
 					<integer>120</integer>
+>>>>>>> other
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>635</integer>
+=======
 					<integer>98</integer>
+>>>>>>> other
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>636</integer>
+=======
 					<integer>634</integer>
+>>>>>>> other
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>22</integer>
+=======
 					<integer>658</integer>
 				</dict>
 				<dict>
@@ -6812,10 +6843,15 @@
 				<dict>
 					<key>CF$UID</key>
 					<integer>718</integer>
+>>>>>>> other
 				</dict>
 			</array>
 		</dict>
+<<<<<<< local
+		<string>layoutTree</string>
+=======
 		<string>ShowDebuggerArea</string>
+>>>>>>> other
 		<string>IDEEDitorArea_DebugArea</string>
 		<string>IDEEditorMode_Standard</string>
 		<string>IDEShowEditor</string>
@@ -8827,6 +8863,8 @@
 				<key>CF$UID</key>
 				<integer>88</integer>
 			</dict>
+<<<<<<< local
+=======
 		</dict>
 		<dict>
 			<key>$class</key>
@@ -8834,19 +8872,62 @@
 				<key>CF$UID</key>
 				<integer>14</integer>
 			</dict>
+>>>>>>> other
 			<key>NS.objects</key>
 			<array>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>645</integer>
+				</dict>
+			</array>
+		</dict>
+		<string>{{0, 0}, {669, 1236}}</string>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>94</integer>
+			</dict>
+			<key>NS.keys</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>569</integer>
+=======
 					<integer>722</integer>
+>>>>>>> other
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>570</integer>
+=======
 					<integer>723</integer>
+>>>>>>> other
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>571</integer>
+				</dict>
+			</array>
+			<key>NS.objects</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>647</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>21</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>664</integer>
+=======
 					<integer>724</integer>
+>>>>>>> other
 				</dict>
 			</array>
 		</dict>
@@ -8854,6 +8935,9 @@
 			<key>$class</key>
 			<dict>
 				<key>CF$UID</key>
+<<<<<<< local
+				<integer>43</integer>
+=======
 				<integer>57</integer>
 			</dict>
 			<key>Identifier</key>
@@ -8918,16 +9002,21 @@
 			<dict>
 				<key>CF$UID</key>
 				<integer>14</integer>
+>>>>>>> other
 			</dict>
 			<key>NS.objects</key>
 			<array>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>648</integer>
+=======
 					<integer>719</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
 					<integer>728</integer>
+>>>>>>> other
 				</dict>
 			</array>
 		</dict>
@@ -8935,6 +9024,9 @@
 			<key>$class</key>
 			<dict>
 				<key>CF$UID</key>
+<<<<<<< local
+				<integer>85</integer>
+=======
 				<integer>141</integer>
 			</dict>
 			<key>children</key>
@@ -9047,20 +9139,34 @@
 			<dict>
 				<key>CF$UID</key>
 				<integer>73</integer>
+>>>>>>> other
 			</dict>
 			<key>NS.keys</key>
 			<array>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>574</integer>
+=======
 					<integer>679</integer>
+>>>>>>> other
 				</dict>
+<<<<<<< local
+=======
 			</array>
 			<key>NS.objects</key>
 			<array>
+>>>>>>> other
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>575</integer>
+=======
 					<integer>734</integer>
+>>>>>>> other
 				</dict>
+<<<<<<< local
+=======
 			</array>
 		</dict>
 		<string>PlayGameController.h</string>
@@ -9093,6 +9199,7 @@
 			</dict>
 			<key>NS.keys</key>
 			<array>
+>>>>>>> other
 				<dict>
 					<key>CF$UID</key>
 					<integer>576</integer>
@@ -9145,11 +9252,277 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>649</integer>
+=======
 					<integer>739</integer>
+>>>>>>> other
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+<<<<<<< local
+					<integer>650</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>656</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>660</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>525</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>661</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>662</integer>
+				</dict>
+			</array>
+		</dict>
+		<string>public.objective-c-source</string>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>49</integer>
+			</dict>
+			<key>DocumentLocation</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>530</integer>
+			</dict>
+			<key>DomainIdentifier</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>35</integer>
+			</dict>
+			<key>IdentifierPath</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>651</integer>
+			</dict>
+			<key>IndexOfDocumentIdentifier</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>21</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>43</integer>
+			</dict>
+			<key>NS.objects</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>652</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>653</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>654</integer>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>39</integer>
+			</dict>
+			<key>Identifier</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>525</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>39</integer>
+			</dict>
+			<key>Identifier</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>527</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>39</integer>
+			</dict>
+			<key>Identifier</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>655</integer>
+			</dict>
+		</dict>
+		<string>wordsleuth</string>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>94</integer>
+			</dict>
+			<key>NS.keys</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>278</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>279</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>280</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>281</integer>
+				</dict>
+			</array>
+			<key>NS.objects</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>657</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>658</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>22</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>659</integer>
+				</dict>
+			</array>
+		</dict>
+		<real>324787296.97459</real>
+		<string>{1527, 2210}</string>
+		<string>{2626, 0}</string>
+		<string>-gaveUp:</string>
+		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>99</integer>
+			</dict>
+			<key>NS.base</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>0</integer>
+			</dict>
+			<key>NS.relative</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>663</integer>
+			</dict>
+		</dict>
+		<string>file://localhost/Users/bde/dev/sparkle/wordsleuth/wordsleuth/PlayGameController.m</string>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>43</integer>
+			</dict>
+			<key>NS.objects</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>665</integer>
+				</dict>
+			</array>
+		</dict>
+		<string>{{0, 0}, {1338, 1236}}</string>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>85</integer>
+			</dict>
+			<key>NS.keys</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>548</integer>
+				</dict>
+			</array>
+			<key>NS.objects</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>667</integer>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>88</integer>
+			</dict>
+			<key>NS.objects</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>668</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>671</integer>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>94</integer>
+			</dict>
+			<key>NS.keys</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>551</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>552</integer>
+				</dict>
+			</array>
+			<key>NS.objects</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>669</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>670</integer>
+=======
 					<integer>740</integer>
+>>>>>>> other
 				</dict>
 			</array>
 		</dict>

@@ -10,10 +10,12 @@
 
 @interface wordsleuthAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
 
+    UINavigationController *_navigationController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
+@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @end

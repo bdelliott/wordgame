@@ -26,6 +26,8 @@
     self = [super initWithCoder:decoder];
     if (self) {
        
+        self.navigationItem.hidesBackButton = YES;
+        self.navigationItem.title = @"poop";
         word = @"nacho";
 
         numGuesses = 0;
@@ -39,16 +41,18 @@
     return self;
     
 }
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     NSLog(@"PlayGameController: viewDidLoad");
     [super viewDidLoad];
 
-    
     numGuessesLabel.text = [NSString stringWithFormat:@"%d guesses so far:", numGuesses];
     beforeTextField.text = @"";
     afterTextField.text = @"";
+    
+    [guessTextField becomeFirstResponder];
 }
 
 
@@ -94,8 +98,6 @@
 - (IBAction)guessMade:(id)sender {
     NSLog(@"user made a guess and dismissed keyboard");
     
-    [guessTextField resignFirstResponder];
-    
     NSString *guess = guessTextField.text;
     guess = [guess lowercaseString];
 
@@ -103,6 +105,8 @@
     
     [self checkGuess:guess];
     
+    // clear guess
+    guessTextField.text = nil;
 }
 
 - (IBAction)gaveUp:(id)sender {

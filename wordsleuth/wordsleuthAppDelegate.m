@@ -14,12 +14,17 @@
 @synthesize window=_window;
 
 @synthesize tabBarController=_tabBarController;
+@synthesize navigationController = _navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
-    self.window.rootViewController = self.tabBarController;
+    self.window.rootViewController = self.navigationController;
+    [self.navigationController pushViewController:self.tabBarController animated:TRUE];
+    self.navigationController.navigationBar.topItem.title = @"Word Sleuth";
+    self.navigationController.navigationBar.topItem.hidesBackButton = YES;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -67,6 +72,7 @@
 {
     [_window release];
     [_tabBarController release];
+    [_navigationController release];
     [super dealloc];
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3488ABD9135D164F00BDD9E2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */; };
 		71B3B6BB1357ADE6002EDD42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BA1357ADE6002EDD42 /* UIKit.framework */; };
 		71B3B6BD1357ADE6002EDD42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BC1357ADE6002EDD42 /* Foundation.framework */; };
 		71B3B6BF1357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BE1357ADE6002EDD42 /* CoreGraphics.framework */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		71B3B6B61357ADE6002EDD42 /* wordsleuth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wordsleuth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71B3B6BA1357ADE6002EDD42 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		71B3B6BC1357ADE6002EDD42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -51,9 +53,9 @@
 		71B3B6C91357ADE6002EDD42 /* wordsleuthAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wordsleuthAppDelegate.h; sourceTree = "<group>"; };
 		71B3B6CA1357ADE6002EDD42 /* wordsleuthAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wordsleuthAppDelegate.m; sourceTree = "<group>"; };
 		71B3B6CD1357ADE6002EDD42 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		71B3B6CF1357ADE6002EDD42 /* PlayGameController.h */ = {isa = PBXFileReference; name = PlayGameController.h; path = wordsleuth/PlayGameController.h; sourceTree = "<group>"; };
+		71B3B6CF1357ADE6002EDD42 /* PlayGameController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PlayGameController.h; path = wordsleuth/PlayGameController.h; sourceTree = "<group>"; };
 		71B3B6D01357ADE6002EDD42 /* PlayGameController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PlayGameController.m; path = wordsleuth/PlayGameController.m; sourceTree = "<group>"; };
-		71B3B6D21357ADE6002EDD42 /* HighScoresController.h */ = {isa = PBXFileReference; name = HighScoresController.h; path = wordsleuth/HighScoresController.h; sourceTree = "<group>"; };
+		71B3B6D21357ADE6002EDD42 /* HighScoresController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HighScoresController.h; path = wordsleuth/HighScoresController.h; sourceTree = "<group>"; };
 		71B3B6D31357ADE6002EDD42 /* HighScoresController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HighScoresController.m; path = wordsleuth/HighScoresController.m; sourceTree = "<group>"; };
 		71B3B6D61357ADE6002EDD42 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PlayGame.xib; sourceTree = "<group>"; };
 		71B3B6D91357ADE6002EDD42 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/HighScores.xib; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3488ABD9135D164F00BDD9E2 /* QuartzCore.framework in Frameworks */,
 				71B3B6BB1357ADE6002EDD42 /* UIKit.framework in Frameworks */,
 				71B3B6BD1357ADE6002EDD42 /* Foundation.framework in Frameworks */,
 				71B3B6BF1357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */,
@@ -95,6 +98,7 @@
 		71B3B6AB1357ADE6002EDD42 = {
 			isa = PBXGroup;
 			children = (
+				3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */,
 				71B3B6FD1357B192002EDD42 /* Game view */,
 				71B3B6FE1357B1A2002EDD42 /* High Scores view */,
 				71B3B6FF1357B1B0002EDD42 /* Misc Stuff */,

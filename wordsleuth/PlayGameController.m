@@ -7,6 +7,7 @@
 //
 
 #import "PlayGameController.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation PlayGameController
@@ -20,6 +21,7 @@
 @synthesize numGuessesLabel;
 @synthesize beforeTextField;
 @synthesize afterTextField;
+@synthesize giveUp;
 
 - (id)initWithCoder:(NSCoder *)decoder {
     
@@ -42,15 +44,67 @@
     
 }
 
+- (void) styleBackground {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.anchorPoint = CGPointMake(0.0f, 0.0f);
+    gradient.position = CGPointMake(0.0f, 0.0f);
+    gradient.bounds = CGRectMake(0, 0, 360, 240);
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[UIColor whiteColor].CGColor,
+                       (id)[UIColor lightGrayColor].CGColor,
+                       nil];
+    gradient.zPosition = -100.0f;
+    [self.view.layer addSublayer:gradient]; 
+    
+    giveUp.titleLabel.textColor = [UIColor whiteColor];
+}
+
+- (void) styleGiveUp {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.anchorPoint = CGPointMake(0.0f, 0.0f);
+    gradient.position = CGPointMake(0.0f, 0.0f);
+    gradient.bounds = giveUp.layer.bounds;
+    gradient.cornerRadius = 10.0;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[UIColor colorWithRed:0.92f
+                                           green:0.0f
+                                            blue:0.0f
+                                           alpha:1.0].CGColor,
+                       (id)[UIColor colorWithRed:0.62f
+                                           green:0.0f
+                                            blue:0.0f
+                                           alpha:1.0].CGColor,
+                       nil];
+    gradient.zPosition = -100.0f;
+    giveUp.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    giveUp.layer.shadowOpacity = 1.5f;
+    giveUp.layer.shadowColor = [UIColor blackColor].CGColor;
+    giveUp.layer.shadowRadius = 2.5f;
+    /*
+    gradient.borderColor = [UIColor colorWithRed:0.42f
+                                               green:0.0f
+                                                blue:0.0f
+                                               alpha:1.0].CGColor;
+    gradient.borderWidth = 1.0f;
+     */
+    [giveUp.layer addSublayer:gradient]; 
+    
+    giveUp.titleLabel.textColor = [UIColor whiteColor];
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     NSLog(@"PlayGameController: viewDidLoad");
     [super viewDidLoad];
 
-    numGuessesLabel.text = [NSString stringWithFormat:@"%d guesses so far:", numGuesses];
+    numGuessesLabel.text = [NSString stringWithFormat:@"%d guesses", numGuesses];
     beforeTextField.text = @"???";
     afterTextField.text = @"???";
+    
+    [self styleBackground];
+    [self styleGiveUp];
+
     
     [guessTextField becomeFirstResponder];
 }
@@ -79,6 +133,7 @@
 
     [self setBeforeTextField:nil];
     [self setAfterTextField:nil];
+    [self setGiveUp:nil];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -92,6 +147,7 @@
     [guessTextField release];
     [beforeTextField release];
     [afterTextField release];
+    [giveUp release];
     [super dealloc];
 }
 

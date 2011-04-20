@@ -11,6 +11,7 @@ ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 # technical people who get email harassment when things are broken
 ADMINS = (
     ("Brian Elliott", "brian@sparklesoftware.com"),
+    ("Matthew Botos", "matthew@sparklesoftware.com"),
 )
 
 # non-technical "managers" are the same as the tech wizards for this project

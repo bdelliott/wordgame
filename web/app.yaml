@@ -22,6 +22,11 @@ handlers:
 - url: /logout
   script: util/logout.py
 
+# cronjob.
+- url: /cron/.*
+  script: djangoappengine/main/main.py
+  login: admin
+
 # main site.
 - url: /.*
   script: djangoappengine/main/main.py

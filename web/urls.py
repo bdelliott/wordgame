@@ -22,6 +22,9 @@ urlpatterns = patterns('',
     # Django admin site
     (r'^admin/', include(admin.site.urls)),
 
+    # Cronjobs
+    (r'^cron/', include('cron.urls')),
+    
     # Web service application
     (r'^service/', include('service.urls')),
 

@@ -9,6 +9,11 @@
 #import "PlayGameController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "ASIHTTPRequest.h"
+
+#import "wordsleuthAppDelegate.h"
+#import "PostScoreController.h"
+
 
 @implementation PlayGameController
 
@@ -28,9 +33,25 @@
     self = [super initWithCoder:decoder];
     if (self) {
        
-        self.navigationItem.hidesBackButton = YES;
-        self.navigationItem.title = @"poop";
-        word = @"nacho";
+        // load the word of the day
+        NSURL *url = [NSURL URLWithString:@"http://localhost:8000/service/get_word"];
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+        [request startSynchronous];
+        NSError *error = [request error];
+        
+        if (error) {
+            // TODO failed to get word.  implement a disconnected mode from a limited set of words?
+            NSLog(@"word load failed, error=%@", error);
+            
+        } else {
+            NSString *response = [request responseString];
+            NSDictionary *d = [response JSONValue];
+            
+            word = [d objectForKey:@"word"];
+            [word retain];
+            
+            NSLog(@"today's word is: %@", word);
+        }
 
         numGuesses = 0;
         closestBeforeGuess = nil;
@@ -39,6 +60,7 @@
         guesses = [NSMutableArray arrayWithCapacity:32];
         [guesses retain];
         
+        shouldDismissKeyboard = NO;
     }
     return self;
     
@@ -153,7 +175,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     // stop keyboard from being dismissing when the Done button is touched
-    return NO;
+    return shouldDismissKeyboard;
 }
 
 - (IBAction)guessMade:(id)sender {
@@ -252,6 +274,7 @@
         NSComparisonResult cmp = [closestAfterGuess localizedCaseInsensitiveCompare:guess];
         if (cmp == NSOrderedDescending) {
             NSLog(@"%@ is before previous closest 'after' guess %@", guess, closestAfterGuess);
+            closestAfterGuess = guess;
         }
     }
     
@@ -262,6 +285,9 @@
     // do all the you-win stuff.
     NSLog(@"winner winner chicken dinner");
     
+    shouldDismissKeyboard = YES;
+    [guessTextField resignFirstResponder];
+    
     NSString *try;
     if (numGuesses == 1) 
         try = @"try";
@@ -269,10 +295,32 @@
         try = @"tries";
         
     NSString *msg = [NSString stringWithFormat:@"You guessed '%@' correctly in %d %@.", word, numGuesses, try];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You got it!" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Brag", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You got it!" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Post Score", nil];
     [alertView show];
 }
 
-
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 0) {
+        // Done
+        
+        // TODO - disable the textfield controls once user has won 
+        // (and done) giggle
+        NSLog(@"Done button clicked");
+        
+    } else {
+        // post score
+        NSLog(@"Post score button clicked");
+        
+        PostScoreController *postScoreController =
+        [[PostScoreController alloc] initWithNibName:@"PostScoreController" bundle:nil];
+        postScoreController.numGuesses = numGuesses;
+        postScoreController.word = word;
+        
+        wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
+        delegate.window.rootViewController = postScoreController;
+        
+    }
+}
 
 @end

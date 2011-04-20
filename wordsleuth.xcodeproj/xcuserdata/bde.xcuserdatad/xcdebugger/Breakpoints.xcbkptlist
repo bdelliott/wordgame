@@ -2,4 +2,118 @@
 <Bucket
    type = "1"
    version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/PlayGameController.m"
+         timestampString = "324942926.830731"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "184"
+         endingLineNumber = "184"
+         landmarkName = "-guessMade:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/PlayGameController.m"
+         timestampString = "324942926.830731"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "206"
+         endingLineNumber = "206"
+         landmarkName = "-checkGuess:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "PostScoreController.m"
+         timestampString = "324944323.480192"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "68"
+         endingLineNumber = "68"
+         landmarkName = "-postButtonClicked:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/HighScoresController.m"
+         timestampString = "324946552.949962"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/HighScoresController.m"
+         timestampString = "324958172.920309"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "104"
+         endingLineNumber = "104"
+         landmarkName = "-tableView:numberOfRowsInSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/HighScoresController.m"
+         timestampString = "324946648.532727"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "35"
+         endingLineNumber = "35"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/HighScoresController.m"
+         timestampString = "324957357.972816"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/HighScoresController.m"
+         timestampString = "324958061.670157"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+   </FileBreakpoints>
 </Bucket>

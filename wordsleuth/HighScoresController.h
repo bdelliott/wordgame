@@ -12,9 +12,10 @@
 @interface HighScoresController : UIViewController {
     
     IBOutlet UITableView *highScoresTableView;
+
+    NSArray *scores;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *highScoresTableView;
-@property (nonatomic, readonly) NSMutableArray *highScores;
 
 @end

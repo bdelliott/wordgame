@@ -16,6 +16,8 @@
     NSString *closestAfterGuess;
     
     UITextField *guessTextField;
+    BOOL shouldDismissKeyboard;
+    
     UILabel *beforeTextField;
     UILabel *afterTextField;
     UIButton *giveUp;

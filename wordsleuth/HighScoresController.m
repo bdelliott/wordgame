@@ -7,11 +7,11 @@
 //
 
 #import "HighScoresController.h"
+#import "ASIHTTPRequest.h"
 
 
 @implementation HighScoresController
 
-@synthesize highScores;
 @synthesize highScoresTableView;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -19,26 +19,22 @@
 {
     [super viewDidLoad];
     
-    // hack up some fake high scores data
+    // load the high scores of the day
+    NSURL *url = [NSURL URLWithString:@"http://localhost:8000/service/get_scores"];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    NSError *error = [request error];
     
-    highScores = [NSMutableArray arrayWithCapacity:10];
-    [highScores retain];
-    
-    NSMutableArray *p1 = [NSMutableArray arrayWithCapacity:2];
-    [p1 addObject:@"Bob"];
-    [p1 addObject:@"8 guesses"];
-    [highScores addObject:p1];
-
-    NSMutableArray *p2 = [NSMutableArray arrayWithCapacity:2];
-    [p2 addObject:@"Brian"];
-    [p2 addObject:@"10 guesses"];
-    [highScores addObject:p2];
-
-    NSMutableArray *p3 = [NSMutableArray arrayWithCapacity:2];
-    [p3 addObject:@"Cassandra"];
-    [p3 addObject:@"15 guesses"];
-    [highScores addObject:p3];
-
+    if (error) {
+        // TODO failed to get word.  implement a disconnected mode from a limited set of words?
+        NSLog(@"high scores load failed, error=%@", error);
+        
+    } else {
+        NSString *response = [request responseString];
+        NSDictionary *d = [response JSONValue];
+        scores = (NSArray *)[d objectForKey:@"scores"];
+        [scores retain];
+    }  
 }
 
 
@@ -85,17 +81,17 @@
     
     if (cell == nil) {
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellId];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
     }
     
-    NSArray *score = [highScores objectAtIndex:indexPath.row];
-    NSString *playerName = [score objectAtIndex:0];
-    NSString *numGuesses = [score objectAtIndex:1];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@    %@", playerName, numGuesses];
+    NSDictionary *score = [scores objectAtIndex:indexPath.row];
+    NSString *playerName = [score objectForKey:@"user_name"];
+    NSDecimalNumber *numGuesses = [score objectForKey:@"num_guesses"];
+    cell.textLabel.text = playerName;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", numGuesses];
     
     //cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
     
@@ -104,8 +100,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"numberOfRowsInSection");
-    return [highScores count];
+    NSLog(@"numberOfRowsInSection, %d rows", [scores count]);
+    return [scores count];
 }
 
 

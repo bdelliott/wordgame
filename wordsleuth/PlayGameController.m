@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "ASIHTTPRequest.h"
+#import "NSString+SBJSON.h"
 
 #import "wordsleuthAppDelegate.h"
 #import "PostScoreController.h"

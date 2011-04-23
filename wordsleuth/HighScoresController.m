@@ -8,6 +8,7 @@
 
 #import "HighScoresController.h"
 #import "ASIHTTPRequest.h"
+#import "NSString+SBJSON.h"
 
 
 @implementation HighScoresController

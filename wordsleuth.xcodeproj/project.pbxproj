@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3488ABD9135D164F00BDD9E2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */; };
+		349BBECF13634F4A00E2B497 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 349BBECE13634F4A00E2B497 /* Default@2x.png */; };
+		349BBED1136353A900E2B497 /* PlayGameBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */; };
 		71122132135E146A0067C7DB /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 71122119135E146A0067C7DB /* ASIAuthenticationDialog.m */; };
 		71122133135E146A0067C7DB /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7112211C135E146A0067C7DB /* ASIDataCompressor.m */; };
 		71122134135E146A0067C7DB /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7112211E135E146A0067C7DB /* ASIDataDecompressor.m */; };
@@ -75,6 +77,8 @@
 
 /* Begin PBXFileReference section */
 		3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		349BBECE13634F4A00E2B497 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayGameBackground@2x.png"; sourceTree = "<group>"; };
 		71122118135E146A0067C7DB /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		71122119135E146A0067C7DB /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		7112211A135E146A0067C7DB /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -187,6 +191,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		349BBEC913634F3300E2B497 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */,
+				349BBECE13634F4A00E2B497 /* Default@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		71122117135E146A0067C7DB /* ASI HTTP Request */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +312,7 @@
 		71B3B6AB1357ADE6002EDD42 = {
 			isa = PBXGroup;
 			children = (
+				349BBEC913634F3300E2B497 /* Images */,
 				71122171135E15D40067C7DB /* libz.1.2.3.dylib */,
 				71122170135E15D00067C7DB /* CoreGraphics.framework */,
 				7112216E135E15C70067C7DB /* MobileCoreServices.framework */,
@@ -506,6 +520,8 @@
 				71B3B7011357B49B002EDD42 /* tabicon.png in Resources */,
 				7112215D135E14910067C7DB /* FBDialog.bundle in Resources */,
 				71122177135E3C220067C7DB /* PostScoreController.xib in Resources */,
+				349BBECF13634F4A00E2B497 /* Default@2x.png in Resources */,
+				349BBED1136353A900E2B497 /* PlayGameBackground@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

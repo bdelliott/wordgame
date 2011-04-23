@@ -21,6 +21,8 @@
     UILabel *beforeTextField;
     UILabel *afterTextField;
     UIButton *giveUp;
+    UILabel *beforeLabel;
+    UILabel *afterLabel;
 }
 
 @property (assign) NSInteger numGuesses;
@@ -30,6 +32,9 @@
 
 @property (nonatomic, retain) IBOutlet UITextField *guessTextField;
 @property (nonatomic, retain) IBOutlet UILabel *numGuessesLabel;
+
+@property (nonatomic, retain) IBOutlet UILabel *beforeLabel;
+@property (nonatomic, retain) IBOutlet UILabel *afterLabel;
 
 @property (nonatomic, retain) IBOutlet UILabel *beforeTextField;
 @property (nonatomic, retain) IBOutlet UILabel *afterTextField;

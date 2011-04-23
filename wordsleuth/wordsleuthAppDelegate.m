@@ -22,7 +22,7 @@
     // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = self.navigationController;
     [self.navigationController pushViewController:self.tabBarController animated:TRUE];
-    self.navigationController.navigationBar.topItem.title = @"Word Sleuth";
+    self.navigationController.navigationBar.topItem.title = @"Word du Jour";
     self.navigationController.navigationBar.topItem.hidesBackButton = YES;
     
     [self.window makeKeyAndVisible];

@@ -25,6 +25,8 @@
 
 @synthesize guessTextField;
 @synthesize numGuessesLabel;
+@synthesize beforeLabel;
+@synthesize afterLabel;
 @synthesize beforeTextField;
 @synthesize afterTextField;
 @synthesize giveUp;
@@ -68,18 +70,7 @@
 }
 
 - (void) styleBackground {
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.anchorPoint = CGPointMake(0.0f, 0.0f);
-    gradient.position = CGPointMake(0.0f, 0.0f);
-    gradient.bounds = CGRectMake(0, 0, 360, 240);
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[UIColor whiteColor].CGColor,
-                       (id)[UIColor lightGrayColor].CGColor,
-                       nil];
-    gradient.zPosition = -100.0f;
-    [self.view.layer addSublayer:gradient]; 
-    
-    giveUp.titleLabel.textColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"PlayGameBackground.png"]];
 }
 
 - (void) styleGiveUp {
@@ -115,19 +106,27 @@
     giveUp.titleLabel.textColor = [UIColor whiteColor];
 }
 
+- (void) renderNumberOfGuesses {
+    if (numGuesses > 0) {
+        numGuessesLabel.text = [NSString stringWithFormat:@"%d", numGuesses];
+    } else {
+        numGuessesLabel.text = @"";
+    }
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    NSLog(@"PlayGameController: viewDidLoad");
     [super viewDidLoad];
-
-    numGuessesLabel.text = [NSString stringWithFormat:@"%d guesses", numGuesses];
-    beforeTextField.text = @"???";
-    afterTextField.text = @"???";
     
     [self styleBackground];
+    [self renderNumberOfGuesses];    
     [self styleGiveUp];
-
+    
+    [beforeLabel removeFromSuperview];
+    [afterLabel removeFromSuperview];
+    afterTextField.text = nil;
+    beforeTextField.text = nil;
     
     [guessTextField becomeFirstResponder];
 }
@@ -157,6 +156,8 @@
     [self setBeforeTextField:nil];
     [self setAfterTextField:nil];
     [self setGiveUp:nil];
+    [self setBeforeLabel:nil];
+    [self setAfterLabel:nil];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -171,6 +172,8 @@
     [beforeTextField release];
     [afterTextField release];
     [giveUp release];
+    [beforeLabel release];
+    [afterLabel release];
     [super dealloc];
 }
 
@@ -208,14 +211,8 @@
     
     [guesses addObject:guess];
     numGuesses++;
+    [self renderNumberOfGuesses];
     
-    if (numGuesses == 1) {
-        
-        self.numGuessesLabel.text = @"1 guess so far:";
-    } else {
-        self.numGuessesLabel.text = [NSString stringWithFormat:@"%d guesses so far:", numGuesses];
-        
-    }
 
     // check user's guess:
     
@@ -263,6 +260,7 @@
                                                                              
     }
     
+    [self.view addSubview:beforeLabel];
     beforeTextField.text = closestBeforeGuess;
 }
 
@@ -279,6 +277,7 @@
         }
     }
     
+    [self.view addSubview:afterLabel];
     afterTextField.text = closestAfterGuess;
 }
 

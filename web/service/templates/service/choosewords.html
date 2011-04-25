@@ -1,0 +1,30 @@
+<html>
+  <head>
+      <title>Choose Upcoming Daily Words</title>
+  </head>
+  
+  <body>
+      <form method="post" action="{% url choosewords %}">
+          
+          <h2>Choose daily word for the given date:</h2>
+          
+          {{ form.as_p }}
+          <input type="submit" value="Submit"/>
+      </form>
+      
+      <p/>
+      <table border="1" cellpadding="5" width="35%">
+          <tr>
+              <th>Date</th>
+              <th>Daily Word</th>
+          </tr>
+          
+          {% for dw in dwords %}
+            <tr>
+                <td>{{ dw.date }}</td>
+                <td>{{ dw.word }}</td>
+            </tr>
+          {% endfor %}
+       </table>
+  </body>
+</html>

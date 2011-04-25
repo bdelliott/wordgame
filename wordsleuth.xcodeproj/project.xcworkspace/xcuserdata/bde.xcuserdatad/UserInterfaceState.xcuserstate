@@ -5632,8 +5632,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>324958304.06932402</real>
-		<string>{1301, 1130}</string>
+		<real>325206070.29058999</real>
+		<string>{402, 2579}</string>
 		<string>{2680, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -7761,7 +7761,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 9:11 PM</string>
+		<string>4/19/11 at 9:11 PM</string>
 		<integer>106</integer>
 		<dict>
 			<key>$class</key>
@@ -8159,7 +8159,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>683</real>
+		<real>1065</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8834,7 +8834,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>1157</real>
+		<real>1223</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8946,7 +8946,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>166</integer>
+					<integer>22</integer>
 				</dict>
 			</array>
 		</dict>
@@ -9933,7 +9933,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>405</real>
+		<real>428</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -9963,7 +9963,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>751</real>
+		<real>794</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10032,7 +10032,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>405</real>
+		<real>428</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10062,7 +10062,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>751</real>
+		<real>794</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10131,7 +10131,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>635</real>
+		<real>1017</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10203,7 +10203,7 @@
 			</array>
 		</dict>
 		<string>SplitPosition</string>
-		<real>0.50043213367462158</real>
+		<real>0.5004088282585144</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10488,7 +10488,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>324958304.07237601</real>
+		<real>325206070.29256099</real>
 		<string>{0, 389}</string>
 		<string>{307, 0}</string>
 		<string>@interface HighScoresController</string>
@@ -10525,7 +10525,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {577, 613}}</string>
+		<string>{{0, 0}, {610, 1289}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10778,8 +10778,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>324958304.0722</real>
-		<string>{1301, 1130}</string>
+		<real>325206070.29244298</real>
+		<string>{402, 2579}</string>
 		<string>{2680, 0}</string>
 		<string>-tableView:cellForRowAtIndexPath:</string>
 		<dict>
@@ -10814,7 +10814,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1157, 613}}</string>
+		<string>{{0, 0}, {1223, 1289}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10829,7 +10829,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{1133, 21}, {1417, 983}}</string>
+		<string>{{1077, 45}, {1483, 1365}}</string>
 	</array>
 	<key>$top</key>
 	<dict>

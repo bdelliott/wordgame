@@ -1,4 +1,4 @@
 cron:
-- description: daily summary job
+- description: nag reminder to generate some daily words
   url: /cron/reminder
   schedule: every 24 hours

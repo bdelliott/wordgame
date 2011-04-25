@@ -1,7 +1,7 @@
 # This file will be post-processed to generate the actual app.yaml use when deploying to 
 # Google App Engine.
 application: sparkleword
-version: 1
+version: 2
 runtime: python
 api_version: 1
 
@@ -12,6 +12,10 @@ handlers:
 
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+
+- url: /_ah/queue/deferred
+  script: djangoappengine/deferred/handler.py
+  login: admin
 
 # mapping to the Django admin site's static files.
 - url: /media/admin

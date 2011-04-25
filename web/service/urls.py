@@ -21,6 +21,8 @@ urlpatterns = patterns('',
     url(r'^get_word', views.get_word, name="get_word"),
     url(r'^post_score/(?P<user_name>.+)', views.post_score, name="post_score"),
     url(r'^get_scores', views.get_scores, name='get_scores'),
+    
+    url(r'^choosewords', views.choosewords, name="choosewords"),    # admin view to choose upcoming daily words.
 
 )
 

@@ -13,8 +13,8 @@ class User(models.Model):
 class DailyWord(models.Model):
     ''' word of the day '''
     
-    word = models.CharField("The word of the day", max_length=16)
-    date = models.DateField("The date", auto_now_add=True)
+    word = models.CharField("The word of the day", max_length=16, unique=True)
+    date = models.DateField("The date", unique=True)
     
     def __str__(self):
         return "%s: %s" % (self.date, self.word)

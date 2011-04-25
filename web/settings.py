@@ -60,7 +60,9 @@ ROOT_URLCONF = 'urls'
 
 # where templates get loaded from:
 TEMPLATE_DIRS = (
+    os.path.join(ROOT_PATH, "templates"),
     os.path.join(ROOT_PATH, "service", "templates"),
+    os.path.join(ROOT_PATH, "cron", "templates"),
 )
 
 # Activate django-dbindexer if available

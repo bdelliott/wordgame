@@ -1,6 +1,5 @@
 syntax: glob
 
 *.pyc
-app.yaml
 *.DS_Store
 *.orig

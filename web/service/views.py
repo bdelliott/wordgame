@@ -1,17 +1,62 @@
 import datetime
 import logging
 logger = logging.getLogger("views")
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
-from .models import User, DailyWord, Score
-from . import word
-
+from django.template.context import RequestContext
 from django.http import *
 from django.shortcuts import *
 from django.utils import simplejson as json
 
-from . import models
+from .forms import DailyWordForm
+from .models import User, DailyWord, Score
+from . import word
 
+def choosewords(request):
+    ''' admin view for choosing upcoming words. '''
+
+    today = datetime.date.today()
+    logger.info("choosewords: Today is %s" % today)
+
+    context = RequestContext(request)
+    
+    dwords = DailyWord.objects.filter(date__gte=today).order_by("date")
+    logger.info(dwords)
+    date = today
+    x = len(dwords)
+    if x > 0:
+        date = dwords[x-1].date + datetime.timedelta(days=1)
+
+    logger.info("choosewords: Choosing word for date %s" % today)
+        
+    if request.method == "GET":
+        # render form.
+    
+        context["form"] = DailyWordForm(initial= { 
+            "date" : date,
+        })
+
+    else:
+        # validate and save.
+
+        form = DailyWordForm(request.POST)
+        if form.is_valid():
+            
+            # form is valid - 
+            
+            dw = DailyWord()
+            dw.date = form.cleaned_data["date"]
+            dw.word = form.cleaned_data["word"]
+            dw.save()
+            return redirect("choosewords")
+            
+        else:
+            context["form"] = form
+            
+    context["dwords"] = dwords
+    return render_to_response("service/choosewords.html", context)
+            
+            
 def get_scores(request):
     
     # get today's top scores

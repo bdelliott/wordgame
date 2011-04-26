@@ -82,6 +82,23 @@ def get_scores(request):
     scores_json = json.dumps(d)
     return HttpResponse(content=scores_json, mimetype='application/javascript')
     
+def get_time(request):
+    
+    # get google app engine time
+    now = datetime.datetime.now()
+    logger.info("Server time is: %s" % now)
+    
+    d = {
+        "year" : now.year,
+        "month" : now.month,
+        "day" : now.day,
+        "hour" : now.hour,
+        "minute" : now.minute,
+        "second" : now.second,
+    }
+    
+    now_json = json.dumps(d)
+    return HttpResponse(content=now_json, mimetype='application/javascript')
     
 def get_word(request):
     ''' get today's word '''

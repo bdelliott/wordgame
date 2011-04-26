@@ -41,6 +41,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *beforeTextField;
 @property (nonatomic, retain) IBOutlet UILabel *afterTextField;
 @property (nonatomic, retain) IBOutlet UIButton *giveUp;
+
 - (IBAction)guessMade:(id)sender;
 - (IBAction)gaveUp:(id)sender;
 

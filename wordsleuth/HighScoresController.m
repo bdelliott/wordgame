@@ -9,7 +9,7 @@
 #import "HighScoresController.h"
 #import "ASIHTTPRequest.h"
 #import "NSString+SBJSON.h"
-
+#import "WordURL.h"
 
 @implementation HighScoresController
 
@@ -35,7 +35,7 @@
     NSLog(@"Loading high scores");
     
     // load the high scores of the day
-    NSURL *url = [NSURL URLWithString:@"http://localhost:8000/service/get_scores"];
+    NSURL *url = [WordURL getHighScoresURL];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request startSynchronous];
     NSError *error = [request error];

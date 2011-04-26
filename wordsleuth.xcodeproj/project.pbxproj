@@ -41,6 +41,7 @@
 		711F835513672A14000CD08C /* TSAlertViewButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834E13672A14000CD08C /* TSAlertViewButtonBackground.png */; };
 		711F835613672A14000CD08C /* TSAlertViewCancelButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834F13672A14000CD08C /* TSAlertViewCancelButtonBackground.png */; };
 		711F835713672A14000CD08C /* TSAlertViewMessageListViewShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F835013672A14000CD08C /* TSAlertViewMessageListViewShadow.png */; };
+		711F835A13674DDF000CD08C /* WordURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 711F835913674DDF000CD08C /* WordURL.m */; };
 		71B3B6BB1357ADE6002EDD42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BA1357ADE6002EDD42 /* UIKit.framework */; };
 		71B3B6BD1357ADE6002EDD42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BC1357ADE6002EDD42 /* Foundation.framework */; };
 		71B3B6BF1357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BE1357ADE6002EDD42 /* CoreGraphics.framework */; };
@@ -144,6 +145,8 @@
 		711F834E13672A14000CD08C /* TSAlertViewButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewButtonBackground.png; path = TSAlertView/TSAlertViewButtonBackground.png; sourceTree = "<group>"; };
 		711F834F13672A14000CD08C /* TSAlertViewCancelButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewCancelButtonBackground.png; path = TSAlertView/TSAlertViewCancelButtonBackground.png; sourceTree = "<group>"; };
 		711F835013672A14000CD08C /* TSAlertViewMessageListViewShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewMessageListViewShadow.png; path = TSAlertView/TSAlertViewMessageListViewShadow.png; sourceTree = "<group>"; };
+		711F835813674DDF000CD08C /* WordURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordURL.h; path = ../WordURL.h; sourceTree = "<group>"; };
+		711F835913674DDF000CD08C /* WordURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordURL.m; path = ../WordURL.m; sourceTree = "<group>"; };
 		71B3B6B61357ADE6002EDD42 /* wordsleuth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wordsleuth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71B3B6BA1357ADE6002EDD42 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		71B3B6BC1357ADE6002EDD42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -379,6 +382,8 @@
 		71B3B6C01357ADE6002EDD42 /* wordsleuth */ = {
 			isa = PBXGroup;
 			children = (
+				711F835813674DDF000CD08C /* WordURL.h */,
+				711F835913674DDF000CD08C /* WordURL.m */,
 				71B3B6C91357ADE6002EDD42 /* wordsleuthAppDelegate.h */,
 				71B3B6CA1357ADE6002EDD42 /* wordsleuthAppDelegate.m */,
 				71B3B6CC1357ADE6002EDD42 /* MainWindow.xib */,
@@ -609,6 +614,7 @@
 				71122165135E14910067C7DB /* SBJsonParser.m in Sources */,
 				71122166135E14910067C7DB /* SBJsonWriter.m in Sources */,
 				711F835113672A14000CD08C /* TSAlertView.m in Sources */,
+				711F835A13674DDF000CD08C /* WordURL.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

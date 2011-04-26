@@ -14,6 +14,7 @@
 #import "NSString+SBJSON.h"
 
 #import "HighScoresController.h"
+#import "WordURL.h"
 
 
 @implementation PlayGameController
@@ -45,7 +46,8 @@
     
     
     // load the word of the day
-    NSURL *url = [NSURL URLWithString:@"http://localhost:8000/service/get_word"];
+    NSURL *url = [WordURL getWordURL];
+    
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request startSynchronous];
     NSError *error = [request error];
@@ -338,8 +340,7 @@
 
 - (void)postScore:(NSString *)userName {
     
-    NSString *postUrl = [NSString stringWithFormat:@"http://localhost:8000/service/post_score/%@", userName];
-    NSURL *url = [NSURL URLWithString:postUrl];
+    NSURL *url = [WordURL postScoreURL:userName];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     

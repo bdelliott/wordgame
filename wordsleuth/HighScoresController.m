@@ -15,10 +15,24 @@
 
 @synthesize highScoresTableView;
 
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (!self)
+        return nil;
+    
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.title = @"High Scores";
+
+    return self;
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSLog(@"Loading high scores");
     
     // load the high scores of the day
     NSURL *url = [NSURL URLWithString:@"http://localhost:8000/service/get_scores"];

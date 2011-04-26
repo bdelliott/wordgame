@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSAlertView.h"
 
-
-@interface PlayGameController : UIViewController {
+@interface PlayGameController : UIViewController <TSAlertViewDelegate> {
     
     NSMutableArray *guesses;
     NSString *closestBeforeGuess;

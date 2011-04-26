@@ -34,8 +34,13 @@
 		7112216D135E15BD0067C7DB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7112216C135E15BD0067C7DB /* SystemConfiguration.framework */; };
 		7112216F135E15C70067C7DB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7112216E135E15C70067C7DB /* MobileCoreServices.framework */; };
 		71122172135E15D40067C7DB /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 71122171135E15D40067C7DB /* libz.1.2.3.dylib */; };
-		71122176135E3C220067C7DB /* PostScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71122174135E3C220067C7DB /* PostScoreController.m */; };
-		71122177135E3C220067C7DB /* PostScoreController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71122175135E3C220067C7DB /* PostScoreController.xib */; };
+		711F835113672A14000CD08C /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 711F834A13672A14000CD08C /* TSAlertView.m */; };
+		711F835213672A14000CD08C /* TSAlertViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834B13672A14000CD08C /* TSAlertViewBackground.png */; };
+		711F835313672A14000CD08C /* TSAlertViewBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834C13672A14000CD08C /* TSAlertViewBackground2.png */; };
+		711F835413672A14000CD08C /* TSAlertViewButtonBackground_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834D13672A14000CD08C /* TSAlertViewButtonBackground_Highlighted.png */; };
+		711F835513672A14000CD08C /* TSAlertViewButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834E13672A14000CD08C /* TSAlertViewButtonBackground.png */; };
+		711F835613672A14000CD08C /* TSAlertViewCancelButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834F13672A14000CD08C /* TSAlertViewCancelButtonBackground.png */; };
+		711F835713672A14000CD08C /* TSAlertViewMessageListViewShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F835013672A14000CD08C /* TSAlertViewMessageListViewShadow.png */; };
 		71B3B6BB1357ADE6002EDD42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BA1357ADE6002EDD42 /* UIKit.framework */; };
 		71B3B6BD1357ADE6002EDD42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BC1357ADE6002EDD42 /* Foundation.framework */; };
 		71B3B6BF1357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BE1357ADE6002EDD42 /* CoreGraphics.framework */; };
@@ -131,9 +136,14 @@
 		7112216E135E15C70067C7DB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		71122170135E15D00067C7DB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		71122171135E15D40067C7DB /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
-		71122173135E3C220067C7DB /* PostScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostScoreController.h; sourceTree = "<group>"; };
-		71122174135E3C220067C7DB /* PostScoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostScoreController.m; sourceTree = "<group>"; };
-		71122175135E3C220067C7DB /* PostScoreController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostScoreController.xib; sourceTree = "<group>"; };
+		711F834913672A14000CD08C /* TSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSAlertView.h; path = TSAlertView/TSAlertView.h; sourceTree = "<group>"; };
+		711F834A13672A14000CD08C /* TSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSAlertView.m; path = TSAlertView/TSAlertView.m; sourceTree = "<group>"; };
+		711F834B13672A14000CD08C /* TSAlertViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewBackground.png; path = TSAlertView/TSAlertViewBackground.png; sourceTree = "<group>"; };
+		711F834C13672A14000CD08C /* TSAlertViewBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewBackground2.png; path = TSAlertView/TSAlertViewBackground2.png; sourceTree = "<group>"; };
+		711F834D13672A14000CD08C /* TSAlertViewButtonBackground_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewButtonBackground_Highlighted.png; path = TSAlertView/TSAlertViewButtonBackground_Highlighted.png; sourceTree = "<group>"; };
+		711F834E13672A14000CD08C /* TSAlertViewButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewButtonBackground.png; path = TSAlertView/TSAlertViewButtonBackground.png; sourceTree = "<group>"; };
+		711F834F13672A14000CD08C /* TSAlertViewCancelButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewCancelButtonBackground.png; path = TSAlertView/TSAlertViewCancelButtonBackground.png; sourceTree = "<group>"; };
+		711F835013672A14000CD08C /* TSAlertViewMessageListViewShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewMessageListViewShadow.png; path = TSAlertView/TSAlertViewMessageListViewShadow.png; sourceTree = "<group>"; };
 		71B3B6B61357ADE6002EDD42 /* wordsleuth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wordsleuth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71B3B6BA1357ADE6002EDD42 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		71B3B6BC1357ADE6002EDD42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -309,6 +319,21 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		711F8348136729F8000CD08C /* TSAlertview */ = {
+			isa = PBXGroup;
+			children = (
+				711F834913672A14000CD08C /* TSAlertView.h */,
+				711F834A13672A14000CD08C /* TSAlertView.m */,
+				711F834B13672A14000CD08C /* TSAlertViewBackground.png */,
+				711F834C13672A14000CD08C /* TSAlertViewBackground2.png */,
+				711F834D13672A14000CD08C /* TSAlertViewButtonBackground_Highlighted.png */,
+				711F834E13672A14000CD08C /* TSAlertViewButtonBackground.png */,
+				711F834F13672A14000CD08C /* TSAlertViewCancelButtonBackground.png */,
+				711F835013672A14000CD08C /* TSAlertViewMessageListViewShadow.png */,
+			);
+			name = TSAlertview;
+			sourceTree = "<group>";
+		};
 		71B3B6AB1357ADE6002EDD42 = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +346,7 @@
 				3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */,
 				71122117135E146A0067C7DB /* ASI HTTP Request */,
 				7112213C135E14910067C7DB /* Facebook IOS SDK */,
+				711F8348136729F8000CD08C /* TSAlertview */,
 				71B3B6FD1357B192002EDD42 /* Game view */,
 				71B3B6FE1357B1A2002EDD42 /* High Scores view */,
 				71B3B6FF1357B1B0002EDD42 /* Misc Stuff */,
@@ -405,9 +431,6 @@
 		71B3B6FE1357B1A2002EDD42 /* High Scores view */ = {
 			isa = PBXGroup;
 			children = (
-				71122173135E3C220067C7DB /* PostScoreController.h */,
-				71122174135E3C220067C7DB /* PostScoreController.m */,
-				71122175135E3C220067C7DB /* PostScoreController.xib */,
 				71B3B6D81357ADE6002EDD42 /* HighScores.xib */,
 				71B3B6D21357ADE6002EDD42 /* HighScoresController.h */,
 				71B3B6D31357ADE6002EDD42 /* HighScoresController.m */,
@@ -519,9 +542,14 @@
 				71B3B6FC1357B170002EDD42 /* appicon.png in Resources */,
 				71B3B7011357B49B002EDD42 /* tabicon.png in Resources */,
 				7112215D135E14910067C7DB /* FBDialog.bundle in Resources */,
-				71122177135E3C220067C7DB /* PostScoreController.xib in Resources */,
 				349BBECF13634F4A00E2B497 /* Default@2x.png in Resources */,
 				349BBED1136353A900E2B497 /* PlayGameBackground@2x.png in Resources */,
+				711F835213672A14000CD08C /* TSAlertViewBackground.png in Resources */,
+				711F835313672A14000CD08C /* TSAlertViewBackground2.png in Resources */,
+				711F835413672A14000CD08C /* TSAlertViewButtonBackground_Highlighted.png in Resources */,
+				711F835513672A14000CD08C /* TSAlertViewButtonBackground.png in Resources */,
+				711F835613672A14000CD08C /* TSAlertViewCancelButtonBackground.png in Resources */,
+				711F835713672A14000CD08C /* TSAlertViewMessageListViewShadow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,7 +608,7 @@
 				71122164135E14910067C7DB /* SBJsonBase.m in Sources */,
 				71122165135E14910067C7DB /* SBJsonParser.m in Sources */,
 				71122166135E14910067C7DB /* SBJsonWriter.m in Sources */,
-				71122176135E3C220067C7DB /* PostScoreController.m in Sources */,
+				711F835113672A14000CD08C /* TSAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

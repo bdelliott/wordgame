@@ -9,11 +9,11 @@
 #import "PlayGameController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "ASIFormDataRequest.h"
 #import "ASIHTTPRequest.h"
 #import "NSString+SBJSON.h"
 
-#import "wordsleuthAppDelegate.h"
-#import "PostScoreController.h"
+#import "HighScoresController.h"
 
 
 @implementation PlayGameController
@@ -31,40 +31,49 @@
 @synthesize afterTextField;
 @synthesize giveUp;
 
-- (id)initWithCoder:(NSCoder *)decoder {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
-    self = [super initWithCoder:decoder];
-    if (self) {
-       
-        // load the word of the day
-        NSURL *url = [NSURL URLWithString:@"http://localhost:8000/service/get_word"];
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-        [request startSynchronous];
-        NSError *error = [request error];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (!self)
+        return nil;
+    
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.title = @"Word Du Jour";
+    
+    
+    NSLog(@"initializing play game controller");
+    
+    
+    // load the word of the day
+    NSURL *url = [NSURL URLWithString:@"http://localhost:8000/service/get_word"];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    NSError *error = [request error];
+    
+    if (error) {
+        // TODO failed to get word.  implement a disconnected mode from a limited set of words?
+        NSLog(@"word load failed, error=%@", error);
         
-        if (error) {
-            // TODO failed to get word.  implement a disconnected mode from a limited set of words?
-            NSLog(@"word load failed, error=%@", error);
-            
-        } else {
-            NSString *response = [request responseString];
-            NSDictionary *d = [response JSONValue];
-            
-            word = [d objectForKey:@"word"];
-            [word retain];
-            
-            NSLog(@"today's word is: %@", word);
-        }
-
-        numGuesses = 0;
-        closestBeforeGuess = nil;
-        closestAfterGuess = nil;
+    } else {
+        NSString *response = [request responseString];
+        NSDictionary *d = [response JSONValue];
         
-        guesses = [NSMutableArray arrayWithCapacity:32];
-        [guesses retain];
+        word = [d objectForKey:@"word"];
+        [word retain];
         
-        shouldDismissKeyboard = NO;
+        NSLog(@"today's word is: %@", word);
     }
+    
+    numGuesses = 0;
+    closestBeforeGuess = nil;
+    closestAfterGuess = nil;
+    
+    guesses = [NSMutableArray arrayWithCapacity:32];
+    [guesses retain];
+    
+    shouldDismissKeyboard = NO;
+    
+    
     return self;
     
 }
@@ -294,33 +303,61 @@
     else
         try = @"tries";
         
-    NSString *msg = [NSString stringWithFormat:@"You guessed '%@' correctly in %d %@.", word, numGuesses, try];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You got it!" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Post Score", nil];
+    NSString *msg = [NSString stringWithFormat:@"You guessed '%@' correctly in %d %@. \n\nEnter a username for your score:", word, numGuesses, try];
+    
+    TSAlertView *alertView = [[TSAlertView new] autorelease];
+    alertView.title = @"You got it!";
+    alertView.message = msg;
+    
+    CGFloat f = 150;
+    alertView.width = f;
+    
+    alertView.delegate = self;
+    alertView.buttonLayout = TSAlertViewButtonLayoutNormal;
+    alertView.usesMessageTextView = FALSE;
+    
+    alertView.style = TSAlertViewStyleInput;
+    [alertView addButtonWithTitle:@"Post Score"];
     [alertView show];
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+- (void)alertView:(TSAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    if (buttonIndex == 0) {
-        // Done
-        
-        // TODO - disable the textfield controls once user has won 
-        // (and done) giggle
-        NSLog(@"Done button clicked");
+    // post score
+    NSLog(@"Post score button clicked");
+    
+    NSString *userName = alertView.inputTextField.text;
+    NSString *postUrl = [NSString stringWithFormat:@"http://localhost:8000/service/post_score/%@", userName];
+    NSURL *url = [NSURL URLWithString:postUrl];
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    
+    NSString *numGuessStr = [NSString stringWithFormat:@"%d", numGuesses];
+    
+    [request setPostValue:numGuessStr forKey:@"num_guesses"];
+    [request setPostValue:word forKey:@"word"];
+    
+    [request startSynchronous];
+    
+    
+    NSError *error = [request error];
+    if (error || [request responseStatusCode] != 200) {
+        // score post failed
+        NSLog(@"score post failed");
         
     } else {
-        // post score
-        NSLog(@"Post score button clicked");
         
-        PostScoreController *postScoreController =
-        [[PostScoreController alloc] initWithNibName:@"PostScoreController" bundle:nil];
-        postScoreController.numGuesses = numGuesses;
-        postScoreController.word = word;
-        
-        wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
-        delegate.window.rootViewController = postScoreController;
-        
+        // score posted, get high scores
+        NSLog(@"score successfully posted");        
     }
+    
+    
+
+    HighScoresController *highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
+                                                  
+    [self.navigationController pushViewController:highScoresController animated:TRUE];
+    [self.navigationController popToViewController:highScoresController animated:TRUE];
+    
 }
 
 @end

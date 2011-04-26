@@ -18,6 +18,7 @@
 
 @implementation PlayGameController
 
+@synthesize solved;
 @synthesize numGuesses;
 @synthesize guesses;
 
@@ -39,7 +40,6 @@
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Word Du Jour";
-    
     
     NSLog(@"initializing play game controller");
     
@@ -208,6 +208,8 @@
 - (IBAction)gaveUp:(id)sender {
     // user gave up, just tell them the answer
     
+    self.solved = FALSE;
+    
     NSString *msg = [NSString stringWithFormat:@"The word of the day is '%@'.  Better luck next time!", word];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No luck, eh?" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil];
     [alertView show];
@@ -294,6 +296,8 @@
     // do all the you-win stuff.
     NSLog(@"winner winner chicken dinner");
     
+    self.solved = TRUE;
+    
     shouldDismissKeyboard = YES;
     [guessTextField resignFirstResponder];
     
@@ -323,10 +327,17 @@
 
 - (void)alertView:(TSAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    // post score
-    NSLog(@"Post score button clicked");
+    // post score or give up
+    if (solved) {
+        NSString *userName = alertView.inputTextField.text;
+        [self postScore:userName];
+    }
     
-    NSString *userName = alertView.inputTextField.text;
+    [self goToHighScores];
+}
+
+- (void)postScore:(NSString *)userName {
+    
     NSString *postUrl = [NSString stringWithFormat:@"http://localhost:8000/service/post_score/%@", userName];
     NSURL *url = [NSURL URLWithString:postUrl];
     
@@ -352,9 +363,12 @@
     }
     
     
+}
 
+-(void)goToHighScores {
+    
     HighScoresController *highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
-                                                  
+    
     [self.navigationController pushViewController:highScoresController animated:TRUE];
     [self.navigationController popToViewController:highScoresController animated:TRUE];
     

@@ -18,4 +18,6 @@
 
 @property (nonatomic, retain) IBOutlet UITableView *highScoresTableView;
 
++ (UIColor*) highlightColor;
+
 @end

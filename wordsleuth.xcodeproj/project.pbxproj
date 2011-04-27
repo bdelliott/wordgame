@@ -10,6 +10,7 @@
 		3488ABD9135D164F00BDD9E2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */; };
 		349BBECF13634F4A00E2B497 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 349BBECE13634F4A00E2B497 /* Default@2x.png */; };
 		349BBED1136353A900E2B497 /* PlayGameBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */; };
+		34CD2644136794130039237B /* FullBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CD2643136794130039237B /* FullBackground@2x.png */; };
 		71122132135E146A0067C7DB /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 71122119135E146A0067C7DB /* ASIAuthenticationDialog.m */; };
 		71122133135E146A0067C7DB /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7112211C135E146A0067C7DB /* ASIDataCompressor.m */; };
 		71122134135E146A0067C7DB /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7112211E135E146A0067C7DB /* ASIDataDecompressor.m */; };
@@ -85,6 +86,7 @@
 		3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		349BBECE13634F4A00E2B497 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayGameBackground@2x.png"; sourceTree = "<group>"; };
+		34CD2643136794130039237B /* FullBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FullBackground@2x.png"; sourceTree = "<group>"; };
 		71122118135E146A0067C7DB /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		71122119135E146A0067C7DB /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		7112211A135E146A0067C7DB /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		349BBEC913634F3300E2B497 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				34CD2643136794130039237B /* FullBackground@2x.png */,
 				349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */,
 				349BBECE13634F4A00E2B497 /* Default@2x.png */,
 			);
@@ -555,6 +558,7 @@
 				711F835513672A14000CD08C /* TSAlertViewButtonBackground.png in Resources */,
 				711F835613672A14000CD08C /* TSAlertViewCancelButtonBackground.png in Resources */,
 				711F835713672A14000CD08C /* TSAlertViewMessageListViewShadow.png in Resources */,
+				34CD2644136794130039237B /* FullBackground@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,10 @@
 
 @synthesize highScoresTableView;
 
++ (UIColor*) highlightColor {
+    return [UIColor colorWithRed:.91f green:.67f blue:.15f alpha:1.0f];
+}
+
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -22,7 +26,7 @@
         return nil;
     
     self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.title = @"High Scores";
+    self.navigationItem.title = @"Best Scores";
 
     return self;
 }
@@ -31,7 +35,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"FullBackground.png"]];
+    self.highScoresTableView.backgroundColor = [UIColor clearColor];
     
+    self.highScoresTableView.rowHeight = 34.0f;
+
     NSLog(@"Loading high scores");
     
     // load the high scores of the day
@@ -88,18 +97,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSUInteger row = indexPath.row;
-    NSString *cellId = [NSString stringWithFormat:@"highscore%d", row];
-    NSLog(@"cellId==%@", cellId);
+    NSString *cellId = @"ScoreCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (cell == nil) {
-        
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
-        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        cell.backgroundColor = [UIColor clearColor];        
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.detailTextLabel.textColor = [HighScoresController highlightColor];
+        cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:cell.detailTextLabel.font.pointSize];
     }
     
     NSDictionary *score = [scores objectAtIndex:indexPath.row];
@@ -107,8 +115,6 @@
     NSDecimalNumber *numGuesses = [score objectForKey:@"num_guesses"];
     cell.textLabel.text = playerName;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", numGuesses];
-    
-    //cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
     
     return cell;
 }

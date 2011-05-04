@@ -43,9 +43,9 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"FullBackground.png"]];
-    self.highScoresTableView.backgroundColor = [UIColor clearColor];
-    
+    self.highScoresTableView.backgroundColor = [UIColor clearColor];    
     self.highScoresTableView.rowHeight = 34.0f;
+    [self updateTimeLeft];
 
     NSLog(@"Loading high scores");
     
@@ -143,11 +143,7 @@
     
 }
 
-- (void)updateTimeLeft {
-    // iphone date/time library is the poo.. the steaming kind
-    
-    NSDate *now = [NSDate date];
-    
+- (NSDate *) getNextMidnight:(NSDate *) now  {
     NSDateComponents *offset = [[NSDateComponents alloc] init];
     [offset setDay:1];
     
@@ -172,9 +168,10 @@
     NSDate *midnight = [cal dateFromComponents:comps];
     [comps release];
     
-    NSTimeInterval diff = [midnight timeIntervalSinceDate:now];
-    int secsuntilmidnight = (int)diff;
-    
+    return midnight;
+}
+
+- (NSMutableString *) formatTimeLeft: (int) secsuntilmidnight  {
     int hours = secsuntilmidnight / 3600;
     int remainder = secsuntilmidnight % 3600;
     int minutes = remainder / 60;
@@ -197,7 +194,17 @@
     [timeLeft appendFormat:secondsFormat, seconds];
     [timeLeft appendString:@"!"];
     
-    self.timeLeftLabel.text = timeLeft;
+    return timeLeft;
+}
+
+- (void)updateTimeLeft {
+    // iphone date/time library is the poo.. the steaming kind
+    
+    NSDate *now = [NSDate date];    
+    NSDate *midnight = [self getNextMidnight: now];    
+    int secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
+    
+    self.timeLeftLabel.text = [self formatTimeLeft: secondsUntilMidnight];
 }
 
 

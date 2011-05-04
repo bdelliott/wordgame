@@ -114,7 +114,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];        
         cell.textLabel.textColor = [UIColor whiteColor];
-        cell.detailTextLabel.textColor = [HighScoresController highlightColor];
+        cell.detailTextLabel.textColor = [UIColor whiteColor];
         cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:cell.detailTextLabel.font.pointSize];
     }
     
@@ -180,7 +180,22 @@
     int minutes = remainder / 60;
     int seconds = remainder % 60;
     
-    NSString *timeLeft = [NSString stringWithFormat:@"%d:%d:%d", hours, minutes, seconds];
+    NSMutableString *timeLeft = [NSMutableString stringWithString:@"Play again in just "];
+    
+    if (hours > 0) { 
+        [timeLeft appendFormat:@"%d:%02d:", hours, minutes];
+    } else {
+        [timeLeft appendFormat:@"%d:", minutes]; 
+    }
+    
+    NSString *secondsFormat = nil;
+    if (minutes > 0) { 
+        secondsFormat = @"%02d";
+    } else {
+        secondsFormat = @"%d";
+    }
+    [timeLeft appendFormat:secondsFormat, seconds];
+    [timeLeft appendString:@"!"];
     
     self.timeLeftLabel.text = timeLeft;
 }

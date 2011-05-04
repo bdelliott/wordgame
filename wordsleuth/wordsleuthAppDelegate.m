@@ -7,6 +7,7 @@
 //
 
 #import "wordsleuthAppDelegate.h"
+#import "HighScoresController.h"
 
 @implementation wordsleuthAppDelegate
 
@@ -24,9 +25,23 @@
     // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = self.navigationController;
     
-    playGameController = [[PlayGameController alloc] initWithNibName:@"PlayGame" bundle:nil];
+    // first check if the user has already played today:
+    BOOL playedToday = [self checkPlayedToday];
     
-    [self.navigationController pushViewController:playGameController animated:TRUE];
+    if (playedToday) {
+        // skip to high scores screen with timer
+        [HighScoresController goToHighScores];
+        
+    } else {
+        // user has not played today:
+        playGameController = [[PlayGameController alloc] initWithNibName:@"PlayGame" bundle:nil];
+        
+        [self.navigationController pushViewController:playGameController animated:TRUE];
+        
+    }
+    
+    
+
     
     /*self.navigationController.navigationBar.topItem.title = @"Word du Jour";
     self.navigationController.navigationBar.topItem.hidesBackButton = YES;
@@ -95,5 +110,50 @@
 {
 }
 */
+
+- (BOOL)checkPlayedToday {
+    
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    
+    // get last played date
+    NSDate *lastPlayed = [standardUserDefaults objectForKey:@"lastPlayed"];
+    NSLog(@"Game last played on: %@", lastPlayed);
+    
+    if (!lastPlayed) {
+        // user has never played
+        return FALSE;
+    }
+    
+    // get current date/time
+    NSDate *now = [NSDate date]; // returns the UTC date/time
+    
+    // test if the two are the same day using the truly odd
+    // NSCalendar and NSDateComponent classes!  could they make
+    // this any uglier?
+    
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    unsigned uglyDateComponentOrBits = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSDateComponents *lastComponents = [cal components:uglyDateComponentOrBits fromDate:lastPlayed];
+    NSDateComponents *nowComponents = [cal components:uglyDateComponentOrBits fromDate:now];
+    
+    NSInteger lastYear = [lastComponents year];
+    NSInteger lastMonth = [lastComponents month];
+    NSInteger lastDay = [lastComponents day];
+    
+    NSInteger nowYear = [nowComponents year];
+    NSInteger nowMonth = [nowComponents month];
+    NSInteger nowDay = [nowComponents day];
+    
+    if (lastYear != nowYear)
+        return FALSE;
+    if (lastMonth != nowMonth)
+        return FALSE;
+    return (lastDay == nowDay);
+    
+}
+
+
+
 
 @end

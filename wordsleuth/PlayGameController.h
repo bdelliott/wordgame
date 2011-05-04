@@ -11,8 +11,6 @@
 
 @interface PlayGameController : UIViewController <TSAlertViewDelegate> {
     
-    BOOL solved;
-    NSMutableArray *guesses;
     NSString *closestBeforeGuess;
     NSString *closestAfterGuess;
     
@@ -28,7 +26,7 @@
 
 @property (assign) BOOL solved;
 @property (assign) NSInteger numGuesses;
-@property (nonatomic, readonly) NSMutableArray *guesses;
+@property (nonatomic, retain) NSMutableArray *guesses;
 
 @property (nonatomic, retain) NSString *word;
 
@@ -42,6 +40,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *afterTextField;
 @property (nonatomic, retain) IBOutlet UIButton *giveUp;
 
+- (void) initGame;
+
 - (IBAction)guessMade:(id)sender;
 - (IBAction)gaveUp:(id)sender;
 
@@ -53,5 +53,7 @@
 - (void)guessIsCorrect;
 
 - (void)postScore:(NSString *)userName;
-- (void)goToHighScores;
+
+- (void)saveLastPlayed;
+
 @end

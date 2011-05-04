@@ -27,7 +27,7 @@
 
 
 + (NSURL *)getTimeURL {
-
+    /* just a debug function at the moment. */
     return [self getURL:@"get_time"];
 }
 

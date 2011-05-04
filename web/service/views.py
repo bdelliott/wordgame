@@ -2,6 +2,7 @@ import datetime
 import logging
 logger = logging.getLogger("views")
 logger.setLevel(logging.INFO)
+import time
 
 from django.template.context import RequestContext
 from django.http import *
@@ -83,7 +84,7 @@ def get_scores(request):
     return HttpResponse(content=scores_json, mimetype='application/javascript')
     
 def get_time(request):
-    
+    ''' just a debug view '''
     # get google app engine time
     now = datetime.datetime.now()
     logger.info("Server time is: %s" % now)
@@ -103,7 +104,10 @@ def get_time(request):
 def get_word(request):
     ''' get today's word '''
     
-    today = datetime.date.today()
+    now = datetime.datetime.now()
+    logger.info("now=%s" % now)
+    today = now.date()
+    
     try:
         daily_word = DailyWord.objects.get(date=today)
         
@@ -113,14 +117,28 @@ def get_word(request):
         w = word.generate_daily_word(today)
         daily_word = DailyWord()
         daily_word.word = w
+        daily_word.date = today
         daily_word.save()
         
+    # calculate time in seconds until next word will be available to replace this one:    
+    tomorrow = today + datetime.timedelta(days=1)
+    new_word_time = datetime.date(tomorrow.year, tomorrow.month, tomorrow.day)
+    
+    logger.info("new_word_time: %s" % new_word_time)
+    
+    # conver to epoch
+    now_epoch = time.mktime(now.timetuple())
+    new_word_epoch = time.mktime(new_word_time.timetuple())
+    
+    secs_until_next_word = new_word_epoch - now_epoch
+    
     # return daily word as json.
     d = {
         "year" : daily_word.date.year,
         "month" : daily_word.date.month,
         "day" : daily_word.date.day,
         "word" : daily_word.word,
+        "timeleft" : secs_until_next_word,
     }
     dw_json = json.dumps(d)
     return HttpResponse(content=dw_json, mimetype='application/javascript')

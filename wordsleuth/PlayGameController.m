@@ -44,6 +44,12 @@
     
     NSLog(@"initializing play game controller");
     
+    [self initGame];
+    return self;
+    
+}
+
+- (void)initGame {
     
     // load the word of the day
     NSURL *url = [WordURL getWordURL];
@@ -63,7 +69,9 @@
         word = [d objectForKey:@"word"];
         [word retain];
         
+        
         NSLog(@"today's word is: %@", word);
+        
     }
     
     numGuesses = 0;
@@ -74,10 +82,6 @@
     [guesses retain];
     
     shouldDismissKeyboard = NO;
-    
-    
-    return self;
-    
 }
 
 - (void) styleBackground {
@@ -214,6 +218,8 @@
     
     self.solved = FALSE;
     
+    [self saveLastPlayed];
+    
     NSString *msg = [NSString stringWithFormat:@"The word of the day is '%@'.  Better luck next time!", word];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No luck, eh?" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil];
     [alertView show];
@@ -301,6 +307,8 @@
     NSLog(@"winner winner chicken dinner");
     
     self.solved = TRUE;
+    [self saveLastPlayed];
+
     
     shouldDismissKeyboard = YES;
     [guessTextField resignFirstResponder];
@@ -337,7 +345,7 @@
         [self postScore:userName];
     }
     
-    [self goToHighScores];
+    [HighScoresController goToHighScores];
 }
 
 - (void)postScore:(NSString *)userName {
@@ -368,13 +376,16 @@
     
 }
 
--(void)goToHighScores {
+- (void)saveLastPlayed {
+    // save last played date/time -- called after user wins or gives
+    // up
+    NSDate *newLastPlayed = [NSDate date];
     
-    HighScoresController *highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
-    
-    [self.navigationController pushViewController:highScoresController animated:TRUE];
-    [self.navigationController popToViewController:highScoresController animated:TRUE];
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    [standardUserDefaults setObject:newLastPlayed forKey:@"lastPlayed"];
     
 }
+
+
 
 @end

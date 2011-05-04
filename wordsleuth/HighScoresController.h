@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  HighScoresController.h
 //  wordsleuth
 //
 //  Created by Brian D. Elliott on 4/14/11.
@@ -12,12 +12,19 @@
 @interface HighScoresController : UIViewController {
     
     IBOutlet UITableView *highScoresTableView;
+    UILabel *timeLeftLabel;
 
     NSArray *scores;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *highScoresTableView;
+@property (nonatomic, retain) IBOutlet UILabel *timeLeftLabel;
+
+
+- (void)updateTimeLeft;
 
 + (UIColor*) highlightColor;
+
++ (void)goToHighScores;
 
 @end

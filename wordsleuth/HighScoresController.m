@@ -7,13 +7,17 @@
 //
 
 #import "HighScoresController.h"
+#import "wordsleuthAppDelegate.h"
+
 #import "ASIHTTPRequest.h"
 #import "NSString+SBJSON.h"
 #import "WordURL.h"
 
+
 @implementation HighScoresController
 
 @synthesize highScoresTableView;
+@synthesize timeLeftLabel;
 
 + (UIColor*) highlightColor {
     return [UIColor colorWithRed:.91f green:.67f blue:.15f alpha:1.0f];
@@ -28,6 +32,8 @@
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Best Scores";
 
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
+    
     return self;
 }
 
@@ -82,6 +88,7 @@
 {
     [highScoresTableView release];
     highScoresTableView = nil;
+    [self setTimeLeftLabel:nil];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -92,6 +99,7 @@
 - (void)dealloc
 {
     [highScoresTableView release];
+    [timeLeftLabel release];
     [super dealloc];
 }
 
@@ -124,6 +132,59 @@
     NSLog(@"numberOfRowsInSection, %d rows", [scores count]);
     return [scores count];
 }
+
++ (void)goToHighScores {
+    
+    wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
+    HighScoresController *highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
+    
+    [delegate.navigationController pushViewController:highScoresController animated:TRUE];
+    [delegate.navigationController popToViewController:highScoresController animated:TRUE];
+    
+}
+
+- (void)updateTimeLeft {
+    // iphone date/time library is the poo.. the steaming kind
+    
+    NSDate *now = [NSDate date];
+    
+    NSDateComponents *offset = [[NSDateComponents alloc] init];
+    [offset setDay:1];
+    
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDate *tomorrow = [cal dateByAddingComponents:offset toDate:now options:0];
+    
+    [offset release];
+    
+    unsigned flags = (NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit);
+    NSDateComponents *comps = [cal components:flags fromDate:tomorrow];
+    NSInteger d = [comps day];
+    NSInteger m = [comps month];
+    NSInteger y = [comps year];
+
+    // now build tomorrow with hour set to 12am when the word rolls over
+    comps = [[NSDateComponents alloc] init];
+    [comps setYear:y];
+    [comps setMonth:m];
+    [comps setDay:d];
+    [comps setHour:0];
+    
+    NSDate *midnight = [cal dateFromComponents:comps];
+    [comps release];
+    
+    NSTimeInterval diff = [midnight timeIntervalSinceDate:now];
+    int secsuntilmidnight = (int)diff;
+    
+    int hours = secsuntilmidnight / 3600;
+    int remainder = secsuntilmidnight % 3600;
+    int minutes = remainder / 60;
+    int seconds = remainder % 60;
+    
+    NSString *timeLeft = [NSString stringWithFormat:@"%d:%d:%d", hours, minutes, seconds];
+    
+    self.timeLeftLabel.text = timeLeft;
+}
+
 
 
 @end

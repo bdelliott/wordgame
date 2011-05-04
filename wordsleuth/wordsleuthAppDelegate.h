@@ -22,4 +22,8 @@
 
 @property (nonatomic, retain) PlayGameController *playGameController;
 
+
+- (BOOL)checkPlayedToday;
+
+
 @end

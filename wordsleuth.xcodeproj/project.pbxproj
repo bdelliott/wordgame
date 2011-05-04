@@ -357,6 +357,7 @@
 				71B3B6FE1357B1A2002EDD42 /* High Scores view */,
 				71B3B6FF1357B1B0002EDD42 /* Misc Stuff */,
 				71B3B6C01357ADE6002EDD42 /* wordsleuth */,
+				71B3B6C11357ADE6002EDD42 /* Supporting Files */,
 				71B3B6E61357ADE6002EDD42 /* wordsleuthTests */,
 				71B3B6B91357ADE6002EDD42 /* Frameworks */,
 				71B3B6B71357ADE6002EDD42 /* Products */,
@@ -390,7 +391,6 @@
 				71B3B6C91357ADE6002EDD42 /* wordsleuthAppDelegate.h */,
 				71B3B6CA1357ADE6002EDD42 /* wordsleuthAppDelegate.m */,
 				71B3B6CC1357ADE6002EDD42 /* MainWindow.xib */,
-				71B3B6C11357ADE6002EDD42 /* Supporting Files */,
 			);
 			path = wordsleuth;
 			sourceTree = "<group>";
@@ -404,6 +404,7 @@
 				71B3B6C71357ADE6002EDD42 /* main.m */,
 			);
 			name = "Supporting Files";
+			path = wordsleuth;
 			sourceTree = "<group>";
 		};
 		71B3B6E61357ADE6002EDD42 /* wordsleuthTests */ = {

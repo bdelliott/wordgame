@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PostScoreTextFieldDelegate.h"
 #import "TSAlertView.h"
 
 @interface PlayGameController : UIViewController <TSAlertViewDelegate> {
@@ -22,6 +23,9 @@
     UIButton *giveUp;
     UILabel *beforeLabel;
     UILabel *afterLabel;
+    
+    TSAlertView *alertView;
+    PostScoreTextFieldDelegate *alertViewDelegate;
 }
 
 @property (assign) BOOL solved;
@@ -39,6 +43,9 @@
 @property (nonatomic, retain) IBOutlet UILabel *beforeTextField;
 @property (nonatomic, retain) IBOutlet UILabel *afterTextField;
 @property (nonatomic, retain) IBOutlet UIButton *giveUp;
+
+
+@property (nonatomic, retain) TSAlertView *alertView;
 
 - (void) initGame;
 

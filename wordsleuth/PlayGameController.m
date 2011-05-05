@@ -14,6 +14,7 @@
 #import "NSString+SBJSON.h"
 
 #import "HighScoresController.h"
+#import "PostScoreTextFieldDelegate.h"
 #import "WordURL.h"
 
 
@@ -33,6 +34,8 @@
 @synthesize afterTextField;
 @synthesize giveUp;
 
+@synthesize alertView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,6 +45,9 @@
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Word Du Jour";
     
+    self.alertView = [[TSAlertView new] autorelease];
+    alertViewDelegate = [[PostScoreTextFieldDelegate alloc] init];
+
     NSLog(@"initializing play game controller");
     
     [self initGame];
@@ -191,10 +197,15 @@
     [giveUp release];
     [beforeLabel release];
     [afterLabel release];
+    
+    [alertView release];
+    [alertViewDelegate release];
+    
     [super dealloc];
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    NSLog(@"textFieldShouldEndEditing");
     // stop keyboard from being dismissing when the Done button is touched
     return shouldDismissKeyboard;
 }
@@ -321,7 +332,6 @@
         
     NSString *msg = [NSString stringWithFormat:@"You guessed '%@' correctly in %d %@. \n\nEnter a username for your score:", word, numGuesses, try];
     
-    TSAlertView *alertView = [[TSAlertView new] autorelease];
     alertView.title = @"You got it!";
     alertView.message = msg;
     
@@ -334,46 +344,54 @@
     
     alertView.style = TSAlertViewStyleInput;
     [alertView addButtonWithTitle:@"Post Score"];
+    
+    // use a separate delegate object so things don't get muddled with multiple
+    // text fields in this controller
+    alertView.inputTextField.delegate = alertViewDelegate;
+    alertViewDelegate.alertView = alertView;
+
     [alertView show];
 }
 
 - (void)alertView:(TSAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    // post score or give up
-    if (solved) {
-        NSString *userName = alertView.inputTextField.text;
+    NSString *userName = alertView.inputTextField.text;
         [self postScore:userName];
-    }
-    
-    [HighScoresController goToHighScores];
 }
 
 - (void)postScore:(NSString *)userName {
     
-    NSURL *url = [WordURL postScoreURL:userName];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    
-    NSString *numGuessStr = [NSString stringWithFormat:@"%d", numGuesses];
-    
-    [request setPostValue:numGuessStr forKey:@"num_guesses"];
-    [request setPostValue:word forKey:@"word"];
-    
-    [request startSynchronous];
-    
-    
-    NSError *error = [request error];
-    if (error || [request responseStatusCode] != 200) {
-        // score post failed
-        NSLog(@"score post failed");
+    NSLog(@"postScore: %@", userName);
+    if (solved) {
+        NSLog(@"postScore: solved, so posting");
         
-    } else {
+        NSURL *url = [WordURL postScoreURL:userName];
         
-        // score posted, get high scores
-        NSLog(@"score successfully posted");        
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        
+        NSString *numGuessStr = [NSString stringWithFormat:@"%d", numGuesses];
+        
+        [request setPostValue:numGuessStr forKey:@"num_guesses"];
+        [request setPostValue:word forKey:@"word"];
+        
+        [request startSynchronous];
+        
+        
+        NSError *error = [request error];
+        if (error || [request responseStatusCode] != 200) {
+            // score post failed
+            NSLog(@"score post failed");
+            
+        } else {
+            
+            // score posted, get high scores
+            NSLog(@"score successfully posted");        
+        }
     }
     
-    
+    NSLog(@"going to high scores view");
+    [HighScoresController goToHighScores];
+
 }
 
 - (void)saveLastPlayed {

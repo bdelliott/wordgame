@@ -43,6 +43,7 @@
 		711F835613672A14000CD08C /* TSAlertViewCancelButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834F13672A14000CD08C /* TSAlertViewCancelButtonBackground.png */; };
 		711F835713672A14000CD08C /* TSAlertViewMessageListViewShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F835013672A14000CD08C /* TSAlertViewMessageListViewShadow.png */; };
 		711F835A13674DDF000CD08C /* WordURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 711F835913674DDF000CD08C /* WordURL.m */; };
+		713BDC87137340BC00A4F5AC /* PostScoreTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 713BDC86137340BC00A4F5AC /* PostScoreTextFieldDelegate.m */; };
 		71B3B6BB1357ADE6002EDD42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BA1357ADE6002EDD42 /* UIKit.framework */; };
 		71B3B6BD1357ADE6002EDD42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BC1357ADE6002EDD42 /* Foundation.framework */; };
 		71B3B6BF1357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BE1357ADE6002EDD42 /* CoreGraphics.framework */; };
@@ -149,6 +150,8 @@
 		711F835013672A14000CD08C /* TSAlertViewMessageListViewShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewMessageListViewShadow.png; path = TSAlertView/TSAlertViewMessageListViewShadow.png; sourceTree = "<group>"; };
 		711F835813674DDF000CD08C /* WordURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordURL.h; path = ../WordURL.h; sourceTree = "<group>"; };
 		711F835913674DDF000CD08C /* WordURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordURL.m; path = ../WordURL.m; sourceTree = "<group>"; };
+		713BDC85137340BC00A4F5AC /* PostScoreTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostScoreTextFieldDelegate.h; sourceTree = "<group>"; };
+		713BDC86137340BC00A4F5AC /* PostScoreTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostScoreTextFieldDelegate.m; sourceTree = "<group>"; };
 		71B3B6B61357ADE6002EDD42 /* wordsleuth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wordsleuth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71B3B6BA1357ADE6002EDD42 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		71B3B6BC1357ADE6002EDD42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -433,6 +436,8 @@
 				71B3B6D51357ADE6002EDD42 /* PlayGame.xib */,
 				71B3B6CF1357ADE6002EDD42 /* PlayGameController.h */,
 				71B3B6D01357ADE6002EDD42 /* PlayGameController.m */,
+				713BDC85137340BC00A4F5AC /* PostScoreTextFieldDelegate.h */,
+				713BDC86137340BC00A4F5AC /* PostScoreTextFieldDelegate.m */,
 			);
 			name = "Game view";
 			sourceTree = "<group>";
@@ -620,6 +625,7 @@
 				71122166135E14910067C7DB /* SBJsonWriter.m in Sources */,
 				711F835113672A14000CD08C /* TSAlertView.m in Sources */,
 				711F835A13674DDF000CD08C /* WordURL.m in Sources */,
+				713BDC87137340BC00A4F5AC /* PostScoreTextFieldDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

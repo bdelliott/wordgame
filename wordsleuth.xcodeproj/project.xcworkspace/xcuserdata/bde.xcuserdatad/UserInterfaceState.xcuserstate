@@ -4436,7 +4436,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>High Scores view</string>
+		<string>Game view</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -4455,7 +4455,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>Game view</string>
+		<string>High Scores view</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6044,7 +6044,7 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>326321615.06217402</real>
+		<real>326324079.40864003</real>
 		<string>{0, 615}</string>
 		<string>{609, 0}</string>
 		<string>@interface wordsleuthAppDelegate</string>
@@ -6335,9 +6335,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>326321615.06201601</real>
-		<string>{151, 2499}</string>
-		<string>{844, 0}</string>
+		<real>326324079.40839398</real>
+		<string>{0, 2460}</string>
+		<string>{825, 0}</string>
 		<string>-application:didFinishLaunchingWithOptions:</string>
 		<dict>
 			<key>$class</key>
@@ -14251,9 +14251,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>326321604.41737002</real>
-		<string>{8484, 2300}</string>
-		<string>{9661, 0}</string>
+		<real>326324069.46331298</real>
+		<string>{9341, 2370}</string>
+		<string>{12148, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -16047,9 +16047,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>326321615.05974197</real>
-		<string>{151, 2499}</string>
-		<string>{844, 0}</string>
+		<real>326324079.40447199</real>
+		<string>{0, 2460}</string>
+		<string>{825, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -18002,7 +18002,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>362</integer>
+					<integer>1266</integer>
 				</dict>
 			</array>
 		</dict>
@@ -18256,7 +18256,7 @@
 				<integer>1282</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>326321610.64882499</real>
+			<real>326324076.76435</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -18267,7 +18267,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 3:53 PM</string>
+		<string>Today at 4:34 PM</string>
 		<integer>106</integer>
 		<dict>
 			<key>$class</key>

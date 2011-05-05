@@ -28,7 +28,6 @@
     // first check if the user has already played today:
     BOOL playedToday = [self checkPlayedToday];
     
-    // todo remove
     if (playedToday) {
         // skip to high scores screen with timer
         [HighScoresController goToHighScores];

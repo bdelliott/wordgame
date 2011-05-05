@@ -59,6 +59,9 @@
 - (void)guessAfterWord:(NSString *)guess;
 - (void)guessIsCorrect;
 
+- (NSString *)getSavedUserName;
+- (void)saveUserName:(NSString *)userName;
+
 - (void)postScore:(NSString *)userName;
 
 - (void)saveLastPlayed;

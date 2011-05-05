@@ -350,13 +350,29 @@
     alertView.inputTextField.delegate = alertViewDelegate;
     alertViewDelegate.alertView = alertView;
 
+    // check for a saved user name to pre-populate the user name field:
+    NSString *savedUserName = [self getSavedUserName];
+    
+    NSLog(@"savedUserName = %@", savedUserName);
+    
+    if (savedUserName) {
+        alertView.inputTextField.text = savedUserName;
+    }
+    
     [alertView show];
 }
 
 - (void)alertView:(TSAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    NSString *userName = alertView.inputTextField.text;
+    if (alertView == self.alertView) {
+        
+        NSString *userName = alertView.inputTextField.text;
         [self postScore:userName];
+    } else {
+        // give up button
+        [self postScore:nil];
+    }
+    
 }
 
 - (void)postScore:(NSString *)userName {
@@ -386,6 +402,9 @@
             
             // score posted, get high scores
             NSLog(@"score successfully posted");        
+            
+            // save the username for next time
+            [self saveUserName:userName];
         }
     }
     
@@ -403,6 +422,21 @@
     [standardUserDefaults setObject:newLastPlayed forKey:@"lastPlayed"];
     
 }
+
+- (NSString *)getSavedUserName {
+    
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    return [standardUserDefaults stringForKey:@"savedUserName"];
+}
+
+- (void)saveUserName:(NSString *)userName {
+    
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    [standardUserDefaults setObject:userName forKey:@"savedUserName"];
+    [standardUserDefaults synchronize];
+}
+
+
 
 
 

@@ -138,8 +138,6 @@
     [self renderNumberOfGuesses];    
     [self styleGiveUp];
     
-    afterTextField.textColor = [HighScoresController highlightColor];
-    beforeTextField.textColor = afterTextField.textColor; 
     [beforeLabel removeFromSuperview];
     [afterLabel removeFromSuperview];
     afterTextField.text = nil;

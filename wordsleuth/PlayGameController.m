@@ -60,14 +60,9 @@
     [self initGame];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"PGC:viewDidAppear");
-
-    [super viewDidAppear:animated];
-
-}
-
 - (void)initGame {
+    
+    NSLog(@"PGC:initGame");
     
     shouldDismissKeyboard = NO;
     [guessTextField becomeFirstResponder]; // grab the editing focus
@@ -163,6 +158,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    NSLog(@"PGC:viewDidLoad");
     [super viewDidLoad];
     
     [self styleBackground];
@@ -174,7 +170,8 @@
     afterTextField.text = nil;
     beforeTextField.text = nil;
     
-    [guessTextField becomeFirstResponder];
+    BOOL accepts = [guessTextField becomeFirstResponder];
+    NSLog(@"guessTextField accepts first responder status=%d", accepts);
 }
 
 
@@ -251,6 +248,7 @@
     // user gave up, just tell them the answer
     
     self.solved = FALSE;
+    shouldDismissKeyboard = TRUE;
     
     [self saveLastPlayed];
     

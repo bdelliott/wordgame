@@ -28,27 +28,39 @@
     // first check if the user has already played today:
     BOOL playedToday = [self checkPlayedToday];
     
+    // egregious testing hack:
+    playedToday = NO;
+    
     if (playedToday) {
         // skip to high scores screen with timer
+        NSLog(@"User already played today, going to high scores.");
         [HighScoresController goToHighScores];
         
     } else {
-        // user has not played today:
-        playGameController = [[PlayGameController alloc] initWithNibName:@"PlayGame" bundle:nil];
-        
-        [self.navigationController pushViewController:playGameController animated:TRUE];
+        NSLog(@"User has not played yet today, initializing game.");
+        [self startGame];
         
     }
     
-    
-
-    
-    /*self.navigationController.navigationBar.topItem.title = @"Word du Jour";
-    self.navigationController.navigationBar.topItem.hidesBackButton = YES;
-    */
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+- (void)startGame {
+
+    NSLog(@"wordsleuth:startGame");
+    if (!self.playGameController) {
+        // user has not played today:
+        self.playGameController = [[PlayGameController alloc] initWithNibName:@"PlayGame" bundle:nil];
+        [self.navigationController pushViewController:self.playGameController animated:TRUE];
+    }
+    
+    [self.navigationController popToViewController:self.playGameController animated:TRUE];
+
+}
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -97,20 +109,6 @@
     [super dealloc];
 }
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
-}
-*/
-
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
-{
-}
-*/
-
 - (BOOL)checkPlayedToday {
     
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -152,8 +150,6 @@
     return (lastDay == nowDay);
     
 }
-
-
 
 
 @end

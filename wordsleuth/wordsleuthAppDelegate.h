@@ -10,9 +10,11 @@
 
 #import "PlayGameController.h"
 
-@interface wordsleuthAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+@interface wordsleuthAppDelegate : NSObject <UIApplicationDelegate> {
 
+    PlayGameController *playGameController;
     UINavigationController *_navigationController;
+    UIWindow *window;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -25,5 +27,6 @@
 
 - (BOOL)checkPlayedToday;
 
+- (void)startGame;
 
 @end

@@ -15,13 +15,19 @@
     UILabel *timeLeftLabel;
 
     NSArray *scores;
+    NSTimer *timer;
+    UIButton *playAgainButton;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *highScoresTableView;
 @property (nonatomic, retain) IBOutlet UILabel *timeLeftLabel;
+@property (nonatomic, retain) NSTimer *timer;
+@property (nonatomic, retain) IBOutlet UIButton *playAgainButton;
 
 
 - (void)updateTimeLeft;
+- (int)updateTimeLeftLabel;
+- (IBAction)pressedPlayAgain:(id)sender;
 
 + (UIColor*) highlightColor;
 

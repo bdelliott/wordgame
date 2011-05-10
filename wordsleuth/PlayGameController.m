@@ -50,12 +50,27 @@
 
     NSLog(@"initializing play game controller");
     
-    [self initGame];
     return self;
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"PGC:viewWillAppear");
+    [super viewWillAppear:animated];
+    [self initGame];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"PGC:viewDidAppear");
+
+    [super viewDidAppear:animated];
+
+}
+
 - (void)initGame {
+    
+    shouldDismissKeyboard = NO;
+    [guessTextField becomeFirstResponder]; // grab the editing focus
     
     // load the word of the day
     NSURL *url = [WordURL getWordURL];
@@ -87,7 +102,17 @@
     guesses = [NSMutableArray arrayWithCapacity:32];
     [guesses retain];
     
-    shouldDismissKeyboard = NO;
+}
+
+- (void) endGame {
+    // clean up
+    
+    [word release];
+    numGuesses = 0;
+    [closestBeforeGuess release];
+    [closestAfterGuess release];
+    closestBeforeGuess = closestAfterGuess = nil;
+    [guesses release];
 }
 
 - (void) styleBackground {
@@ -204,7 +229,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     NSLog(@"textFieldShouldEndEditing");
-    // stop keyboard from being dismissing when the Done button is touched
+    // stop keyboard from being dismissed when the Done button is touched
     return shouldDismissKeyboard;
 }
 
@@ -229,8 +254,11 @@
     
     [self saveLastPlayed];
     
+    [guessTextField resignFirstResponder];
+    
     NSString *msg = [NSString stringWithFormat:@"The word of the day is '%@'.  Better luck next time!", word];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No luck, eh?" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil];
+
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"No luck, eh?" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil] autorelease];
     [alertView show];
 
 }
@@ -341,7 +369,12 @@
     alertView.usesMessageTextView = FALSE;
     
     alertView.style = TSAlertViewStyleInput;
-    [alertView addButtonWithTitle:@"Post Score"];
+    NSLog(@"numberOfButtons: %d", alertView.numberOfButtons);
+    
+    if (alertView.numberOfButtons == 0) {
+        // only add the button for the first time they play.
+        [alertView addButtonWithTitle:@"Post Score"];
+    }
     
     // use a separate delegate object so things don't get muddled with multiple
     // text fields in this controller
@@ -366,11 +399,14 @@
         
         NSString *userName = alertView.inputTextField.text;
         [self postScore:userName];
+        
+
     } else {
         // give up button
         [self postScore:nil];
     }
     
+    [self endGame];
 }
 
 - (void)postScore:(NSString *)userName {

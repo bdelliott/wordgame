@@ -48,6 +48,7 @@
 @property (nonatomic, retain) TSAlertView *alertView;
 
 - (void) initGame;
+- (void) endGame;
 
 - (IBAction)guessMade:(id)sender;
 - (IBAction)gaveUp:(id)sender;

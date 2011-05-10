@@ -18,6 +18,8 @@
 
 @synthesize highScoresTableView;
 @synthesize timeLeftLabel;
+@synthesize timer;
+@synthesize playAgainButton;
 
 + (UIColor*) highlightColor {
     return [UIColor colorWithRed:.91f green:.67f blue:.15f alpha:1.0f];
@@ -31,9 +33,11 @@
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Best Scores";
-
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
     
+    self.navigationController.delegate = self;
+
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
+
     return self;
 }
 
@@ -45,7 +49,7 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"FullBackground.png"]];
     self.highScoresTableView.backgroundColor = [UIColor clearColor];    
     self.highScoresTableView.rowHeight = 34.0f;
-    [self updateTimeLeft];
+    [self updateTimeLeftLabel];
 
     NSLog(@"Loading high scores");
     
@@ -65,6 +69,8 @@
         scores = (NSArray *)[d objectForKey:@"scores"];
         [scores retain];
     }  
+    
+
 }
 
 
@@ -89,6 +95,7 @@
     [highScoresTableView release];
     highScoresTableView = nil;
     [self setTimeLeftLabel:nil];
+    [self setPlayAgainButton:nil];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -100,6 +107,7 @@
 {
     [highScoresTableView release];
     [timeLeftLabel release];
+    [playAgainButton release];
     [super dealloc];
 }
 
@@ -139,7 +147,7 @@
     HighScoresController *highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
     
     [delegate.navigationController pushViewController:highScoresController animated:TRUE];
-    [delegate.navigationController popToViewController:highScoresController animated:TRUE];
+    //[delegate.navigationController popToViewController:highScoresController animated:TRUE];
     
 }
 
@@ -198,6 +206,26 @@
 }
 
 - (void)updateTimeLeft {
+    // timer callback.  update the label and then go to a new game if timer
+    // is up
+    
+    int secondsUntilMidnight = [self updateTimeLeftLabel];
+    
+    // testing hack:
+    secondsUntilMidnight = 0;
+    
+    if (secondsUntilMidnight == 0) {
+        
+        // disable time countdown.  show play button.
+        
+        [self.timer invalidate];
+        self.timeLeftLabel.hidden = YES;
+        self.playAgainButton.hidden = NO;
+        
+    }
+    
+}
+- (int)updateTimeLeftLabel {
     // iphone date/time library is the poo.. the steaming kind
     
     NSDate *now = [NSDate date];    
@@ -205,8 +233,20 @@
     int secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
     
     self.timeLeftLabel.text = [self formatTimeLeft: secondsUntilMidnight];
+    
+    return secondsUntilMidnight;
 }
 
+- (IBAction)pressedPlayAgain:(id)sender {
+    
+    NSLog(@"play again pressed");
+    
+    // restart the game
+    
+    wordsleuthAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate startGame];
+
+}
 
 
 @end

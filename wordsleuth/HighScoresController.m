@@ -211,8 +211,8 @@
     
     int secondsUntilMidnight = [self updateTimeLeftLabel];
     
-    // testing hack:
-    secondsUntilMidnight = 0;
+    // BDE testing hack:
+    //secondsUntilMidnight = 0;
     
     if (secondsUntilMidnight == 0) {
         

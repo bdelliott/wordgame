@@ -28,8 +28,8 @@
     // first check if the user has already played today:
     BOOL playedToday = [self checkPlayedToday];
     
-    // egregious testing hack:
-    playedToday = NO;
+    // BDE egregious testing hack:
+    //playedToday = NO;
     
     if (playedToday) {
         // skip to high scores screen with timer

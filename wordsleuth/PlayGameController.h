@@ -28,7 +28,6 @@
     PostScoreTextFieldDelegate *alertViewDelegate;
 }
 
-@property (assign) BOOL solved;
 @property (assign) NSInteger numGuesses;
 @property (nonatomic, retain) NSMutableArray *guesses;
 

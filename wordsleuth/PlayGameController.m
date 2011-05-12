@@ -20,7 +20,6 @@
 
 @implementation PlayGameController
 
-@synthesize solved;
 @synthesize numGuesses;
 @synthesize guesses;
 
@@ -108,6 +107,10 @@
     [closestAfterGuess release];
     closestBeforeGuess = closestAfterGuess = nil;
     [guesses release];
+    
+    NSLog(@"going to high scores view");
+    [HighScoresController goToHighScores];
+
 }
 
 - (void) styleBackground {
@@ -247,7 +250,6 @@
 - (IBAction)gaveUp:(id)sender {
     // user gave up, just tell them the answer
     
-    self.solved = FALSE;
     shouldDismissKeyboard = TRUE;
     
     [self saveLastPlayed];
@@ -341,7 +343,6 @@
     // do all the you-win stuff.
     NSLog(@"winner winner chicken dinner");
     
-    self.solved = TRUE;
     [self saveLastPlayed];
 
     
@@ -372,6 +373,7 @@
     if (alertView.numberOfButtons == 0) {
         // only add the button for the first time they play.
         [alertView addButtonWithTitle:@"Post Score"];
+        [alertView addButtonWithTitle:@"Skip"];
     }
     
     // use a separate delegate object so things don't get muddled with multiple
@@ -395,53 +397,43 @@
     
     if (alertView == self.alertView) {
         
-        NSString *userName = alertView.inputTextField.text;
-        [self postScore:userName];
-        
-
-    } else {
-        // give up button
-        [self postScore:nil];
-    }
-    
+        if (buttonIndex == 0) {
+            NSString *userName = alertView.inputTextField.text;
+            [self postScore:userName];
+        }   
+    } 
     [self endGame];
 }
 
 - (void)postScore:(NSString *)userName {
     
     NSLog(@"postScore: %@", userName);
-    if (solved) {
-        NSLog(@"postScore: solved, so posting");
-        
-        NSURL *url = [WordURL postScoreURL:userName];
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        
-        NSString *numGuessStr = [NSString stringWithFormat:@"%d", numGuesses];
-        
-        [request setPostValue:numGuessStr forKey:@"num_guesses"];
-        [request setPostValue:word forKey:@"word"];
-        
-        [request startSynchronous];
-        
-        
-        NSError *error = [request error];
-        if (error || [request responseStatusCode] != 200) {
-            // score post failed
-            NSLog(@"score post failed");
-            
-        } else {
-            
-            // score posted, get high scores
-            NSLog(@"score successfully posted");        
-            
-            // save the username for next time
-            [self saveUserName:userName];
-        }
-    }
     
-    NSLog(@"going to high scores view");
-    [HighScoresController goToHighScores];
+    NSURL *url = [WordURL postScoreURL:userName];
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    
+    NSString *numGuessStr = [NSString stringWithFormat:@"%d", numGuesses];
+    
+    [request setPostValue:numGuessStr forKey:@"num_guesses"];
+    [request setPostValue:word forKey:@"word"];
+    
+    [request startSynchronous];
+    
+    
+    NSError *error = [request error];
+    if (error || [request responseStatusCode] != 200) {
+        // score post failed
+        NSLog(@"score post failed");
+        
+    } else {
+        
+        // score posted, get high scores
+        NSLog(@"score successfully posted");        
+        
+        // save the username for next time
+        [self saveUserName:userName];
+    }
 
 }
 

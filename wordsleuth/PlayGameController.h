@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "PostScoreTextFieldDelegate.h"
+#import "MBProgressHUD.h"
 #import "TSAlertView.h"
 
-@interface PlayGameController : UIViewController <TSAlertViewDelegate> {
+@interface PlayGameController : UIViewController <MBProgressHUDDelegate, TSAlertViewDelegate> {
     
     NSString *closestBeforeGuess;
     NSString *closestAfterGuess;
@@ -26,6 +27,9 @@
     
     TSAlertView *alertView;
     PostScoreTextFieldDelegate *alertViewDelegate;
+
+    MBProgressHUD *hud;
+
 }
 
 @property (assign) NSInteger numGuesses;
@@ -45,7 +49,6 @@
 
 
 @property (nonatomic, retain) TSAlertView *alertView;
-
 - (void) initGame;
 - (void) endGame;
 
@@ -63,6 +66,7 @@
 - (void)saveUserName:(NSString *)userName;
 
 - (void)postScore:(NSString *)userName;
+- (void)doPostScore:(NSString *)userName;
 
 - (void)saveLastPlayed;
 

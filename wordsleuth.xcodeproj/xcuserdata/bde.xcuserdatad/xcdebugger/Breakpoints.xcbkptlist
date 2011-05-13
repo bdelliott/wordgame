@@ -163,11 +163,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "326930592.825338"
+         timestampString = "326944733.399081"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "447"
-         endingLineNumber = "447"
+         startingLineNumber = "485"
+         endingLineNumber = "485"
          landmarkName = "-saveLastPlayed"
          landmarkType = "5">
       </FileBreakpoint>
@@ -191,11 +191,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "326930592.825338"
+         timestampString = "326944733.399081"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "462"
-         endingLineNumber = "462"
+         startingLineNumber = "500"
+         endingLineNumber = "500"
          landmarkName = "-saveUserName:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -351,6 +351,20 @@
          startingLineNumber = "373"
          endingLineNumber = "373"
          landmarkName = "-guessIsCorrect"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/PlayGameController.m"
+         timestampString = "326940167.152934"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "401"
+         endingLineNumber = "401"
+         landmarkName = "-alertView:didDismissWithButtonIndex:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -35,6 +35,7 @@
 		7112216D135E15BD0067C7DB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7112216C135E15BD0067C7DB /* SystemConfiguration.framework */; };
 		7112216F135E15C70067C7DB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7112216E135E15C70067C7DB /* MobileCoreServices.framework */; };
 		71122172135E15D40067C7DB /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 71122171135E15D40067C7DB /* libz.1.2.3.dylib */; };
+		71184923137C91BB007EA87E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 71184922137C91BB007EA87E /* MBProgressHUD.m */; };
 		711F835113672A14000CD08C /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 711F834A13672A14000CD08C /* TSAlertView.m */; };
 		711F835213672A14000CD08C /* TSAlertViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834B13672A14000CD08C /* TSAlertViewBackground.png */; };
 		711F835313672A14000CD08C /* TSAlertViewBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834C13672A14000CD08C /* TSAlertViewBackground2.png */; };
@@ -140,6 +141,8 @@
 		7112216E135E15C70067C7DB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		71122170135E15D00067C7DB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		71122171135E15D40067C7DB /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		71184921137C91BB007EA87E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		71184922137C91BB007EA87E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		711F834913672A14000CD08C /* TSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSAlertView.h; path = TSAlertView/TSAlertView.h; sourceTree = "<group>"; };
 		711F834A13672A14000CD08C /* TSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSAlertView.m; path = TSAlertView/TSAlertView.m; sourceTree = "<group>"; };
 		711F834B13672A14000CD08C /* TSAlertViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TSAlertViewBackground.png; path = TSAlertView/TSAlertViewBackground.png; sourceTree = "<group>"; };
@@ -328,6 +331,15 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		7118491E137C918D007EA87E /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				71184921137C91BB007EA87E /* MBProgressHUD.h */,
+				71184922137C91BB007EA87E /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		711F8348136729F8000CD08C /* TSAlertview */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +367,7 @@
 				3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */,
 				71122117135E146A0067C7DB /* ASI HTTP Request */,
 				7112213C135E14910067C7DB /* Facebook IOS SDK */,
+				7118491E137C918D007EA87E /* MBProgressHUD */,
 				711F8348136729F8000CD08C /* TSAlertview */,
 				71B3B6FD1357B192002EDD42 /* Game view */,
 				71B3B6FE1357B1A2002EDD42 /* High Scores view */,
@@ -626,6 +639,7 @@
 				711F835113672A14000CD08C /* TSAlertView.m in Sources */,
 				711F835A13674DDF000CD08C /* WordURL.m in Sources */,
 				713BDC87137340BC00A4F5AC /* PostScoreTextFieldDelegate.m in Sources */,
+				71184923137C91BB007EA87E /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

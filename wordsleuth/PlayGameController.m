@@ -400,14 +400,47 @@
         if (buttonIndex == 0) {
             NSString *userName = alertView.inputTextField.text;
             [self postScore:userName];
-        }   
-    } 
-    [self endGame];
+        } else {
+            [self endGame];
+        }
+    } else {
+        [self endGame];
+    }
 }
 
 - (void)postScore:(NSString *)userName {
+    // disply an activity indictor to let user know we're chugging
+    // along on stuff.
+    
     
     NSLog(@"postScore: %@", userName);
+    
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+	[self.navigationController.view addSubview:hud];
+	
+    hud.delegate = self;
+    hud.labelText = @"Posting Score";
+	
+    [hud showWhileExecuting:@selector(doPostScore:) onTarget:self withObject:userName animated:YES];
+    
+}
+
+- (void)hudWasHidden {
+    // clean up mb progress hud after it's no longer displayed
+    
+    NSLog(@"hudWasHidden");
+    // Remove HUD from screen when the HUD was hidded
+    [hud removeFromSuperview];
+    [hud release];
+	hud = nil;
+}
+
+
+
+- (void)doPostScore:(NSString *)userName {
+    // do the actual score posting
+    
+    NSLog(@"doPostScore: userName=%@", userName);
     
     NSURL *url = [WordURL postScoreURL:userName];
     
@@ -434,8 +467,13 @@
         // save the username for next time
         [self saveUserName:userName];
     }
-
+    
+    [self endGame];
+    
+    sleep(1); // pause long enough that the indicator doesn't flash
+              // by too fast.
 }
+
 
 - (void)saveLastPlayed {
     // save last played date/time -- called after user wins or gives

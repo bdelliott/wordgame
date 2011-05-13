@@ -59,6 +59,7 @@ def choosewords(request):
             
             
 def get_scores(request):
+    # TODO this may need a date parameter due to possible race condition with the clock flipping over midnight.
     
     # get today's top scores
     today = datetime.date.today()
@@ -126,7 +127,7 @@ def get_word(request):
     
     logger.info("new_word_time: %s" % new_word_time)
     
-    # conver to epoch
+    # convert to epoch
     now_epoch = time.mktime(now.timetuple())
     new_word_epoch = time.mktime(new_word_time.timetuple())
     
@@ -146,8 +147,19 @@ def get_word(request):
         
 def post_score(request, user_name):
     
-    num_guesses = int(request.POST["num_guesses"])
-    word = request.POST["word"]
+    num_guesses = request.POST.get("num_guesses")
+    if not num_guesses:
+        msg = "post_score: 'num_guesses' param missing or empty string"
+        logger.warn(msg)
+        return HttpResponseBadRequest(msg)
+        
+    num_guesses = int(num_guesses)
+    
+    word = request.POST.get("word")
+    if not word:
+        msg = "post_score: 'word' param missing or empty string"
+        logger.warn(msg)
+        return HttpResponseBadRequest(msg)
     
     dw = DailyWord.objects.get(word=word)   # make sure we apply score to right word if score gets submitted close to midnight.
     

@@ -457,7 +457,8 @@
     NSError *error = [request error];
     if (error || [request responseStatusCode] != 200) {
         // score post failed
-        NSLog(@"score post failed");
+        NSLog(@"Score post failed, error=%@, HTTP status code=%d",
+              error, [request responseStatusCode]);
         
     } else {
         

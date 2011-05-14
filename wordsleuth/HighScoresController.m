@@ -231,7 +231,7 @@
     NSDate *midnight = [self getNextMidnight: now];    
     int secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
     
-    self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just @%!", [self formatTimeLeft: secondsUntilMidnight]];
+    self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilMidnight]];
     
     return secondsUntilMidnight;
 }

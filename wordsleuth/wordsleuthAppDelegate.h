@@ -19,6 +19,9 @@ extern NSString* const GameStateLoaded;
     UIWindow *window;
     
     BOOL playedToday;
+    BOOL launchDisplayCompleted;
+    BOOL hasGameState;
+    NSTimer *launchTimer;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

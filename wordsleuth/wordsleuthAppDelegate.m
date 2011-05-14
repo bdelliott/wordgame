@@ -29,7 +29,15 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     [NSThread detachNewThreadSelector:@selector(loadGameState) toTarget:self withObject:nil];
     
     [self.window makeKeyAndVisible];
+    
+    launchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchDisplayCompleted) userInfo:nil repeats:NO];
+
     return YES;
+}
+
+- (void) launchDisplayCompleted {
+    launchDisplayCompleted = YES;
+    [self loadGameView];
 }
 
 - (void) loadGameState {
@@ -37,6 +45,7 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     
     // first check if the user has already played today:
     playedToday = [self checkPlayedToday];
+    hasGameState = YES;
     
     // BDE egregious testing hack:
     //playedToday = NO;
@@ -48,17 +57,17 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
 }
 
 - (void) loadGameView {
-    self.window.rootViewController = self.navigationController;
-    
-    if (playedToday) {
-        // skip to high scores screen with timer
-        NSLog(@"User already played today, going to high scores.");
-        [HighScoresController goToHighScores];
+    if (hasGameState && launchDisplayCompleted) {
+        self.window.rootViewController = self.navigationController;
         
-    } else {
-        NSLog(@"User has not played yet today, initializing game.");
-        [self startGame];
-        
+        if (playedToday) {
+            // skip to high scores screen with timer
+            NSLog(@"User already played today, going to high scores.");
+            [HighScoresController goToHighScores];            
+        } else {
+            NSLog(@"User has not played yet today, initializing game.");
+            [self startGame];            
+        }
     }
 }
 

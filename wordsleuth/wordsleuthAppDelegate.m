@@ -8,9 +8,12 @@
 
 #import "wordsleuthAppDelegate.h"
 #import "HighScoresController.h"
+#import "Launch.h"
+
+NSString* const GameStateLoaded = @"GameStateLoaded";
+
 
 @implementation wordsleuthAppDelegate
-
 
 @synthesize window=_window;
 
@@ -21,15 +24,31 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    // Add the tab bar controller's current view as a subview of the window
-    self.window.rootViewController = self.navigationController;
+    self.window.rootViewController = [[[Launch alloc] init] autorelease];
+    
+    [NSThread detachNewThreadSelector:@selector(loadGameState) toTarget:self withObject:nil];
+    
+    [self.window makeKeyAndVisible];
+    return YES;
+}
+
+- (void) loadGameState {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // first check if the user has already played today:
-    BOOL playedToday = [self checkPlayedToday];
+    playedToday = [self checkPlayedToday];
     
     // BDE egregious testing hack:
     //playedToday = NO;
+    
+    // all calls to UIKit must be from main thread
+    [self performSelectorOnMainThread:@selector(loadGameView) withObject:nil waitUntilDone:NO];
+    
+    [pool release];
+}
+
+- (void) loadGameView {
+    self.window.rootViewController = self.navigationController;
     
     if (playedToday) {
         // skip to high scores screen with timer
@@ -41,9 +60,6 @@
         [self startGame];
         
     }
-    
-    [self.window makeKeyAndVisible];
-    return YES;
 }
 
 - (void)startGame {

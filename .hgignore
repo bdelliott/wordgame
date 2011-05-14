@@ -3,3 +3,5 @@ syntax: glob
 .git
 *.pyc
 *.orig
+*xcuserdata*
+.DS_Store

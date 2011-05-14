@@ -25,6 +25,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *playAgainButton;
 
 
+- (NSMutableString *) formatTimeLeft:(int) secsuntilmidnight;
 - (void)updateTimeLeft;
 - (int)updateTimeLeftLabel;
 - (IBAction)pressedPlayAgain:(id)sender;

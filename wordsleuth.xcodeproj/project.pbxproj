@@ -10,6 +10,7 @@
 		343D9D4E137DFE450017380A /* SparkleSoftware@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 343D9D4D137DFE450017380A /* SparkleSoftware@2x.png */; };
 		343D9D5A137E004F0017380A /* Launch.m in Sources */ = {isa = PBXBuildFile; fileRef = 343D9D58137E004F0017380A /* Launch.m */; };
 		343D9D5B137E004F0017380A /* Launch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343D9D59137E004F0017380A /* Launch.xib */; };
+		343D9D5E137E9A640017380A /* HighScoresControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 343D9D5D137E9A640017380A /* HighScoresControllerTest.m */; };
 		3488ABD9135D164F00BDD9E2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */; };
 		349BBECF13634F4A00E2B497 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 349BBECE13634F4A00E2B497 /* Default@2x.png */; };
 		349BBED1136353A900E2B497 /* PlayGameBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */; };
@@ -92,6 +93,8 @@
 		343D9D57137E004F0017380A /* Launch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Launch.h; sourceTree = "<group>"; };
 		343D9D58137E004F0017380A /* Launch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Launch.m; sourceTree = "<group>"; };
 		343D9D59137E004F0017380A /* Launch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Launch.xib; sourceTree = "<group>"; };
+		343D9D5C137E9A640017380A /* HighScoresControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoresControllerTest.h; sourceTree = "<group>"; };
+		343D9D5D137E9A640017380A /* HighScoresControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoresControllerTest.m; sourceTree = "<group>"; };
 		3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		349BBECE13634F4A00E2B497 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayGameBackground@2x.png"; sourceTree = "<group>"; };
@@ -448,6 +451,8 @@
 				71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */,
 				71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */,
 				71B3B6E71357ADE6002EDD42 /* Supporting Files */,
+				343D9D5C137E9A640017380A /* HighScoresControllerTest.h */,
+				343D9D5D137E9A640017380A /* HighScoresControllerTest.m */,
 			);
 			path = wordsleuthTests;
 			sourceTree = "<group>";
@@ -670,6 +675,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71B3B6F01357ADE6002EDD42 /* wordsleuthTests.m in Sources */,
+				343D9D5E137E9A640017380A /* HighScoresControllerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -165,6 +165,8 @@
     [super viewDidLoad];
     
     [self styleBackground];
+    self.navigationItem.titleView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Title.png"]] autorelease];
+
     [self renderNumberOfGuesses];    
     [self styleGiveUp];
     

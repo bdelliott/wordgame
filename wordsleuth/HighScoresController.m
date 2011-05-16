@@ -34,8 +34,6 @@
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Best Scores";
     
-    self.navigationController.delegate = self;
-
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
 
     return self;

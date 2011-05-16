@@ -34,11 +34,31 @@
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Best Scores";
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
-
     return self;
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"HSC:viewWillAppear");
+    
+    [super viewWillAppear:animated];
+    
+    self.timeLeftLabel.hidden = NO;
+    self.playAgainButton.hidden = YES;
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
+    NSLog(@"timer scheduled (%@)", self.timer);
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"HSC:viewWillDisappear");
+    [super viewDidDisappear:animated];
+    
+    [self.timer invalidate];
+    self.timer = nil;
+    
+}
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -145,8 +165,6 @@
     HighScoresController *highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
     
     [delegate.navigationController pushViewController:highScoresController animated:TRUE];
-    //[delegate.navigationController popToViewController:highScoresController animated:TRUE];
-    
 }
 
 - (NSDate *) getNextMidnight:(NSDate *) now  {
@@ -206,6 +224,8 @@
     // timer callback.  update the label and then go to a new game if timer
     // is up
     
+    //NSLog(@"HSC:updateTimeLeft");
+    
     int secondsUntilMidnight = [self updateTimeLeftLabel];
     
     // BDE testing hack:
@@ -216,6 +236,8 @@
         // disable time countdown.  show play button.
         
         [self.timer invalidate];
+        self.timer = nil;
+        
         self.timeLeftLabel.hidden = YES;
         self.playAgainButton.hidden = NO;
         
@@ -236,7 +258,7 @@
 
 - (IBAction)pressedPlayAgain:(id)sender {
     
-    NSLog(@"play again pressed");
+    //NSLog(@"play again pressed");
     
     // restart the game
     

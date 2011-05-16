@@ -227,8 +227,6 @@
     [self setAfterLabel:nil];
     [super viewDidUnload];
 
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 
@@ -462,6 +460,8 @@
     [hud removeFromSuperview];
     [hud release];
 	hud = nil;
+    
+    [self endGame];
 }
 
 
@@ -497,8 +497,6 @@
         // save the username for next time
         [self saveUserName:userName];
     }
-    
-    [self endGame];
     
     sleep(1); // pause long enough that the indicator doesn't flash
               // by too fast.

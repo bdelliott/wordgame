@@ -16,7 +16,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 
     NSLog(@"PostScoreTextFieldDelegate:textFieldShouldReturn");
-    NSString *userName = [textField text];
+    //NSString *userName = [textField text];
     
     [alertView dismissWithClickedButtonIndex:0 animated:YES];
     return YES;

@@ -33,6 +33,7 @@
 @synthesize afterTextField;
 @synthesize giveUp;
 
+@synthesize fetchWordErrorAlertView;
 @synthesize alertView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -66,7 +67,21 @@
     shouldDismissKeyboard = NO;
     [guessTextField becomeFirstResponder]; // grab the editing focus
     
+    numGuesses = 0;
+    closestBeforeGuess = nil;
+    closestAfterGuess = nil;
+    
+    guesses = [NSMutableArray arrayWithCapacity:32];
+    [guesses retain];
+
+    word = [self fetchWord];
+}
+
+- (NSString *) fetchWord {
     // load the word of the day
+    
+    NSLog(@"fetchWord");
+    
     NSURL *url = [WordURL getWordURL];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -76,27 +91,31 @@
     if (error) {
         // TODO failed to get word.  implement a disconnected mode from a limited set of words?
         NSLog(@"word load failed, error=%@", error);
+
+        // retry until successful, display network error to use on
+        // failure
+        
+        self.fetchWordErrorAlertView = [[UIAlertView alloc] initWithTitle:@"Can't fetch today's word" message:@"An error occurred retrieving today's word.  Please confirm you have a network connection and try again." delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil, nil];
+
+        [fetchWordErrorAlertView show];
+        
+        return nil;
         
     } else {
         NSString *response = [request responseString];
         NSDictionary *d = [response JSONValue];
         
-        word = [d objectForKey:@"word"];
-        [word retain];
+        NSString *w = [d objectForKey:@"word"];
+        [w retain];
         
         
-        NSLog(@"today's word is: %@", word);
+        NSLog(@"today's word is: %@", w);
         
+        return w;
     }
-    
-    numGuesses = 0;
-    closestBeforeGuess = nil;
-    closestAfterGuess = nil;
-    
-    guesses = [NSMutableArray arrayWithCapacity:32];
-    [guesses retain];
-    
+
 }
+
 
 - (void) endGame {
     // clean up
@@ -223,6 +242,7 @@
     
     [alertView release];
     [alertViewDelegate release];
+    [fetchWordErrorAlertView release];
     
     [super dealloc];
 }
@@ -258,8 +278,8 @@
     
     NSString *msg = [NSString stringWithFormat:@"The word of the day is '%@'.  Better luck next time!", word];
 
-    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"No luck, eh?" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil] autorelease];
-    [alertView show];
+    UIAlertView *gaveUpAlertView = [[[UIAlertView alloc] initWithTitle:@"No luck, eh?" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil] autorelease];
+    [gaveUpAlertView show];
 
 }
 
@@ -393,9 +413,15 @@
     [alertView show];
 }
 
-- (void)alertView:(TSAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+- (void)alertView:(TSAlertView *)aView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    if (alertView == self.alertView) {
+    if ((UIAlertView *)aView == fetchWordErrorAlertView) {
+        // just retry fetching today's view
+        [self fetchWord];
+        [fetchWordErrorAlertView release];
+        
+    } else if (aView == self.alertView) {
+        // high score username popup.
         
         if (buttonIndex == 0) {
             NSString *userName = alertView.inputTextField.text;
@@ -404,6 +430,7 @@
             [self endGame];
         }
     } else {
+        // give up popup
         [self endGame];
     }
 }

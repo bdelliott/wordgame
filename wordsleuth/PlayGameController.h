@@ -25,6 +25,7 @@
     UILabel *beforeLabel;
     UILabel *afterLabel;
     
+    UIAlertView *fetchWordErrorAlertView;
     TSAlertView *alertView;
     PostScoreTextFieldDelegate *alertViewDelegate;
 
@@ -47,9 +48,13 @@
 @property (nonatomic, retain) IBOutlet UILabel *afterTextField;
 @property (nonatomic, retain) IBOutlet UIButton *giveUp;
 
+@property (nonatomic, retain) UIAlertView *fetchWordErrorAlertView;
 
 @property (nonatomic, retain) TSAlertView *alertView;
+
 - (void) initGame;
+- (NSString *) fetchWord;
+
 - (void) endGame;
 
 - (IBAction)guessMade:(id)sender;

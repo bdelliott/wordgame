@@ -10,11 +10,18 @@
 
 #import "PlayGameController.h"
 
+extern NSString* const GameStateLoaded;
+
 @interface wordsleuthAppDelegate : NSObject <UIApplicationDelegate> {
 
     PlayGameController *playGameController;
     UINavigationController *_navigationController;
     UIWindow *window;
+    
+    BOOL playedToday;
+    BOOL launchDisplayCompleted;
+    BOOL hasGameState;
+    NSTimer *launchTimer;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -26,7 +33,8 @@
 
 
 - (BOOL)checkPlayedToday;
-
+- (void) loadGameState;
+- (void) loadGameView;
 - (void)startGame;
 
 @end

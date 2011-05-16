@@ -8,9 +8,12 @@
 
 #import "wordsleuthAppDelegate.h"
 #import "HighScoresController.h"
+#import "Launch.h"
+
+NSString* const GameStateLoaded = @"GameStateLoaded";
+
 
 @implementation wordsleuthAppDelegate
-
 
 @synthesize window=_window;
 
@@ -21,29 +24,51 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    // Add the tab bar controller's current view as a subview of the window
-    self.window.rootViewController = self.navigationController;
+    self.window.rootViewController = [[[Launch alloc] init] autorelease];
+    
+    [NSThread detachNewThreadSelector:@selector(loadGameState) toTarget:self withObject:nil];
+    
+    [self.window makeKeyAndVisible];
+    
+    launchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchDisplayCompleted) userInfo:nil repeats:NO];
+
+    return YES;
+}
+
+- (void) launchDisplayCompleted {
+    launchDisplayCompleted = YES;
+    [self loadGameView];
+}
+
+- (void) loadGameState {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // first check if the user has already played today:
-    BOOL playedToday = [self checkPlayedToday];
+    playedToday = [self checkPlayedToday];
+    hasGameState = YES;
     
     // BDE egregious testing hack:
     //playedToday = NO;
     
-    if (playedToday) {
-        // skip to high scores screen with timer
-        NSLog(@"User already played today, going to high scores.");
-        [HighScoresController goToHighScores];
-        
-    } else {
-        NSLog(@"User has not played yet today, initializing game.");
-        [self startGame];
-        
-    }
+    // all calls to UIKit must be from main thread
+    [self performSelectorOnMainThread:@selector(loadGameView) withObject:nil waitUntilDone:NO];
     
-    [self.window makeKeyAndVisible];
-    return YES;
+    [pool release];
+}
+
+- (void) loadGameView {
+    if (hasGameState && launchDisplayCompleted) {
+        self.window.rootViewController = self.navigationController;
+        
+        if (playedToday) {
+            // skip to high scores screen with timer
+            NSLog(@"User already played today, going to high scores.");
+            [HighScoresController goToHighScores];            
+        } else {
+            NSLog(@"User has not played yet today, initializing game.");
+            [self startGame];            
+        }
+    }
 }
 
 - (void)startGame {

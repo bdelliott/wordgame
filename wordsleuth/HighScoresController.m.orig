@@ -34,7 +34,7 @@
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Best Scores";
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
+    self.navigationController.delegate = self;
 
     return self;
 }
@@ -68,7 +68,7 @@
         [scores retain];
     }  
     
-
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
 }
 
 
@@ -183,7 +183,7 @@
     int minutes = remainder / 60;
     int seconds = remainder % 60;
     
-    NSMutableString *timeLeft = [NSMutableString string];
+    NSMutableString *timeLeft = [NSMutableString stringWithString:@"Play again in just "];
     
     if (hours > 0) { 
         [timeLeft appendFormat:@"%d:%02d:", hours, minutes];
@@ -192,12 +192,13 @@
     }
     
     NSString *secondsFormat = nil;
-    if (minutes > 0 || secsuntilmidnight > 60) { 
+    if (minutes > 0) { 
         secondsFormat = @"%02d";
     } else {
         secondsFormat = @"%d";
     }
     [timeLeft appendFormat:secondsFormat, seconds];
+    [timeLeft appendString:@"!"];
     
     return timeLeft;
 }
@@ -229,7 +230,7 @@
     NSDate *midnight = [self getNextMidnight: now];    
     int secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
     
-    self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilMidnight]];
+    self.timeLeftLabel.text = [self formatTimeLeft: secondsUntilMidnight];
     
     return secondsUntilMidnight;
 }

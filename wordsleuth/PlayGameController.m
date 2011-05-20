@@ -7,7 +7,6 @@
 //
 
 #import "PlayGameController.h"
-#import <QuartzCore/QuartzCore.h>
 
 #import "ASIFormDataRequest.h"
 #import "ASIHTTPRequest.h"
@@ -16,6 +15,7 @@
 #import "HighScoresController.h"
 #import "PostScoreTextFieldDelegate.h"
 #import "WordURL.h"
+#import "UIButton+Gradient.h"
 
 
 @implementation PlayGameController
@@ -137,35 +137,10 @@
 }
 
 - (void) styleGiveUp {
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.anchorPoint = CGPointMake(0.0f, 0.0f);
-    gradient.position = CGPointMake(0.0f, 0.0f);
-    gradient.bounds = giveUp.layer.bounds;
-    gradient.cornerRadius = 10.0;
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[UIColor colorWithRed:0.92f
-                                           green:0.0f
-                                            blue:0.0f
-                                           alpha:1.0].CGColor,
-                       (id)[UIColor colorWithRed:0.62f
-                                           green:0.0f
-                                            blue:0.0f
-                                           alpha:1.0].CGColor,
-                       nil];
-    gradient.zPosition = -100.0f;
-    giveUp.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-    giveUp.layer.shadowOpacity = 1.5f;
-    giveUp.layer.shadowColor = [UIColor blackColor].CGColor;
-    giveUp.layer.shadowRadius = 2.5f;
-    /*
-    gradient.borderColor = [UIColor colorWithRed:0.42f
-                                               green:0.0f
-                                                blue:0.0f
-                                               alpha:1.0].CGColor;
-    gradient.borderWidth = 1.0f;
-     */
-    [giveUp.layer addSublayer:gradient]; 
-    
+    [giveUp styleWithGradientColor:[UIColor colorWithRed:0.77f
+                                                   green:0.0f
+                                                    blue:0.0f
+                                                   alpha:1.0]];
     giveUp.titleLabel.textColor = [UIColor whiteColor];
 }
 

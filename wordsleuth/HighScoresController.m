@@ -12,6 +12,7 @@
 #import "ASIHTTPRequest.h"
 #import "NSString+SBJSON.h"
 #import "WordURL.h"
+#import "UIButton+Gradient.h"
 
 
 @implementation HighScoresController
@@ -46,6 +47,8 @@
     self.timeLeftLabel.hidden = NO;
     self.playAgainButton.hidden = YES;
     
+    [self updateTimeLeft];
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
     NSLog(@"timer scheduled (%@)", self.timer);
     
@@ -68,6 +71,8 @@
     self.highScoresTableView.backgroundColor = [UIColor clearColor];    
     self.highScoresTableView.rowHeight = 34.0f;
     [self updateTimeLeftLabel];
+    
+    [self.playAgainButton styleWithGradientColor:[HighScoresController highlightColor]];
 
     NSLog(@"Loading high scores");
     

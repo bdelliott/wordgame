@@ -26,6 +26,7 @@
 		3488ABD9135D164F00BDD9E2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */; };
 		349BBECF13634F4A00E2B497 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 349BBECE13634F4A00E2B497 /* Default@2x.png */; };
 		349BBED1136353A900E2B497 /* PlayGameBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */; };
+		34B1766B1385ED9E002B5925 /* UIButton+Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B1766A1385ED9E002B5925 /* UIButton+Gradient.m */; };
 		34CD2644136794130039237B /* FullBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CD2643136794130039237B /* FullBackground@2x.png */; };
 		71122132135E146A0067C7DB /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 71122119135E146A0067C7DB /* ASIAuthenticationDialog.m */; };
 		71122133135E146A0067C7DB /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7112211C135E146A0067C7DB /* ASIDataCompressor.m */; };
@@ -79,8 +80,6 @@
 		71B3B6EE1357ADE6002EDD42 /* wordsleuthTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */; };
 		71B3B6F01357ADE6002EDD42 /* wordsleuthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */; };
 		71B3B6FA1357B0E5002EDD42 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6F91357B0E5002EDD42 /* Default.png */; };
-		71B3B6FC1357B170002EDD42 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6FB1357B170002EDD42 /* appicon.png */; };
-		71B3B7011357B49B002EDD42 /* tabicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B7001357B49B002EDD42 /* tabicon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +121,8 @@
 		3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		349BBECE13634F4A00E2B497 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		349BBED0136353A900E2B497 /* PlayGameBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayGameBackground@2x.png"; sourceTree = "<group>"; };
+		34B176691385ED9E002B5925 /* UIButton+Gradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Gradient.h"; sourceTree = "<group>"; };
+		34B1766A1385ED9E002B5925 /* UIButton+Gradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Gradient.m"; sourceTree = "<group>"; };
 		34CD2643136794130039237B /* FullBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FullBackground@2x.png"; sourceTree = "<group>"; };
 		71122118135E146A0067C7DB /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		71122119135E146A0067C7DB /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
@@ -212,9 +213,7 @@
 		71B3B6EC1357ADE6002EDD42 /* wordsleuthTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wordsleuthTests-Prefix.pch"; sourceTree = "<group>"; };
 		71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wordsleuthTests.h; sourceTree = "<group>"; };
 		71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wordsleuthTests.m; sourceTree = "<group>"; };
-		71B3B6F91357B0E5002EDD42 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		71B3B6FB1357B170002EDD42 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
-		71B3B7001357B49B002EDD42 /* tabicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabicon.png; sourceTree = "<group>"; };
+		71B3B6F91357B0E5002EDD42 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +258,7 @@
 		349BBEC913634F3300E2B497 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				71B3B6F91357B0E5002EDD42 /* Default.png */,
 				343D9DA1137ECC190017380A /* FullBackground.png */,
 				343D9DA2137ECC190017380A /* PlayGameBackground.png */,
 				343D9DA3137ECC190017380A /* SparkleSoftware.png */,
@@ -417,19 +417,13 @@
 			children = (
 				343D9D51137DFEF80017380A /* Launch View */,
 				349BBEC913634F3300E2B497 /* Images */,
-				71122171135E15D40067C7DB /* libz.1.2.3.dylib */,
-				71122170135E15D00067C7DB /* CoreGraphics.framework */,
-				7112216E135E15C70067C7DB /* MobileCoreServices.framework */,
-				7112216C135E15BD0067C7DB /* SystemConfiguration.framework */,
-				7112216A135E15AF0067C7DB /* CFNetwork.framework */,
-				3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */,
 				71122117135E146A0067C7DB /* ASI HTTP Request */,
 				7112213C135E14910067C7DB /* Facebook IOS SDK */,
 				7118491E137C918D007EA87E /* MBProgressHUD */,
 				711F8348136729F8000CD08C /* TSAlertview */,
 				71B3B6FD1357B192002EDD42 /* Game view */,
 				71B3B6FE1357B1A2002EDD42 /* High Scores view */,
-				71B3B6FF1357B1B0002EDD42 /* Misc Stuff */,
+				71B3B6FF1357B1B0002EDD42 /* UIButton+Gradient */,
 				71B3B6C01357ADE6002EDD42 /* wordsleuth */,
 				71B3B6C11357ADE6002EDD42 /* Supporting Files */,
 				71B3B6E61357ADE6002EDD42 /* wordsleuthTests */,
@@ -450,6 +444,12 @@
 		71B3B6B91357ADE6002EDD42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				71122171135E15D40067C7DB /* libz.1.2.3.dylib */,
+				71122170135E15D00067C7DB /* CoreGraphics.framework */,
+				7112216E135E15C70067C7DB /* MobileCoreServices.framework */,
+				7112216C135E15BD0067C7DB /* SystemConfiguration.framework */,
+				7112216A135E15AF0067C7DB /* CFNetwork.framework */,
+				3488ABD8135D164F00BDD9E2 /* QuartzCore.framework */,
 				71B3B6BA1357ADE6002EDD42 /* UIKit.framework */,
 				71B3B6BC1357ADE6002EDD42 /* Foundation.framework */,
 				71B3B6BE1357ADE6002EDD42 /* CoreGraphics.framework */,
@@ -525,14 +525,13 @@
 			name = "High Scores view";
 			sourceTree = "<group>";
 		};
-		71B3B6FF1357B1B0002EDD42 /* Misc Stuff */ = {
+		71B3B6FF1357B1B0002EDD42 /* UIButton+Gradient */ = {
 			isa = PBXGroup;
 			children = (
-				71B3B6FB1357B170002EDD42 /* appicon.png */,
-				71B3B6F91357B0E5002EDD42 /* Default.png */,
-				71B3B7001357B49B002EDD42 /* tabicon.png */,
+				34B176691385ED9E002B5925 /* UIButton+Gradient.h */,
+				34B1766A1385ED9E002B5925 /* UIButton+Gradient.m */,
 			);
-			name = "Misc Stuff";
+			name = "UIButton+Gradient";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -626,8 +625,6 @@
 				71B3B6D71357ADE6002EDD42 /* PlayGame.xib in Resources */,
 				71B3B6DA1357ADE6002EDD42 /* HighScores.xib in Resources */,
 				71B3B6FA1357B0E5002EDD42 /* Default.png in Resources */,
-				71B3B6FC1357B170002EDD42 /* appicon.png in Resources */,
-				71B3B7011357B49B002EDD42 /* tabicon.png in Resources */,
 				7112215D135E14910067C7DB /* FBDialog.bundle in Resources */,
 				349BBECF13634F4A00E2B497 /* Default@2x.png in Resources */,
 				349BBED1136353A900E2B497 /* PlayGameBackground@2x.png in Resources */,
@@ -715,6 +712,7 @@
 				713BDC87137340BC00A4F5AC /* PostScoreTextFieldDelegate.m in Sources */,
 				71184923137C91BB007EA87E /* MBProgressHUD.m in Sources */,
 				343D9D5A137E004F0017380A /* Launch.m in Sources */,
+				34B1766B1385ED9E002B5925 /* UIButton+Gradient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

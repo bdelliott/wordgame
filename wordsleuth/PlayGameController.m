@@ -122,10 +122,8 @@
     
     [word release];
     numGuesses = 0;
-    [closestBeforeGuess release];
-    [closestAfterGuess release];
-    closestBeforeGuess = closestAfterGuess = nil;
     [guesses release];
+    closestBeforeGuess = closestAfterGuess = nil;
     
     NSLog(@"going to high scores view");
     [HighScoresController goToHighScores];
@@ -231,12 +229,13 @@
 - (IBAction)guessMade:(id)sender {
     NSLog(@"user made a guess");
     
-    NSString *guess = guessTextField.text;
+    NSString *guess = [guessTextField.text copy];
     guess = [guess lowercaseString];
 
     NSLog(@"user guessed '%@'", guess);
     
     [self checkGuess:guess];
+    //[guess release];
     
     // clear guess
     guessTextField.text = nil;

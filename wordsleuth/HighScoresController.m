@@ -141,7 +141,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];        
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId] autorelease];        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];        
         cell.textLabel.textColor = [UIColor whiteColor];
@@ -170,6 +170,7 @@
     HighScoresController *highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
     
     [delegate.navigationController pushViewController:highScoresController animated:TRUE];
+    [highScoresController release];
 }
 
 - (NSDate *) getNextMidnight:(NSDate *) now  {

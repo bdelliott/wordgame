@@ -73,7 +73,7 @@
     
     self.guesses = [NSMutableArray array];
 
-    word = [self fetchWord];
+    [self fetchWord];
 }
 
 - (NSString *) fetchWord {
@@ -102,15 +102,13 @@
         
     } else {
         NSString *response = [request responseString];
-        NSDictionary *d = [response JSONValue];
+        NSDictionary *dictionary = [response JSONValue];
         
-        NSString *w = [d objectForKey:@"word"];
-        [w retain];
+        self.word = [dictionary objectForKey:@"word"];
         
+        NSLog(@"today's word is: %@", word);
         
-        NSLog(@"today's word is: %@", w);
-        
-        return w;
+        return word;
     }
 
 }

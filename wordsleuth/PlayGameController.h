@@ -33,8 +33,9 @@
 
 }
 
-@property (assign) NSInteger numGuesses;
 @property (nonatomic, retain) NSMutableArray *guesses;
+@property (nonatomic, retain) NSString *closestBeforeGuess;
+@property (nonatomic, retain) NSString *closestAfterGuess;
 
 @property (nonatomic, retain) NSString *word;
 

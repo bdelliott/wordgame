@@ -20,8 +20,9 @@
 
 @implementation PlayGameController
 
-@synthesize numGuesses;
 @synthesize guesses;
+@synthesize closestAfterGuess;
+@synthesize closestBeforeGuess;
 
 @synthesize word;
 
@@ -67,12 +68,10 @@
     shouldDismissKeyboard = NO;
     [guessTextField becomeFirstResponder]; // grab the editing focus
     
-    numGuesses = 0;
     closestBeforeGuess = nil;
     closestAfterGuess = nil;
     
-    guesses = [NSMutableArray arrayWithCapacity:32];
-    [guesses retain];
+    self.guesses = [NSMutableArray array];
 
     word = [self fetchWord];
 }
@@ -121,9 +120,12 @@
     // clean up
     
     [word release];
-    numGuesses = 0;
-    [guesses release];
-    closestBeforeGuess = closestAfterGuess = nil;
+    for (NSString *guess in self.guesses) {
+        NSLog(@"Retain count of object in guesses %@ %d", guess, [guess retainCount]);
+    }
+    [self.guesses removeAllObjects];
+    self.closestBeforeGuess = nil;
+    self.closestAfterGuess = nil;
     
     NSLog(@"going to high scores view");
     [HighScoresController goToHighScores];
@@ -143,8 +145,8 @@
 }
 
 - (void) renderNumberOfGuesses {
-    if (numGuesses > 0) {
-        numGuessesLabel.text = [NSString stringWithFormat:@"%d", numGuesses];
+    if ([self.guesses count] > 0) {
+        numGuessesLabel.text = [NSString stringWithFormat:@"%d", [self.guesses count]];
     } else {
         numGuessesLabel.text = @"";
     }
@@ -205,6 +207,10 @@
 
 - (void)dealloc
 {
+    [guesses release];
+    [closestBeforeGuess release];
+    [closestAfterGuess release];
+    
     [numGuessesLabel release];
     [guessTextField release];
     [beforeTextField release];
@@ -226,16 +232,14 @@
     return shouldDismissKeyboard;
 }
 
-- (IBAction)guessMade:(id)sender {
-    NSLog(@"user made a guess");
-    
-    NSString *guess = [guessTextField.text copy];
-    guess = [guess lowercaseString];
-
+- (IBAction)guessMade:(id)sender {    
+    NSString *guess = [[guessTextField.text copy] autorelease];
     NSLog(@"user guessed '%@'", guess);
-    
+    NSLog(@"Guess retain count after copy %d", [guess retainCount]);
+
+    guess = [guess lowercaseString];
     [self checkGuess:guess];
-    //[guess release];
+    NSLog(@"Guess retain count after release %d", [guess retainCount]);
     
     // clear guess
     guessTextField.text = nil;
@@ -262,7 +266,7 @@
     BOOL wrong = FALSE;
     
     [guesses addObject:guess];
-    numGuesses++;
+    NSLog(@"Guess retain count after addObject %d", [guess retainCount]);
     [self renderNumberOfGuesses];
     
 
@@ -294,6 +298,7 @@
             
     }
     
+    NSLog(@"Guess retain count after comparison %d", [guess retainCount]);
     
 }
 
@@ -301,13 +306,13 @@
     // compare to previous closest "before" guess
     
     if (!closestBeforeGuess) {
-        closestBeforeGuess = guess;
+        self.closestBeforeGuess = guess;
     } else {
         
         NSComparisonResult cmp = [closestBeforeGuess localizedCaseInsensitiveCompare:guess];
         if (cmp == NSOrderedAscending) {
             NSLog(@"%@ is after previous closest 'before' guess %@", guess, closestBeforeGuess);
-            closestBeforeGuess = guess;
+            self.closestBeforeGuess = guess;
         }
                                                                              
     }
@@ -320,12 +325,12 @@
     // compare to previous closest "after" guess
     
     if (!closestAfterGuess) {
-        closestAfterGuess = guess;
+        self.closestAfterGuess = guess;
     } else {
         NSComparisonResult cmp = [closestAfterGuess localizedCaseInsensitiveCompare:guess];
         if (cmp == NSOrderedDescending) {
             NSLog(@"%@ is before previous closest 'after' guess %@", guess, closestAfterGuess);
-            closestAfterGuess = guess;
+            self.closestAfterGuess = guess;
         }
     }
     
@@ -344,12 +349,12 @@
     [guessTextField resignFirstResponder];
     
     NSString *try;
-    if (numGuesses == 1) 
+    if ([self.guesses count] == 1) 
         try = @"try";
     else
         try = @"tries";
         
-    NSString *msg = [NSString stringWithFormat:@"You guessed '%@' correctly in %d %@. \n\nEnter a username for your score:", word, numGuesses, try];
+    NSString *msg = [NSString stringWithFormat:@"You guessed '%@' correctly in %d %@. \n\nEnter a username for your score:", word, [self.guesses count], try];
     
     alertView.title = @"You got it!";
     alertView.message = msg;
@@ -449,7 +454,7 @@
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     
-    NSString *numGuessStr = [NSString stringWithFormat:@"%d", numGuesses];
+    NSString *numGuessStr = [NSString stringWithFormat:@"%d", [self.guesses count]];
     
     [request setPostValue:numGuessStr forKey:@"num_guesses"];
     [request setPostValue:word forKey:@"word"];

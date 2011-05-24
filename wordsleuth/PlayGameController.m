@@ -120,9 +120,7 @@
     // clean up
     
     [word release];
-    for (NSString *guess in self.guesses) {
-        NSLog(@"Retain count of object in guesses %@ %d", guess, [guess retainCount]);
-    }
+
     [self.guesses removeAllObjects];
     self.closestBeforeGuess = nil;
     self.closestAfterGuess = nil;
@@ -227,7 +225,7 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    NSLog(@"textFieldShouldEndEditing");
+    //NSLog(@"textFieldShouldEndEditing");
     // stop keyboard from being dismissed when the Done button is touched
     return shouldDismissKeyboard;
 }
@@ -235,11 +233,9 @@
 - (IBAction)guessMade:(id)sender {    
     NSString *guess = [[guessTextField.text copy] autorelease];
     NSLog(@"user guessed '%@'", guess);
-    NSLog(@"Guess retain count after copy %d", [guess retainCount]);
 
     guess = [guess lowercaseString];
     [self checkGuess:guess];
-    NSLog(@"Guess retain count after release %d", [guess retainCount]);
     
     // clear guess
     guessTextField.text = nil;
@@ -263,10 +259,7 @@
 
 - (void)checkGuess:(NSString *)guess {
     
-    BOOL wrong = FALSE;
-    
     [guesses addObject:guess];
-    NSLog(@"Guess retain count after addObject %d", [guess retainCount]);
     [self renderNumberOfGuesses];
     
 
@@ -277,7 +270,6 @@
     switch (cmp) {
         case NSOrderedAscending:
             // word is before guess
-            wrong = TRUE;
             [self guessAfterWord:guess];
             break;
             
@@ -288,7 +280,6 @@
             
         case NSOrderedDescending:
             // word is after guess
-            wrong = TRUE;
             [self guessBeforeWord:guess];
              break;
             
@@ -298,7 +289,6 @@
             
     }
     
-    NSLog(@"Guess retain count after comparison %d", [guess retainCount]);
     
 }
 

@@ -31,7 +31,6 @@ extern NSString* const GameStateLoaded;
 
 @property (nonatomic, retain) PlayGameController *playGameController;
 
-
 - (BOOL)checkPlayedToday;
 - (void) loadGameState;
 - (void) loadGameView;

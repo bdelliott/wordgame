@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DebugGestureView.h"
 
-
-@interface HighScoresController : UIViewController {
+@interface HighScoresController : UIViewController <DebugViewDelegate> {
     
     IBOutlet UITableView *highScoresTableView;
     UILabel *timeLeftLabel;
@@ -24,11 +24,14 @@
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, retain) IBOutlet UIButton *playAgainButton;
 
+@property (nonatomic, retain) DebugGestureView *debugGestureView;
 
 - (NSMutableString *) formatTimeLeft:(int) secsuntilmidnight;
 - (void)updateTimeLeft;
 - (int)updateTimeLeftLabel;
 - (IBAction)pressedPlayAgain:(id)sender;
+
+- (void)togglePlayAgainButton:(BOOL)enabled;
 
 + (UIColor*) highlightColor;
 

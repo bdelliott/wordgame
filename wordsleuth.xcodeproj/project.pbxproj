@@ -80,6 +80,7 @@
 		71B3B6EE1357ADE6002EDD42 /* wordsleuthTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */; };
 		71B3B6F01357ADE6002EDD42 /* wordsleuthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */; };
 		71B3B6FA1357B0E5002EDD42 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6F91357B0E5002EDD42 /* Default.png */; };
+		71BB57F0138D2EF500DF35F1 /* DebugGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +215,8 @@
 		71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wordsleuthTests.h; sourceTree = "<group>"; };
 		71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wordsleuthTests.m; sourceTree = "<group>"; };
 		71B3B6F91357B0E5002EDD42 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		71BB57EE138D2EF500DF35F1 /* DebugGestureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugGestureView.h; sourceTree = "<group>"; };
+		71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugGestureView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,6 +524,8 @@
 				71B3B6D81357ADE6002EDD42 /* HighScores.xib */,
 				71B3B6D21357ADE6002EDD42 /* HighScoresController.h */,
 				71B3B6D31357ADE6002EDD42 /* HighScoresController.m */,
+				71BB57EE138D2EF500DF35F1 /* DebugGestureView.h */,
+				71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */,
 			);
 			name = "High Scores view";
 			sourceTree = "<group>";
@@ -713,6 +718,7 @@
 				71184923137C91BB007EA87E /* MBProgressHUD.m in Sources */,
 				343D9D5A137E004F0017380A /* Launch.m in Sources */,
 				34B1766B1385ED9E002B5925 /* UIButton+Gradient.m in Sources */,
+				71BB57F0138D2EF500DF35F1 /* DebugGestureView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

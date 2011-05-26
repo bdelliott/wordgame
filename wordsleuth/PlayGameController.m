@@ -102,6 +102,7 @@
         
     } else {
         NSString *response = [request responseString];
+        NSLog(@"response==%@", response);
         NSDictionary *dictionary = [response JSONValue];
         
         self.word = [dictionary objectForKey:@"word"];
@@ -118,6 +119,7 @@
     // clean up
     
     [word release];
+    word = nil;
 
     [self.guesses removeAllObjects];
     self.closestBeforeGuess = nil;

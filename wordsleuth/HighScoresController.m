@@ -22,6 +22,8 @@
 @synthesize timer;
 @synthesize playAgainButton;
 
+@synthesize debugGestureView;
+
 + (UIColor*) highlightColor {
     return [UIColor colorWithRed:.91f green:.67f blue:.15f alpha:1.0f];
 }
@@ -41,11 +43,18 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"HSC:viewWillAppear");
-    
+
     [super viewWillAppear:animated];
+
+    // add an invisible view covering the whole frame for detecting 
+    // debug gestures.  (iz the voodoo)
+    CGRect wholeWindow = [self.view bounds];
+    self.debugGestureView = [[DebugGestureView alloc] initWithFrame:wholeWindow];
+    self.debugGestureView.delegate = self;
+    [self.view addSubview:self.debugGestureView];
+    [self.view sendSubviewToBack:self.debugGestureView];
     
-    self.timeLeftLabel.hidden = NO;
-    self.playAgainButton.hidden = YES;
+    [self togglePlayAgainButton:NO];
     
     [self updateTimeLeft];
     
@@ -131,6 +140,7 @@
     [highScoresTableView release];
     [timeLeftLabel release];
     [playAgainButton release];
+    [debugGestureView release];
     [super dealloc];
 }
 
@@ -244,8 +254,7 @@
         [self.timer invalidate];
         self.timer = nil;
         
-        self.timeLeftLabel.hidden = YES;
-        self.playAgainButton.hidden = NO;
+        [self togglePlayAgainButton:YES];
         
     }
     
@@ -272,6 +281,35 @@
     [delegate startGame];
 
 }
+
+- (void)togglePlayAgainButton:(BOOL)enabled {
+    
+    if (enabled) {
+        NSLog(@"enabling button");
+        //[self.timeLeftLabel removeFromSuperview];
+        //[self.view addSubview:playAgainButton];
+        self.timeLeftLabel.hidden = YES;
+        self.playAgainButton.hidden = NO;
+    } else {
+        NSLog(@"disabling button");
+        self.timeLeftLabel.hidden = NO;
+        self.playAgainButton.hidden = YES;
+    }
+}
+
+
+-(void) debugGestureDetected {
+    [self.timer invalidate];
+    self.timer = nil;
+
+    [self togglePlayAgainButton:YES];
+}
+
+/*
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"fooooooo");
+    [super touchesBegan:touches withEvent:event];
+}*/
 
 
 @end

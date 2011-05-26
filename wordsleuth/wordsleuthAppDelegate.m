@@ -63,7 +63,9 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
         if (playedToday) {
             // skip to high scores screen with timer
             NSLog(@"User already played today, going to high scores.");
-            [HighScoresController goToHighScores];            
+            int lastPlayedNumGuesses = [self getLastPlayedNumGuesses];
+            [HighScoresController goToHighScores:lastPlayedNumGuesses];            
+            
         } else {
             NSLog(@"User has not played yet today, initializing game.");
             [self startGame];            
@@ -176,5 +178,14 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     
 }
 
+- (int)getLastPlayedNumGuesses {
+
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    
+    
+    // returns 0 if int not found.
+    int lastPlayedNumGuesses = [standardUserDefaults integerForKey:@"lastPlayedNumGuesses"];
+    return lastPlayedNumGuesses;
+}
 
 @end

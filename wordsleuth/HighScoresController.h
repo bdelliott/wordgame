@@ -12,6 +12,7 @@
 @interface HighScoresController : UIViewController <DebugViewDelegate> {
     
     IBOutlet UITableView *highScoresTableView;
+    IBOutlet UILabel *yourScoreLabel;
     UILabel *timeLeftLabel;
 
     NSArray *scores;
@@ -21,8 +22,11 @@
 
 @property (nonatomic, retain) IBOutlet UITableView *highScoresTableView;
 @property (nonatomic, retain) IBOutlet UILabel *timeLeftLabel;
+@property (nonatomic, retain) IBOutlet UILabel *yourScoreLabel;
+
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, retain) IBOutlet UIButton *playAgainButton;
+@property (nonatomic, assign) int numGuesses;
 
 @property (nonatomic, retain) DebugGestureView *debugGestureView;
 
@@ -35,6 +39,6 @@
 
 + (UIColor*) highlightColor;
 
-+ (void)goToHighScores;
++ (void)goToHighScores:(int)numGuesses;
 
 @end

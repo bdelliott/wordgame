@@ -19,8 +19,10 @@
 
 @synthesize highScoresTableView;
 @synthesize timeLeftLabel;
+@synthesize yourScoreLabel;
 @synthesize timer;
 @synthesize playAgainButton;
+@synthesize numGuesses;
 
 @synthesize debugGestureView;
 
@@ -36,6 +38,8 @@
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Best Scores";
+    
+    self.numGuesses = 0;
     
     return self;
 }
@@ -54,6 +58,16 @@
     [self.view addSubview:self.debugGestureView];
     [self.view sendSubviewToBack:self.debugGestureView];
     
+    // if they solved it, show the user's score.
+    if (self.numGuesses == 0) {
+        self.yourScoreLabel.hidden = YES;
+    } else {
+        self.yourScoreLabel.hidden = NO;
+        
+        NSString *yourScore = [NSString stringWithFormat:@"Your Score: %d", self.numGuesses];
+        self.yourScoreLabel.text = yourScore;
+    }
+    
     [self togglePlayAgainButton:NO];
     
     [self updateTimeLeft];
@@ -69,7 +83,7 @@
     
     [self.timer invalidate];
     self.timer = nil;
-    
+        
 }
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -128,6 +142,8 @@
     highScoresTableView = nil;
     [self setTimeLeftLabel:nil];
     [self setPlayAgainButton:nil];
+    [yourScoreLabel release];
+    yourScoreLabel = nil;
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -139,8 +155,10 @@
 {
     [highScoresTableView release];
     [timeLeftLabel release];
+    [yourScoreLabel release];
     [playAgainButton release];
     [debugGestureView release];
+    [yourScoreLabel release];
     [super dealloc];
 }
 
@@ -174,10 +192,11 @@
     return [scores count];
 }
 
-+ (void)goToHighScores {
++ (void)goToHighScores:(int)numGuesses {
     
     wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
     HighScoresController *highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
+    highScoresController.numGuesses = numGuesses;
     
     [delegate.navigationController pushViewController:highScoresController animated:TRUE];
     [highScoresController release];
@@ -286,8 +305,6 @@
     
     if (enabled) {
         NSLog(@"enabling button");
-        //[self.timeLeftLabel removeFromSuperview];
-        //[self.view addSubview:playAgainButton];
         self.timeLeftLabel.hidden = YES;
         self.playAgainButton.hidden = NO;
     } else {

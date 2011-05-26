@@ -74,6 +74,6 @@
 - (void)postScore:(NSString *)userName;
 - (void)doPostScore:(NSString *)userName;
 
-- (void)saveLastPlayed;
+- (void)saveLastPlayed:(int)numGuesses;
 
 @end

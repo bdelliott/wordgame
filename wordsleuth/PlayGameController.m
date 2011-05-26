@@ -118,6 +118,8 @@
 - (void) endGame {
     // clean up
     
+    int numGuesses = [self.guesses count];
+    
     [word release];
     word = nil;
 
@@ -126,7 +128,7 @@
     self.closestAfterGuess = nil;
     
     NSLog(@"going to high scores view");
-    [HighScoresController goToHighScores];
+    [HighScoresController goToHighScores:numGuesses];
 
 }
 
@@ -246,7 +248,7 @@
     
     shouldDismissKeyboard = TRUE;
     
-    [self saveLastPlayed];
+    [self saveLastPlayed:0];
     
     [guessTextField resignFirstResponder];
     
@@ -332,14 +334,15 @@
     // do all the you-win stuff.
     NSLog(@"winner winner chicken dinner");
     
-    [self saveLastPlayed];
+    int numGuesses = [self.guesses count];
+    [self saveLastPlayed:numGuesses];
 
     
     shouldDismissKeyboard = YES;
     [guessTextField resignFirstResponder];
     
     NSString *try;
-    if ([self.guesses count] == 1) 
+    if (numGuesses == 1) 
         try = @"try";
     else
         try = @"tries";
@@ -472,7 +475,7 @@
 }
 
 
-- (void)saveLastPlayed {
+- (void)saveLastPlayed:(int)numGuesses {
     // save last played date/time -- called after user wins or gives
     // up
     NSDate *newLastPlayed = [NSDate date];
@@ -480,6 +483,9 @@
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     [standardUserDefaults setObject:newLastPlayed forKey:@"lastPlayed"];
     
+    // save number of guesses also
+    // 0 guesses indicates that they gave up
+    [standardUserDefaults setInteger:numGuesses forKey:@"lastPlayedNumGuesses"];
 }
 
 - (NSString *)getSavedUserName {

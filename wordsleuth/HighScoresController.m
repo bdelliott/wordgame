@@ -305,11 +305,5 @@
     [self togglePlayAgainButton:YES];
 }
 
-/*
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSLog(@"fooooooo");
-    [super touchesBegan:touches withEvent:event];
-}*/
-
 
 @end

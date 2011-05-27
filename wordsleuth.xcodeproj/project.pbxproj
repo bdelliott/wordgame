@@ -840,6 +840,7 @@
 					Request,
 				);
 				INFOPLIST_FILE = "wordsleuth/wordsleuth-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -860,6 +861,7 @@
 					Request,
 				);
 				INFOPLIST_FILE = "wordsleuth/wordsleuth-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;

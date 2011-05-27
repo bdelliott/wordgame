@@ -179,9 +179,9 @@
     
     NSDictionary *score = [scores objectAtIndex:indexPath.row];
     NSString *playerName = [score objectForKey:@"user_name"];
-    NSDecimalNumber *numGuesses = [score objectForKey:@"num_guesses"];
+    NSDecimalNumber *playerGuesses = [score objectForKey:@"num_guesses"];
     cell.textLabel.text = playerName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", numGuesses];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", playerGuesses];
     
     return cell;
 }

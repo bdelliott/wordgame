@@ -233,10 +233,8 @@
 }
 
 - (IBAction)guessMade:(id)sender {    
-    NSString *guess = [[guessTextField.text copy] autorelease];
+    NSString *guess = [[guessTextField.text lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSLog(@"user guessed '%@'", guess);
-
-    guess = [guess lowercaseString];
     [self checkGuess:guess];
     
     // clear guess

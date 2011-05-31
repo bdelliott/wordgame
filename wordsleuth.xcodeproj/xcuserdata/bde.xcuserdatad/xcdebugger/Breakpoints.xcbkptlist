@@ -289,11 +289,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/HighScoresController.m"
-         timestampString = "328133663.365505"
+         timestampString = "328551627.794209"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "269"
-         endingLineNumber = "269"
+         startingLineNumber = "274"
+         endingLineNumber = "274"
          landmarkName = "-updateTimeLeft"
          landmarkType = "5">
       </FileBreakpoint>
@@ -401,11 +401,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/HighScoresController.m"
-         timestampString = "328133663.365505"
+         timestampString = "328551627.794209"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "258"
-         endingLineNumber = "258"
+         startingLineNumber = "263"
+         endingLineNumber = "263"
          landmarkName = "-updateTimeLeft"
          landmarkType = "5">
       </FileBreakpoint>

@@ -188,8 +188,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"numberOfRowsInSection, %d rows", [scores count]);
-    return [scores count];
+    int numScores = [scores count];
+    
+    // limit to display of 8 scores, which is the magic number that fits
+    // properly on an iphone screen.
+    
+    numScores = numScores > 8 ? 8 : numScores;
+    return numScores;
 }
 
 + (void)goToHighScores:(int)numGuesses {

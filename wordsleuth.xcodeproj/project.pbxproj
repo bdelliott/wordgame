@@ -811,7 +811,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Elliott (2JP9G4N39R)";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Elliott (2JP9G4N39R)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -819,7 +819,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "080DA785-35B2-4439-BF5E-14B0EE48B271";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "080DA785-35B2-4439-BF5E-14B0EE48B271";
 				SDKROOT = iphoneos;
 			};
@@ -913,6 +912,68 @@
 			};
 			name = Release;
 		};
+		71BD575913983CD1000E29E4 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+			};
+			name = Distribution;
+		};
+		71BD575A13983CD1000E29E4 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wordsleuth/wordsleuth-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					ASI,
+					HTTP,
+					Request,
+				);
+				INFOPLIST_FILE = "wordsleuth/wordsleuth-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
+		71BD575B13983CD1000E29E4 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/wordsleuth.app/wordsleuth";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wordsleuthTests/wordsleuthTests-Prefix.pch";
+				INFOPLIST_FILE = "wordsleuthTests/wordsleuthTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Distribution;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -921,27 +982,30 @@
 			buildConfigurations = (
 				71B3B6F11357ADE6002EDD42 /* Debug */,
 				71B3B6F21357ADE6002EDD42 /* Release */,
+				71BD575913983CD1000E29E4 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 		71B3B6F31357ADE6002EDD42 /* Build configuration list for PBXNativeTarget "wordsleuth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				71B3B6F41357ADE6002EDD42 /* Debug */,
 				71B3B6F51357ADE6002EDD42 /* Release */,
+				71BD575A13983CD1000E29E4 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 		71B3B6F61357ADE6002EDD42 /* Build configuration list for PBXNativeTarget "wordsleuthTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				71B3B6F71357ADE6002EDD42 /* Debug */,
 				71B3B6F81357ADE6002EDD42 /* Release */,
+				71BD575B13983CD1000E29E4 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 /* End XCConfigurationList section */
 	};

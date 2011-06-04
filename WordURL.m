@@ -38,7 +38,8 @@
 
 + (NSURL *)postScoreURL:(NSString *)userName {
     NSString *s = [NSString stringWithFormat:@"post_score/%@", userName];
-    return [self getURL:s];
+    NSString *escaped = [s stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return [self getURL:escaped];
 }
 
 

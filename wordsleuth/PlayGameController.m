@@ -362,8 +362,8 @@
     
     if (alertView.numberOfButtons == 0) {
         // only add the button for the first time they play.
-        [alertView addButtonWithTitle:@"Post Score"];
         [alertView addButtonWithTitle:@"Skip"];
+        [alertView addButtonWithTitle:@"Post Score"];
     }
     
     // use a separate delegate object so things don't get muddled with multiple
@@ -393,7 +393,7 @@
     } else if (aView == self.alertView) {
         // high score username popup.
         
-        if (buttonIndex == 0) {
+        if (buttonIndex == 1) {
             NSString *userName = alertView.inputTextField.text;
             [self postScore:userName];
         } else {

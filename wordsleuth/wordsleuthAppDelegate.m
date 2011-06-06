@@ -9,6 +9,7 @@
 #import "wordsleuthAppDelegate.h"
 #import "HighScoresController.h"
 #import "Launch.h"
+#import "iRate.h"
 
 NSString* const GameStateLoaded = @"GameStateLoaded";
 
@@ -21,6 +22,8 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
 
 @synthesize playGameController;
 
+@synthesize ratingDelegate;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -29,6 +32,8 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     [NSThread detachNewThreadSelector:@selector(loadGameState) toTarget:self withObject:nil];
     
     [self.window makeKeyAndVisible];
+    
+    [self configureAppRating]; // configure prompting for app store ratings.
     
     launchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchDisplayCompleted) userInfo:nil repeats:NO];
 
@@ -133,6 +138,7 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     [_window release];
     [_navigationController release];
     [playGameController release];
+    [ratingDelegate release];
     [super dealloc];
 }
 
@@ -186,6 +192,35 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     // returns 0 if int not found.
     int lastPlayedNumGuesses = [standardUserDefaults integerForKey:@"lastPlayedNumGuesses"];
     return lastPlayedNumGuesses;
+}
+
+- (void)configureAppRating {
+    // setup prompting for app store ratings.
+    
+    iRate *irate = [iRate sharedInstance];
+    
+    //configure iRate
+	irate.appStoreID = 442117507;   // app id from iTunes connect
+	irate.applicationName = @"Word du Jour";
+    
+    irate.disabled = TRUE;  // disable automatic prompting upon application launch.
+    
+    irate.daysUntilPrompt = 0.0001; // set it effectively to 0 days.  we're prompting by number of games
+                                    // so this setting just effectively disables the time checking.
+    
+    irate.usesUntilPrompt = 0; // don't care how many times the app is launched.
+    
+    // do not prompt until 3 games played.  each game is manually flagged as an event:
+    irate.eventsUntilPrompt = 1; 
+    
+    irate.remindPeriod = 7; // reminder after 7 days if they choose not to rate.
+    
+    irate.debug = YES; // if YES, prompt is always shown. (above settings ignored)
+    
+    // simple delegate to display any errors communicating with the app store
+    self.ratingDelegate = [[RatingDelegate alloc] init];
+    [iRate sharedInstance].delegate = self.ratingDelegate;
+    
 }
 
 @end

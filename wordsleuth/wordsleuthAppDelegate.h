@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "PlayGameController.h"
+#import "RatingDelegate.h"
 
 extern NSString* const GameStateLoaded;
 
@@ -22,6 +23,8 @@ extern NSString* const GameStateLoaded;
     BOOL launchDisplayCompleted;
     BOOL hasGameState;
     NSTimer *launchTimer;
+    
+    RatingDelegate *ratingDelegate;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -30,6 +33,11 @@ extern NSString* const GameStateLoaded;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 @property (nonatomic, retain) PlayGameController *playGameController;
+
+@property (nonatomic, retain) RatingDelegate *ratingDelegate;
+
+
+- (void)configureAppRating;
 
 - (BOOL)checkPlayedToday;
 - (int)getLastPlayedNumGuesses;

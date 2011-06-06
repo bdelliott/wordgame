@@ -80,6 +80,8 @@
 		71B3B6EE1357ADE6002EDD42 /* wordsleuthTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */; };
 		71B3B6F01357ADE6002EDD42 /* wordsleuthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */; };
 		71B3B6FA1357B0E5002EDD42 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6F91357B0E5002EDD42 /* Default.png */; };
+		71BA2BE4139D71FC00B6482E /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA2BE3139D71FC00B6482E /* iRate.m */; };
+		71BA2BE7139D75A000B6482E /* RatingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA2BE6139D75A000B6482E /* RatingDelegate.m */; };
 		71BB57F0138D2EF500DF35F1 /* DebugGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */; };
 /* End PBXBuildFile section */
 
@@ -215,6 +217,10 @@
 		71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wordsleuthTests.h; sourceTree = "<group>"; };
 		71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wordsleuthTests.m; sourceTree = "<group>"; };
 		71B3B6F91357B0E5002EDD42 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		71BA2BE2139D71FC00B6482E /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
+		71BA2BE3139D71FC00B6482E /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
+		71BA2BE5139D75A000B6482E /* RatingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingDelegate.h; sourceTree = "<group>"; };
+		71BA2BE6139D75A000B6482E /* RatingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingDelegate.m; sourceTree = "<group>"; };
 		71BB57EE138D2EF500DF35F1 /* DebugGestureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugGestureView.h; sourceTree = "<group>"; };
 		71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugGestureView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -418,6 +424,7 @@
 		71B3B6AB1357ADE6002EDD42 = {
 			isa = PBXGroup;
 			children = (
+				71BA2BE1139D71D400B6482E /* iRate */,
 				343D9D51137DFEF80017380A /* Launch View */,
 				349BBEC913634F3300E2B497 /* Images */,
 				71122117135E146A0067C7DB /* ASI HTTP Request */,
@@ -537,6 +544,17 @@
 				34B1766A1385ED9E002B5925 /* UIButton+Gradient.m */,
 			);
 			name = "UIButton+Gradient";
+			sourceTree = "<group>";
+		};
+		71BA2BE1139D71D400B6482E /* iRate */ = {
+			isa = PBXGroup;
+			children = (
+				71BA2BE2139D71FC00B6482E /* iRate.h */,
+				71BA2BE3139D71FC00B6482E /* iRate.m */,
+				71BA2BE5139D75A000B6482E /* RatingDelegate.h */,
+				71BA2BE6139D75A000B6482E /* RatingDelegate.m */,
+			);
+			name = iRate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -719,6 +737,8 @@
 				343D9D5A137E004F0017380A /* Launch.m in Sources */,
 				34B1766B1385ED9E002B5925 /* UIButton+Gradient.m in Sources */,
 				71BB57F0138D2EF500DF35F1 /* DebugGestureView.m in Sources */,
+				71BA2BE4139D71FC00B6482E /* iRate.m in Sources */,
+				71BA2BE7139D75A000B6482E /* RatingDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,7 +954,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wordsleuth/wordsleuth-Prefix.pch";

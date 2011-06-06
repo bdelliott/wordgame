@@ -16,6 +16,7 @@
 #import "PostScoreTextFieldDelegate.h"
 #import "WordURL.h"
 #import "UIButton+Gradient.h"
+#import "iRate.h"
 
 
 @implementation PlayGameController
@@ -74,6 +75,12 @@
     self.guesses = [NSMutableArray array];
 
     [self fetchWord];
+    
+    // user may have played enough to get prompted for an app rating:
+    if ([[iRate sharedInstance] shouldPromptForRating]) {
+        // TODO BDE enable this once we have a working ratings url. bug #23
+        //[[iRate sharedInstance] promptIfNetworkAvailable];
+    } 
 }
 
 - (NSString *) fetchWord {
@@ -126,6 +133,9 @@
     [self.guesses removeAllObjects];
     self.closestBeforeGuess = nil;
     self.closestAfterGuess = nil;
+    
+    // log a game's end for ratings prompt purposes:
+    [[iRate sharedInstance] logEvent:YES]; // YES means "do not prompt immediately"
     
     NSLog(@"going to high scores view");
     [HighScoresController goToHighScores:numGuesses];

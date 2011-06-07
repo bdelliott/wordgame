@@ -14,7 +14,6 @@
 #import "WordURL.h"
 #import "UIButton+Gradient.h"
 
-
 @implementation HighScoresController
 
 @synthesize highScoresTableView;
@@ -25,6 +24,10 @@
 @synthesize numGuesses;
 
 @synthesize debugGestureView;
+
+@synthesize bragsEnabled;
+@synthesize facebookBragPrompt;
+@synthesize facebookBragButton;
 
 + (UIColor*) highlightColor {
     return [UIColor colorWithRed:.91f green:.67f blue:.15f alpha:1.0f];
@@ -40,6 +43,11 @@
     self.navigationItem.title = @"Best Scores";
     
     self.numGuesses = 0;
+    
+    // bragging should only be enabled once we're in the app store.
+    self.bragsEnabled = FALSE;
+    
+    self.facebookBragPrompt = [[UIAlertView alloc] initWithTitle:@"Brag on Facebook?" message:@"Would you like to brag about your score on Facebook?" delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"Brag!", nil];
     
     return self;
 }
@@ -73,7 +81,7 @@
     [self updateTimeLeft];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
-    NSLog(@"timer scheduled (%@)", self.timer);
+    //NSLog(@"timer scheduled (%@)", self.timer);
     
 }
 
@@ -114,9 +122,16 @@
         NSDictionary *d = [response JSONValue];
         scores = (NSArray *)[d objectForKey:@"scores"];
         [scores retain];
+        
+        // check if bragging is enabled.
+        NSNumber *brags = (NSNumber *)[d objectForKey:@"bragEnabled"];
+        if (brags) {
+            self.bragsEnabled = [brags boolValue];
+        }
+        
+        NSLog(@"bragEnabled: %d", self.bragsEnabled);
     }  
     
-
 }
 
 
@@ -144,6 +159,7 @@
     [self setPlayAgainButton:nil];
     [yourScoreLabel release];
     yourScoreLabel = nil;
+    [self setFacebookBragButton:nil];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -154,11 +170,29 @@
 - (void)dealloc
 {
     [highScoresTableView release];
+    highScoresTableView = nil;
+    
     [timeLeftLabel release];
+    timeLeftLabel = nil;
+    
     [yourScoreLabel release];
+    yourScoreLabel = nil;
+    
     [playAgainButton release];
+    playAgainButton = nil;
+    
     [debugGestureView release];
+    debugGestureView = nil;
+    
     [yourScoreLabel release];
+    yourScoreLabel =nil;
+    
+    [facebookBragPrompt release];
+    facebookBragPrompt = nil;
+    
+    [facebookBragButton release];
+    facebookBragButton = nil;
+    
     [super dealloc];
 }
 
@@ -190,10 +224,10 @@
     
     int numScores = [scores count];
     
-    // limit to display of 8 scores, which is the magic number that fits
+    // limit to display of 7 scores, which is the magic number that fits
     // properly on an iphone screen.
     
-    numScores = numScores > 8 ? 8 : numScores;
+    numScores = numScores > 7 ? 7 : numScores;
     return numScores;
 }
 
@@ -305,6 +339,26 @@
     [delegate startGame];
 
 }
+
+- (IBAction)facebookBragPressed:(id)sender {
+    
+    // ask the user if they want to brag on facebook:
+    [facebookBragPrompt show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        
+        // brag about score on Facebook
+        
+        wordsleuthAppDelegate *appDelegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
+         
+        [appDelegate.bragFacebook brag:self.numGuesses];
+    }
+}
+
 
 - (void)togglePlayAgainButton:(BOOL)enabled {
     

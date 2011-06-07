@@ -14,11 +14,13 @@
 }
 
 + (NSString *)getBaseURL;
-+ (NSURL *)getURL:(NSString *)function;
++ (NSURL *)getServiceURL:(NSString *)function;
 
 + (NSURL *)getHighScoresURL;
 + (NSURL *)getTimeURL;
 + (NSURL *)getWordURL;
 + (NSURL *)postScoreURL:(NSString *)userName;
+
++ (NSString *)getWallPostIconURL;
 
 @end

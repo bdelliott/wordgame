@@ -10,7 +10,7 @@ from django.shortcuts import *
 from django.utils import simplejson as json
 
 from .forms import DailyWordForm
-from .models import User, DailyWord, Score
+from models import *
 from . import word
 
 def choosewords(request):
@@ -78,8 +78,20 @@ def get_scores(request):
             "num_guesses" : ts.num_guesses,
         })
         
+    # also include config setting for enabling brags.
+    client_name = request.GET.get("client_name", CLIENT_IPHONE) # default to iphone if parameter not provided.
+    bragEnabled = 0
+    try:
+        config_value = ConfigValue.objects.get(name="bragEnabled", client_name=client_name)
+        bragEnabled = int(config_value.value)
+        
+    except ConfigValue.DoesNotExist:
+        logger.error("No config setting for '%s' found with client_name '%s'" % ("bragEnabled", client_name))
+        bragEnabled = 0 
+
     d = {
         "scores" : s,
+        "bragEnabled" : bragEnabled
     }
     scores_json = json.dumps(d)
     return HttpResponse(content=scores_json, mimetype='application/javascript')

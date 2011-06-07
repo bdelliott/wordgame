@@ -82,6 +82,8 @@
 		71B3B6FA1357B0E5002EDD42 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 71B3B6F91357B0E5002EDD42 /* Default.png */; };
 		71BA2BE4139D71FC00B6482E /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA2BE3139D71FC00B6482E /* iRate.m */; };
 		71BA2BE7139D75A000B6482E /* RatingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA2BE6139D75A000B6482E /* RatingDelegate.m */; };
+		71BA2BEF139E790F00B6482E /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 71BA2BEE139E790F00B6482E /* facebook.png */; };
+		71BA2BF3139E80A200B6482E /* BragFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA2BF2139E80A200B6482E /* BragFacebook.m */; };
 		71BB57F0138D2EF500DF35F1 /* DebugGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */; };
 /* End PBXBuildFile section */
 
@@ -221,6 +223,9 @@
 		71BA2BE3139D71FC00B6482E /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		71BA2BE5139D75A000B6482E /* RatingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingDelegate.h; sourceTree = "<group>"; };
 		71BA2BE6139D75A000B6482E /* RatingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingDelegate.m; sourceTree = "<group>"; };
+		71BA2BEE139E790F00B6482E /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		71BA2BF1139E80A200B6482E /* BragFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BragFacebook.h; sourceTree = "<group>"; };
+		71BA2BF2139E80A200B6482E /* BragFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BragFacebook.m; sourceTree = "<group>"; };
 		71BB57EE138D2EF500DF35F1 /* DebugGestureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugGestureView.h; sourceTree = "<group>"; };
 		71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugGestureView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -424,13 +429,10 @@
 		71B3B6AB1357ADE6002EDD42 = {
 			isa = PBXGroup;
 			children = (
-				71BA2BE1139D71D400B6482E /* iRate */,
+				71BA2BE9139E789A00B6482E /* 3rd party code */,
+				71BA2BE8139E788D00B6482E /* Brags */,
 				343D9D51137DFEF80017380A /* Launch View */,
 				349BBEC913634F3300E2B497 /* Images */,
-				71122117135E146A0067C7DB /* ASI HTTP Request */,
-				7112213C135E14910067C7DB /* Facebook IOS SDK */,
-				7118491E137C918D007EA87E /* MBProgressHUD */,
-				711F8348136729F8000CD08C /* TSAlertview */,
 				71B3B6FD1357B192002EDD42 /* Game view */,
 				71B3B6FE1357B1A2002EDD42 /* High Scores view */,
 				71B3B6FF1357B1B0002EDD42 /* UIButton+Gradient */,
@@ -557,6 +559,36 @@
 			name = iRate;
 			sourceTree = "<group>";
 		};
+		71BA2BE8139E788D00B6482E /* Brags */ = {
+			isa = PBXGroup;
+			children = (
+				71BA2BF0139E791300B6482E /* Facebook */,
+			);
+			name = Brags;
+			sourceTree = "<group>";
+		};
+		71BA2BE9139E789A00B6482E /* 3rd party code */ = {
+			isa = PBXGroup;
+			children = (
+				71122117135E146A0067C7DB /* ASI HTTP Request */,
+				7112213C135E14910067C7DB /* Facebook IOS SDK */,
+				71BA2BE1139D71D400B6482E /* iRate */,
+				7118491E137C918D007EA87E /* MBProgressHUD */,
+				711F8348136729F8000CD08C /* TSAlertview */,
+			);
+			name = "3rd party code";
+			sourceTree = "<group>";
+		};
+		71BA2BF0139E791300B6482E /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				71BA2BEE139E790F00B6482E /* facebook.png */,
+				71BA2BF1139E80A200B6482E /* BragFacebook.h */,
+				71BA2BF2139E80A200B6482E /* BragFacebook.m */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -672,6 +704,7 @@
 				343D9DA4137ECC190017380A /* FullBackground.png in Resources */,
 				343D9DA5137ECC190017380A /* PlayGameBackground.png in Resources */,
 				343D9DA6137ECC190017380A /* SparkleSoftware.png in Resources */,
+				71BA2BEF139E790F00B6482E /* facebook.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,6 +772,7 @@
 				71BB57F0138D2EF500DF35F1 /* DebugGestureView.m in Sources */,
 				71BA2BE4139D71FC00B6482E /* iRate.m in Sources */,
 				71BA2BE7139D75A000B6482E /* RatingDelegate.m in Sources */,
+				71BA2BF3139E80A200B6482E /* BragFacebook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

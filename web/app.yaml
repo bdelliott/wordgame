@@ -1,7 +1,7 @@
 # This file will be post-processed to generate the actual app.yaml use when deploying to 
 # Google App Engine.
 application: sparkleword
-version: 2
+version: 3
 runtime: python
 api_version: 1
 
@@ -30,6 +30,11 @@ handlers:
 - url: /cron/.*
   script: djangoappengine/main/main.py
   login: admin
+
+# miscellaneous static files.
+- url: /static
+  static_dir: static
+  expiration: '0'
 
 # main site.
 - url: /.*

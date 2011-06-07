@@ -18,6 +18,10 @@
     NSArray *scores;
     NSTimer *timer;
     UIButton *playAgainButton;
+    
+    BOOL bragsEnabled;
+    UIAlertView *facebookBragPrompt;
+    UIButton *facebookBragButton;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *highScoresTableView;
@@ -30,12 +34,20 @@
 
 @property (nonatomic, retain) DebugGestureView *debugGestureView;
 
+@property (nonatomic, assign) BOOL bragsEnabled;
+@property (nonatomic, retain) UIAlertView *facebookBragPrompt;
+@property (nonatomic, retain) IBOutlet UIButton *facebookBragButton;
+
 - (NSMutableString *) formatTimeLeft:(int) secsuntilmidnight;
 - (void)updateTimeLeft;
 - (int)updateTimeLeftLabel;
 - (IBAction)pressedPlayAgain:(id)sender;
-
 - (void)togglePlayAgainButton:(BOOL)enabled;
+
+
+- (IBAction)facebookBragPressed:(id)sender;
+
+
 
 + (UIColor*) highlightColor;
 

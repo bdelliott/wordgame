@@ -23,6 +23,7 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
 @synthesize playGameController;
 
 @synthesize ratingDelegate;
+@synthesize bragFacebook;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -34,6 +35,8 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     [self.window makeKeyAndVisible];
     
     [self configureAppRating]; // configure prompting for app store ratings.
+    
+    self.bragFacebook = [[BragFacebook alloc] init];
     
     launchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchDisplayCompleted) userInfo:nil repeats:NO];
 
@@ -222,5 +225,11 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     [iRate sharedInstance].delegate = self.ratingDelegate;
     
 }
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    /* stupid facebook sdk forces you to put this method in the application delegate */
+    return [bragFacebook application:application handleOpenURL:url]; 
+}
+
 
 @end

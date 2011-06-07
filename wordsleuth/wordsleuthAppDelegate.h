@@ -11,6 +11,8 @@
 #import "PlayGameController.h"
 #import "RatingDelegate.h"
 
+#import "BragFacebook.h"
+
 extern NSString* const GameStateLoaded;
 
 @interface wordsleuthAppDelegate : NSObject <UIApplicationDelegate> {
@@ -24,7 +26,11 @@ extern NSString* const GameStateLoaded;
     BOOL hasGameState;
     NSTimer *launchTimer;
     
+    // app store ratings
     RatingDelegate *ratingDelegate;
+    
+    // brag stuff
+    BragFacebook *bragFacebook;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -35,7 +41,7 @@ extern NSString* const GameStateLoaded;
 @property (nonatomic, retain) PlayGameController *playGameController;
 
 @property (nonatomic, retain) RatingDelegate *ratingDelegate;
-
+@property (nonatomic, retain) BragFacebook *bragFacebook;
 
 - (void)configureAppRating;
 

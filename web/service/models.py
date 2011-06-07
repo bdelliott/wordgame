@@ -1,5 +1,10 @@
 from django.db import models
 
+CLIENT_IPHONE = "iPhone"
+
+CLIENT_NAMES = (
+    (CLIENT_IPHONE, CLIENT_IPHONE),
+)
 
 class User(models.Model):
     ''' Store additional info about our users here. '''
@@ -39,3 +44,15 @@ class Word(models.Model):
     def __str__(self):
         return self.word
  
+class ConfigValue(models.Model):
+    ''' configuration value '''
+    
+    client_name = models.CharField("Client name", max_length=8, choices=CLIENT_NAMES)
+    min_version = models.CharField("Minimum client version", max_length=6)
+    
+    name = models.CharField("Configuration item name", max_length=16)
+    value = models.CharField("Configuration item value", max_length=1024)
+    
+
+    def __str__(self):
+        return "%s: %s (%s, %s)" % (self.name, self.value, self.client_name, self.min_version)

@@ -21,6 +21,7 @@
     
     BOOL bragsEnabled;
     UIAlertView *facebookBragPrompt;
+    IBOutlet UILabel *bragLabel;
     UIButton *facebookBragButton;
 }
 
@@ -35,6 +36,7 @@
 @property (nonatomic, retain) DebugGestureView *debugGestureView;
 
 @property (nonatomic, assign) BOOL bragsEnabled;
+@property (nonatomic, retain) IBOutlet UILabel *bragLabel;
 @property (nonatomic, retain) UIAlertView *facebookBragPrompt;
 @property (nonatomic, retain) IBOutlet UIButton *facebookBragButton;
 

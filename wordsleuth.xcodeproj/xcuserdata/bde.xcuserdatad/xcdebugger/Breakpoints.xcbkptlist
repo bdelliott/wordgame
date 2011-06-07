@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/HighScoresController.m"
-         timestampString = "329168899.919831"
+         timestampString = "329170483.464283"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "211"
-         endingLineNumber = "211"
+         startingLineNumber = "231"
+         endingLineNumber = "231"
          landmarkName = "-tableView:numberOfRowsInSection:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/HighScoresController.m"
-         timestampString = "329157666.334913"
+         timestampString = "329170483.464283"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "107"
-         endingLineNumber = "107"
+         startingLineNumber = "145"
+         endingLineNumber = "145"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -205,11 +205,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/HighScoresController.m"
-         timestampString = "329157666.334913"
+         timestampString = "329170483.464283"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
+         startingLineNumber = "133"
+         endingLineNumber = "133"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -219,11 +219,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/HighScoresController.m"
-         timestampString = "329168899.919831"
+         timestampString = "329170483.464283"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "308"
-         endingLineNumber = "308"
+         startingLineNumber = "328"
+         endingLineNumber = "328"
          landmarkName = "-updateTimeLeft"
          landmarkType = "5">
       </FileBreakpoint>
@@ -331,11 +331,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/HighScoresController.m"
-         timestampString = "329168899.919831"
+         timestampString = "329170483.464283"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "297"
-         endingLineNumber = "297"
+         startingLineNumber = "317"
+         endingLineNumber = "317"
          landmarkName = "-updateTimeLeft"
          landmarkType = "5">
       </FileBreakpoint>
@@ -345,11 +345,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/HighScoresController.m"
-         timestampString = "329157666.334913"
+         timestampString = "329170483.464283"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "90"
-         endingLineNumber = "90"
+         startingLineNumber = "128"
+         endingLineNumber = "128"
          landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -519,6 +519,20 @@
          startingLineNumber = "94"
          endingLineNumber = "94"
          landmarkName = "-saveFacebookSession"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/HighScoresController.m"
+         timestampString = "329170077.996343"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
+         landmarkName = "-initWithNibName:bundle:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

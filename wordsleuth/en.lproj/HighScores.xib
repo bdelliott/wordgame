@@ -80,7 +80,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Play again in just XX:YY:ZZ</string>
-						<object class="NSFont" key="IBUIFont" id="1035066734">
+						<object class="NSFont" key="IBUIFont" id="418250663">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
@@ -102,7 +102,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont" id="856817899">
+						<object class="NSFont" key="IBUIFont" id="298365285">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
@@ -111,7 +111,7 @@
 						<string key="IBUINormalTitle">Play next word du jour</string>
 						<reference key="IBUIHighlightedTitleColor" ref="315959870"/>
 						<reference key="IBUINormalTitleColor" ref="315959870"/>
-						<object class="NSColor" key="IBUINormalTitleShadowColor" id="1066408594">
+						<object class="NSColor" key="IBUINormalTitleShadowColor" id="380943968">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
@@ -139,7 +139,7 @@
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
-					<object class="IBUIButton" id="33126989">
+					<object class="IBUIButton" id="24540827">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{167, 307}, {35, 29}}</string>
@@ -150,20 +150,20 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIFont" ref="856817899"/>
+						<reference key="IBUIFont" ref="298365285"/>
 						<int key="IBUIButtonType">1</int>
 						<reference key="IBUIHighlightedTitleColor" ref="315959870"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="1066408594"/>
+						<reference key="IBUINormalTitleShadowColor" ref="380943968"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">facebook.png</string>
 						</object>
 					</object>
-					<object class="IBUILabel" id="172369577">
+					<object class="IBUILabel" id="768338428">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{112, 311}, {55, 21}}</string>
@@ -175,7 +175,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Brag:</string>
-						<reference key="IBUIFont" ref="1035066734"/>
+						<reference key="IBUIFont" ref="418250663"/>
 						<reference key="IBUITextColor" ref="315959870"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -185,7 +185,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="33126989"/>
+				<reference key="NSNextKeyView" ref="24540827"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwLjUwMTk2MDgxNCAxAA</bytes>
@@ -259,18 +259,26 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">facebookBragButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="33126989"/>
+						<reference key="destination" ref="24540827"/>
 					</object>
 					<int key="connectionID">25</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">facebookBragPressed:</string>
-						<reference key="source" ref="33126989"/>
+						<reference key="source" ref="24540827"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">26</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">bragLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="768338428"/>
+					</object>
+					<int key="connectionID">28</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -291,8 +299,8 @@
 							<reference ref="612306104"/>
 							<reference ref="870328515"/>
 							<reference ref="618607091"/>
-							<reference ref="172369577"/>
-							<reference ref="33126989"/>
+							<reference ref="768338428"/>
+							<reference ref="24540827"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -332,12 +340,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">23</int>
-						<reference key="object" ref="33126989"/>
+						<reference key="object" ref="24540827"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">24</int>
-						<reference key="object" ref="172369577"/>
+						<reference key="object" ref="768338428"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -387,7 +395,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">26</int>
+			<int key="maxID">28</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -431,6 +439,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>bragLabel</string>
 							<string>facebookBragButton</string>
 							<string>highScoresTableView</string>
 							<string>playAgainButton</string>
@@ -439,6 +448,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UILabel</string>
 							<string>UIButton</string>
 							<string>UITableView</string>
 							<string>UIButton</string>
@@ -450,6 +460,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>bragLabel</string>
 							<string>facebookBragButton</string>
 							<string>highScoresTableView</string>
 							<string>playAgainButton</string>
@@ -458,6 +469,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">bragLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">facebookBragButton</string>
 								<string key="candidateClassName">UIButton</string>

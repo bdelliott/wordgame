@@ -27,6 +27,7 @@
 
 @synthesize bragsEnabled;
 @synthesize facebookBragPrompt;
+@synthesize bragLabel;
 @synthesize facebookBragButton;
 
 + (UIColor*) highlightColor {
@@ -57,6 +58,11 @@
     NSLog(@"HSC:viewWillAppear");
 
     [super viewWillAppear:animated];
+    
+    // hide bragging label and buttons until we retrieve the configuration setting
+    // from the server
+    self.bragLabel.hidden = YES;
+    self.facebookBragButton.hidden = YES;
 
     // add an invisible view covering the whole frame for detecting 
     // debug gestures.  (iz the voodoo)
@@ -83,28 +89,6 @@
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
     //NSLog(@"timer scheduled (%@)", self.timer);
     
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"HSC:viewWillDisappear");
-    [super viewDidDisappear:animated];
-    
-    [self.timer invalidate];
-    self.timer = nil;
-        
-}
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"FullBackground.png"]];
-    self.highScoresTableView.backgroundColor = [UIColor clearColor];    
-    self.highScoresTableView.rowHeight = 34.0f;
-    [self updateTimeLeftLabel];
-    
-    [self.playAgainButton styleWithGradientColor:[HighScoresController highlightColor]];
-
     NSLog(@"Loading high scores");
     
     // load the high scores of the day
@@ -132,6 +116,33 @@
         NSLog(@"bragEnabled: %d", self.bragsEnabled);
     }  
     
+    if (self.bragsEnabled) { 
+        self.bragLabel.hidden = NO;
+        self.facebookBragButton.hidden = NO;
+    }
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"HSC:viewWillDisappear");
+    [super viewDidDisappear:animated];
+    
+    [self.timer invalidate];
+    self.timer = nil;
+        
+}
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"FullBackground.png"]];
+    self.highScoresTableView.backgroundColor = [UIColor clearColor];    
+    self.highScoresTableView.rowHeight = 34.0f;
+    [self updateTimeLeftLabel];
+    
+    [self.playAgainButton styleWithGradientColor:[HighScoresController highlightColor]];
+
 }
 
 
@@ -159,13 +170,18 @@
     [self setPlayAgainButton:nil];
     [yourScoreLabel release];
     yourScoreLabel = nil;
+
     [self setFacebookBragButton:nil];
+    
+    [bragLabel release];
+    bragLabel = nil;
+    
     [super viewDidUnload];
 
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
 
 - (void)dealloc
 {
@@ -193,6 +209,10 @@
     [facebookBragButton release];
     facebookBragButton = nil;
     
+    [bragLabel release];
+    bragLabel = nil;
+    
+
     [super dealloc];
 }
 

@@ -122,9 +122,13 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
+    // also called on startup, so make sure top navigation controller is high scores
+    
+    id topController = [[self.navigationController viewControllers] lastObject];
+    
+    if (playedToday && [topController class] == [HighScoresController class]) {
+        [topController loadBestScores];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

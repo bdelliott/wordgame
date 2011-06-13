@@ -45,7 +45,7 @@
 - (int)updateTimeLeftLabel;
 - (IBAction)pressedPlayAgain:(id)sender;
 - (void)togglePlayAgainButton:(BOOL)enabled;
-
+- (void) loadBestScores;
 
 - (IBAction)facebookBragPressed:(id)sender;
 

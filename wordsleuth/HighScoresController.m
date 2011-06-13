@@ -54,6 +54,38 @@
 }
 
 
+- (void) loadBestScores {
+    //NSLog(@"timer scheduled (%@)", self.timer);
+    
+      NSLog(@"Loading high scores");
+    
+    // load the high scores of the day
+    NSURL *url = [WordURL getHighScoresURL];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    NSError *error = [request error];
+    
+    if (error) {
+        // TODO failed to get word.  implement a disconnected mode from a limited set of words?
+        NSLog(@"high scores load failed, error=%@", error);
+        
+    } else {
+        NSString *response = [request responseString];
+        NSDictionary *d = [response JSONValue];
+        scores = (NSArray *)[d objectForKey:@"scores"];
+        [scores retain];
+        
+        // check if bragging is enabled.
+        NSNumber *brags = (NSNumber *)[d objectForKey:@"bragEnabled"];
+        if (brags) {
+            self.bragsEnabled = [brags boolValue];
+        }
+        
+        NSLog(@"bragEnabled: %d", self.bragsEnabled);
+    }
+
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"HSC:viewWillAppear");
 
@@ -87,34 +119,8 @@
     [self updateTimeLeft];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
-    //NSLog(@"timer scheduled (%@)", self.timer);
     
-    NSLog(@"Loading high scores");
-    
-    // load the high scores of the day
-    NSURL *url = [WordURL getHighScoresURL];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request startSynchronous];
-    NSError *error = [request error];
-    
-    if (error) {
-        // TODO failed to get word.  implement a disconnected mode from a limited set of words?
-        NSLog(@"high scores load failed, error=%@", error);
-        
-    } else {
-        NSString *response = [request responseString];
-        NSDictionary *d = [response JSONValue];
-        scores = (NSArray *)[d objectForKey:@"scores"];
-        [scores retain];
-        
-        // check if bragging is enabled.
-        NSNumber *brags = (NSNumber *)[d objectForKey:@"bragEnabled"];
-        if (brags) {
-            self.bragsEnabled = [brags boolValue];
-        }
-        
-        NSLog(@"bragEnabled: %d", self.bragsEnabled);
-    }  
+    [self loadBestScores];  
     
     if (self.bragsEnabled) { 
         self.bragLabel.hidden = NO;

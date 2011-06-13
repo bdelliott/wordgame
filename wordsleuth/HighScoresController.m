@@ -318,14 +318,14 @@
     // timer callback.  update the label and then go to a new game if timer
     // is up
     
-    //NSLog(@"HSC:updateTimeLeft");
+    NSLog(@"HSC:updateTimeLeft");
     
     int secondsUntilMidnight = [self updateTimeLeftLabel];
     
     // BDE testing hack:
     //secondsUntilMidnight = 0;
     
-    if (secondsUntilMidnight == 0) {
+    if (secondsUntilMidnight <= 0) {
         
         // disable time countdown.  show play button.
         
@@ -341,7 +341,8 @@
     // iphone date/time library is the poo.. the steaming kind
     
     NSDate *now = [NSDate date];    
-    NSDate *midnight = [self getNextMidnight: now];    
+    wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSDate *midnight = [self getNextMidnight: [delegate lastPlayedDate]];    
     int secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
     
     self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilMidnight]];

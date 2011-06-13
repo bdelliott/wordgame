@@ -52,7 +52,7 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // first check if the user has already played today:
-    playedToday = [self checkPlayedToday];
+    playedToday = [self hasPlayedToday];
     hasGameState = YES;
     
     // BDE egregious testing hack:
@@ -145,12 +145,16 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     [super dealloc];
 }
 
-- (BOOL)checkPlayedToday {
-    
+- (NSDate *) lastPlayedDate {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    return [standardUserDefaults objectForKey:@"lastPlayed"];
+}
+
+- (BOOL)hasPlayedToday {
     
-    // get last played date
-    NSDate *lastPlayed = [standardUserDefaults objectForKey:@"lastPlayed"];
+    NSDate *lastPlayed;
+    lastPlayed = [self lastPlayedDate];
+
     NSLog(@"Game last played on: %@", lastPlayed);
     
     if (!lastPlayed) {

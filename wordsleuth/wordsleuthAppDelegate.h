@@ -45,7 +45,8 @@ extern NSString* const GameStateLoaded;
 
 - (void)configureAppRating;
 
-- (BOOL)checkPlayedToday;
+- (BOOL)hasPlayedToday;
+- (NSDate *) lastPlayedDate;
 - (int)getLastPlayedNumGuesses;
 
 - (void) loadGameState;

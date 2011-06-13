@@ -75,5 +75,6 @@
 - (void)doPostScore:(NSString *)userName;
 
 - (void)saveLastPlayed:(int)numGuesses;
+- (void) showHelpForKey:(NSString*)hasSeenHelpKey title:(NSString*)title message:(NSString*)message;
 
 @end

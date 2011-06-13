@@ -59,7 +59,23 @@
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"PGC:viewWillAppear");
     [super viewWillAppear:animated];
+    
+    [self showHelpForKey:@"hasSeenPlayGameHelp" title:@"Welcome to Word du Jour!" message:@"Guess today's word in as few tries as possible for the best score."];
+    
     [self initGame];
+}
+
+- (void) showHelpForKey:(NSString*)hasSeenHelpKey title:(NSString*)title message:(NSString*)message {
+    BOOL hasSeenHelp = [[NSUserDefaults standardUserDefaults] boolForKey:hasSeenHelpKey];
+    
+    if (!hasSeenHelp) {
+        UIAlertView *help = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [help show];
+        [help release];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:hasSeenHelpKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }    
 }
 
 - (void)initGame {
@@ -319,6 +335,9 @@
     
     [self.view addSubview:beforeLabel];
     beforeTextField.text = closestBeforeGuess;
+    
+    NSString *message = [NSString stringWithFormat:@"Today's word is after \"%@\"; try guessing something later in the alphabet.", closestBeforeGuess];
+    [self showHelpForKey:@"hasSeenBeforeWordHelp" title:@"Good guess!" message:message];
 }
 
 - (void)guessAfterWord:(NSString *)guess {
@@ -336,6 +355,9 @@
     
     [self.view addSubview:afterLabel];
     afterTextField.text = closestAfterGuess;
+    
+    NSString *message = [NSString stringWithFormat:@"Today's word is before \"%@\"; try guessing something earlier in the alphabet.", closestBeforeGuess];
+    [self showHelpForKey:@"hasSeenAfterWordHelp" title:@"Good guess!" message:message];
 }
 
 - (void)guessIsCorrect {

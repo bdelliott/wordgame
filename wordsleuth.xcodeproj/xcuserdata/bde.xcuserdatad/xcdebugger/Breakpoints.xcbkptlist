@@ -457,11 +457,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BragFacebook.m"
-         timestampString = "329705870.586007"
+         timestampString = "329707544.439731"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "75"
-         endingLineNumber = "75"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
          landmarkName = "-fbDidLogin"
          landmarkType = "5">
       </FileBreakpoint>
@@ -471,11 +471,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BragFacebook.m"
-         timestampString = "329705870.586007"
+         timestampString = "329707544.439731"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "73"
-         endingLineNumber = "73"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
          landmarkName = "-fbDidLogin"
          landmarkType = "5">
       </FileBreakpoint>
@@ -499,11 +499,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BragFacebook.m"
-         timestampString = "329705870.586007"
+         timestampString = "329707544.439731"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
          landmarkName = "-saveFacebookSession"
          landmarkType = "5">
       </FileBreakpoint>

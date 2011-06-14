@@ -62,8 +62,6 @@
     // save the facebook credentials
     [self saveFacebookSession];
 
-    // http://bit.ly/lMU85K 
-    
     NSString *msg = [NSString stringWithFormat:@"I guessed the Word du Jour in %d %@.", self.numGuesses, self.numGuesses == 1? @"try" : @"tries"];
     
     NSMutableDictionary *d = [[NSMutableDictionary alloc] initWithCapacity:10];
@@ -72,6 +70,19 @@
     NSString *wallPostURL = [WordURL getWallPostIconURL];
     [d setObject:wallPostURL forKey:@"picture"];
     
+    // bit.ly shortened link to WdJ app store page:
+    NSString *link = @"http://bit.ly/lMU85K";
+    [d setObject:link forKey:@"link"];
+    
+    // add name of the link param:
+    NSString *linkName = @"Word du Jour on the iTunes App Store";
+    [d setObject:linkName forKey:@"name"];
+    
+    // caption appears in small text below the link name:
+    NSString *caption = @"Try it!";
+    [d setObject:caption forKey:@"caption"];
+    
+
     [facebook requestWithGraphPath:@"me/feed" andParams:d andHttpMethod:@"POST" andDelegate:self];
 
     

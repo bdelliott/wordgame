@@ -14,6 +14,7 @@
 #import "BragFacebook.h"
 
 extern NSString* const GameStateLoaded;
+extern NSString* const ApplicationBecameActive;
 
 @interface wordsleuthAppDelegate : NSObject <UIApplicationDelegate> {
 

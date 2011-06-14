@@ -56,6 +56,7 @@
                        // for app store builds!!!
     debugTimerExpiration = nil;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadBestScores) name:ApplicationBecameActive object:nil];
     
     return self;
 }
@@ -132,11 +133,7 @@
 
     [self updateTimeLeft];
     
-<<<<<<< local
     [self enableTimer];
-=======
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
->>>>>>> other
     
     [self loadBestScores];  
     
@@ -376,8 +373,6 @@
     // iphone date/time library is the poo.. the steaming kind
     
     NSDate *now = [NSDate date];    
-<<<<<<< local
-    
     int secondsUntilMidnight = 0;
     if (debugTimer) {
         // should not be enabled for shipped version, debugging only.
@@ -385,14 +380,10 @@
         secondsUntilMidnight = (int)[debugTimerExpiration timeIntervalSinceDate:now];
         
     } else {
-        NSDate *midnight = [self getNextMidnight: now];    
+        wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSDate *midnight = [self getNextMidnight: [delegate lastPlayedDate]];    
         secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
     }
-=======
-    wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSDate *midnight = [self getNextMidnight: [delegate lastPlayedDate]];    
-    int secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
->>>>>>> other
     
     self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilMidnight]];
     

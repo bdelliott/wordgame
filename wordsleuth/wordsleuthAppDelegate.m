@@ -12,6 +12,7 @@
 #import "iRate.h"
 
 NSString* const GameStateLoaded = @"GameStateLoaded";
+NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 
 
 @implementation wordsleuthAppDelegate
@@ -130,27 +131,7 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-<<<<<<< local
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
-
-    //NSLog(@"WSAD: applicationDidBecomeActive");
-=======
-    // also called on startup, so make sure top navigation controller is high scores
->>>>>>> other
-    
-<<<<<<< local
-    // TODO refresh scores IF the high scores screen was active.  could probably use an
-    // observer for this.  NSNotifications?
-
-=======
-    id topController = [[self.navigationController viewControllers] lastObject];
-    
-    if (playedToday && [topController class] == [HighScoresController class]) {
-        [topController loadBestScores];
-    }
->>>>>>> other
+    [[NSNotificationCenter defaultCenter] postNotificationName:ApplicationBecameActive object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

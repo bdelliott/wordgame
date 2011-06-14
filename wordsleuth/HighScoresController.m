@@ -50,6 +50,13 @@
     
     self.facebookBragPrompt = [[UIAlertView alloc] initWithTitle:@"Brag on Facebook?" message:@"Would you like to brag about your score on Facebook?" delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"Brag!", nil];
     
+    
+    // DEBUG stuff:
+    debugTimer = FALSE; // for debugging timer rollovers to the next day's word.  disable    
+                       // for app store builds!!!
+    debugTimerExpiration = nil;
+    
+    
     return self;
 }
 
@@ -84,10 +91,16 @@
     
     [self togglePlayAgainButton:NO];
     
+    // if debug is enabled, setup the expiration time 15 seconds in the future
+    if (debugTimer) {
+        NSDate *now = [NSDate date];
+        debugTimerExpiration = [now dateByAddingTimeInterval:15];
+        [debugTimerExpiration retain];
+    }
+
     [self updateTimeLeft];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
-    //NSLog(@"timer scheduled (%@)", self.timer);
+    [self enableTimer];
     
     NSLog(@"Loading high scores");
     
@@ -123,6 +136,14 @@
 
 }
 
+- (void)enableTimer {
+    // turn on the countdown to next word timer.
+    
+    // schedule the timer:
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
+    //NSLog(@"timer scheduled (%@)", self.timer);
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     NSLog(@"HSC:viewWillDisappear");
     [super viewDidDisappear:animated];
@@ -131,6 +152,7 @@
     self.timer = nil;
         
 }
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -212,6 +234,8 @@
     [bragLabel release];
     bragLabel = nil;
     
+    [debugTimerExpiration release];
+    debugTimerExpiration = nil;
 
     [super dealloc];
 }
@@ -325,7 +349,7 @@
     // BDE testing hack:
     //secondsUntilMidnight = 0;
     
-    if (secondsUntilMidnight == 0) {
+    if (secondsUntilMidnight <= 0) {
         
         // disable time countdown.  show play button.
         
@@ -341,8 +365,17 @@
     // iphone date/time library is the poo.. the steaming kind
     
     NSDate *now = [NSDate date];    
-    NSDate *midnight = [self getNextMidnight: now];    
-    int secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
+    
+    int secondsUntilMidnight = 0;
+    if (debugTimer) {
+        // should not be enabled for shipped version, debugging only.
+        // pretend remaining time is very short so we can test game rollover.
+        secondsUntilMidnight = (int)[debugTimerExpiration timeIntervalSinceDate:now];
+        
+    } else {
+        NSDate *midnight = [self getNextMidnight: now];    
+        secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
+    }
     
     self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilMidnight]];
     

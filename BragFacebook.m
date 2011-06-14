@@ -62,6 +62,7 @@
     // save the facebook credentials
     [self saveFacebookSession];
 
+    // http://bit.ly/lMU85K 
     
     NSString *msg = [NSString stringWithFormat:@"I guessed the Word du Jour in %d %@.", self.numGuesses, self.numGuesses == 1? @"try" : @"tries"];
     

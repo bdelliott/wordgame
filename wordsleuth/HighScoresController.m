@@ -132,11 +132,7 @@
 
     [self updateTimeLeft];
     
-<<<<<<< local
     [self enableTimer];
-=======
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
->>>>>>> other
     
     [self loadBestScores];  
     
@@ -353,7 +349,7 @@
     // timer callback.  update the label and then go to a new game if timer
     // is up
     
-    NSLog(@"HSC:updateTimeLeft");
+    //NSLog(@"HSC:updateTimeLeft");
     
     int secondsUntilMidnight = [self updateTimeLeftLabel];
     
@@ -376,7 +372,6 @@
     // iphone date/time library is the poo.. the steaming kind
     
     NSDate *now = [NSDate date];    
-<<<<<<< local
     
     int secondsUntilMidnight = 0;
     if (debugTimer) {
@@ -385,14 +380,10 @@
         secondsUntilMidnight = (int)[debugTimerExpiration timeIntervalSinceDate:now];
         
     } else {
-        NSDate *midnight = [self getNextMidnight: now];    
+        wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSDate *midnight = [self getNextMidnight: [delegate lastPlayedDate]];    
         secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
     }
-=======
-    wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSDate *midnight = [self getNextMidnight: [delegate lastPlayedDate]];    
-    int secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
->>>>>>> other
     
     self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilMidnight]];
     

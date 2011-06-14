@@ -10,6 +10,7 @@
 #import "HighScoresController.h"
 #import "Launch.h"
 #import "iRate.h"
+#import "FlurryAPI.h"
 
 NSString* const GameStateLoaded = @"GameStateLoaded";
 
@@ -25,10 +26,21 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
 @synthesize ratingDelegate;
 @synthesize bragFacebook;
 
+void uncaughtExceptionHandler(NSException *exception) {
+    // log uncaught exceptions into flurry
+    [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window.rootViewController = [[[Launch alloc] init] autorelease];
+    
+    // turn on flurry analytics:
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    NSLog(@"WSAD: Starting Flurry session:");
+    [FlurryAPI startSession:@"2HD76PJHK695MXQ7ZEAS"];
+    [FlurryAPI logEvent:@"poop"];
+    NSLog(@"api version: %@", [FlurryAPI getFlurryAgentVersion]);
     
     [NSThread detachNewThreadSelector:@selector(loadGameState) toTarget:self withObject:nil];
     
@@ -130,27 +142,18 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-<<<<<<< local
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
 
     //NSLog(@"WSAD: applicationDidBecomeActive");
-=======
     // also called on startup, so make sure top navigation controller is high scores
->>>>>>> other
-    
-<<<<<<< local
-    // TODO refresh scores IF the high scores screen was active.  could probably use an
-    // observer for this.  NSNotifications?
 
-=======
     id topController = [[self.navigationController viewControllers] lastObject];
     
     if (playedToday && [topController class] == [HighScoresController class]) {
         [topController loadBestScores];
     }
->>>>>>> other
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -263,6 +266,5 @@ NSString* const GameStateLoaded = @"GameStateLoaded";
     /* stupid facebook sdk forces you to put this method in the application delegate */
     return [bragFacebook application:application handleOpenURL:url]; 
 }
-
 
 @end

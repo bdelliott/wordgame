@@ -23,6 +23,10 @@
     UIAlertView *facebookBragPrompt;
     IBOutlet UILabel *bragLabel;
     UIButton *facebookBragButton;
+    
+    // DEBUG stuff
+    BOOL debugTimer;
+    NSDate *debugTimerExpiration;  
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *highScoresTableView;
@@ -40,6 +44,7 @@
 @property (nonatomic, retain) UIAlertView *facebookBragPrompt;
 @property (nonatomic, retain) IBOutlet UIButton *facebookBragButton;
 
+- (void)enableTimer;
 - (NSMutableString *) formatTimeLeft:(int) secsuntilmidnight;
 - (void)updateTimeLeft;
 - (int)updateTimeLeftLabel;

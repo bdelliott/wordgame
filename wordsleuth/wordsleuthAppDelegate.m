@@ -36,12 +36,9 @@ void uncaughtExceptionHandler(NSException *exception) {
     self.window.rootViewController = [[[Launch alloc] init] autorelease];
     
     // turn on flurry analytics:
+    [self configureFlurry];
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     NSLog(@"WSAD: Starting Flurry session:");
-    [FlurryAPI startSession:@"2HD76PJHK695MXQ7ZEAS"];
-    [FlurryAPI logEvent:@"poop"];
-    NSLog(@"api version: %@", [FlurryAPI getFlurryAgentVersion]);
-    
     [NSThread detachNewThreadSelector:@selector(loadGameState) toTarget:self withObject:nil];
     
     [self.window makeKeyAndVisible];
@@ -136,7 +133,14 @@ void uncaughtExceptionHandler(NSException *exception) {
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
 
-    //NSLog(@"WSAD: applicationWillEnterForeground");
+    NSLog(@"WSAD: applicationWillEnterForeground");
+
+    // log it:    
+    NSDate *now = [NSDate date];
+    
+    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:now, @"date", nil];
+    [FlurryAPI logEvent:@"App becoming active again" withParameters:eventParams];
+    
 
 }
 
@@ -255,7 +259,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     irate.remindPeriod = 7; // reminder after 7 days if they choose not to rate.
     
-    irate.debug = YES; // if YES, prompt is always shown. (above settings ignored)
+    irate.debug = NO; // if YES, prompt is always shown. (above settings ignored)
     
     // simple delegate to display any errors communicating with the app store
     self.ratingDelegate = [[RatingDelegate alloc] init];
@@ -263,9 +267,39 @@ void uncaughtExceptionHandler(NSException *exception) {
     
 }
 
+- (void)configureFlurry {
+    
+    [FlurryAPI startSession:@"2HD76PJHK695MXQ7ZEAS"]; // unique key for WdJ
+    
+    // use the device identifier to help us identify the user uniquely.  (yes user
+    // could use multiple devices, but this will at least help us gauge how many
+    // copies of our app are in use)
+    UIDevice *device = [UIDevice currentDevice];
+    NSString *udid = device.uniqueIdentifier;
+    [FlurryAPI setUserID:udid];
+    
+    NSLog(@"Flurry API version: %@", [FlurryAPI getFlurryAgentVersion]);
+    
+    NSMutableDictionary *eventParams = [NSMutableDictionary dictionaryWithCapacity:2];
+
+    // add app version to event
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSLog(@"App version is: %@", version);
+    
+    [eventParams setObject:version forKey:@"version"];
+    
+    // add time to event
+    NSDate *now = [NSDate date];
+    [eventParams setObject:now forKey:@"date"];
+    
+    [FlurryAPI logEvent:@"App Launch" withParameters:eventParams];
+}
+
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     /* stupid facebook sdk forces you to put this method in the application delegate */
     return [bragFacebook application:application handleOpenURL:url]; 
+
 }
 
 @end

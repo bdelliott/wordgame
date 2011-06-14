@@ -2,3 +2,7 @@ cron:
 - description: nag reminder to generate some daily words
   url: /cron/reminder
   schedule: every 24 hours
+  
+- description: poke app to get keep code freshly loaded
+  url: /service/get_scores?fromcron=yes
+  schedule: every 5 minutes

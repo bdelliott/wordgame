@@ -44,6 +44,7 @@ extern NSString* const GameStateLoaded;
 @property (nonatomic, retain) BragFacebook *bragFacebook;
 
 - (void)configureAppRating;
+- (void)configureFlurry;
 
 - (BOOL)hasPlayedToday;
 - (NSDate *) lastPlayedDate;

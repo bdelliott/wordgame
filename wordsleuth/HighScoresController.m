@@ -10,6 +10,7 @@
 #import "wordsleuthAppDelegate.h"
 
 #import "ASIHTTPRequest.h"
+#import "FlurryAPI.h"
 #import "NSString+SBJSON.h"
 #import "WordURL.h"
 #import "UIButton+Gradient.h"
@@ -64,7 +65,7 @@
 - (void) loadBestScores {
     //NSLog(@"timer scheduled (%@)", self.timer);
     
-      NSLog(@"Loading high scores");
+    NSLog(@"Loading high scores");
     
     // load the high scores of the day
     NSURL *url = [WordURL getHighScoresURL];
@@ -171,6 +172,13 @@
     [self updateTimeLeftLabel];
     
     [self.playAgainButton styleWithGradientColor:[HighScoresController highlightColor]];
+    
+    // log it:    
+    NSDate *now = [NSDate date];
+    
+    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:now, @"date", nil];
+    [FlurryAPI logEvent:@"High scores shown" withParameters:eventParams];
+
 
 }
 

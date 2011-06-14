@@ -242,7 +242,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 	irate.appStoreID = 442117507;   // app id from iTunes connect
 	irate.applicationName = @"Word du Jour";
     
-    irate.disabled = TRUE;  // disable automatic prompting upon application launch.
+    irate.disabled = FALSE;  // disable automatic prompting upon application launch.
     
     irate.daysUntilPrompt = 0.0001; // set it effectively to 0 days.  we're prompting by number of games
                                     // so this setting just effectively disables the time checking.
@@ -250,6 +250,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     irate.usesUntilPrompt = 0; // don't care how many times the app is launched.
     
     // do not prompt until 3 games played.  each game is manually flagged as an event:
+    // prompt will appear once a game is completed AND the app is re-launched.
     irate.eventsUntilPrompt = 1; 
     
     irate.remindPeriod = 7; // reminder after 7 days if they choose not to rate.

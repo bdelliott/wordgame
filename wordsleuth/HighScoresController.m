@@ -1,5 +1,5 @@
 //
-//  SecondViewController.m
+//  HighScoresController.m
 //  wordsleuth
 //
 //  Created by Brian D. Elliott on 4/14/11.
@@ -10,7 +10,7 @@
 #import "wordsleuthAppDelegate.h"
 
 #import "ASIHTTPRequest.h"
-#import "FlurryAPI.h"
+#import "Analytics.h"
 #import "NSString+SBJSON.h"
 #import "WordURL.h"
 #import "UIButton+Gradient.h"
@@ -175,10 +175,7 @@
     [self.playAgainButton styleWithGradientColor:[HighScoresController highlightColor]];
     
     // log it:    
-    NSDate *now = [NSDate date];
-    
-    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:now, @"date", nil];
-    [FlurryAPI logEvent:@"High scores shown" withParameters:eventParams];
+    [Analytics logEvent:@"High scores shown"];
 
 
 }

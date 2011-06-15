@@ -45,7 +45,6 @@ extern NSString* const ApplicationBecameActive;
 @property (nonatomic, retain) BragFacebook *bragFacebook;
 
 - (void)configureAppRating;
-- (void)configureFlurry;
 
 - (BOOL)hasPlayedToday;
 - (NSDate *) lastPlayedDate;

@@ -10,7 +10,7 @@
 #import "HighScoresController.h"
 #import "Launch.h"
 #import "iRate.h"
-#import "FlurryAPI.h"
+#import "Analytics.h"
 
 NSString* const GameStateLoaded = @"GameStateLoaded";
 NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
@@ -27,19 +27,14 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 @synthesize ratingDelegate;
 @synthesize bragFacebook;
 
-void uncaughtExceptionHandler(NSException *exception) {
-    // log uncaught exceptions into flurry
-    [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window.rootViewController = [[[Launch alloc] init] autorelease];
     
-    // turn on flurry analytics:
-    [self configureFlurry];
+    // turn on analytics:
+    [Analytics startAnalytics];
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    NSLog(@"WSAD: Starting Flurry session:");
+
     [NSThread detachNewThreadSelector:@selector(loadGameState) toTarget:self withObject:nil];
     
     [self.window makeKeyAndVisible];
@@ -136,11 +131,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
     NSLog(@"WSAD: applicationWillEnterForeground");
 
-    // log it:    
-    NSDate *now = [NSDate date];
-    
-    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:now, @"date", nil];
-    [FlurryAPI logEvent:@"App becoming active again" withParameters:eventParams];
+    [Analytics logEvent:@"App becoming active again"];
     
 
 }
@@ -256,35 +247,6 @@ void uncaughtExceptionHandler(NSException *exception) {
     [iRate sharedInstance].delegate = self.ratingDelegate;
     
 }
-
-- (void)configureFlurry {
-    
-    [FlurryAPI startSession:@"2HD76PJHK695MXQ7ZEAS"]; // unique key for WdJ
-    
-    // use the device identifier to help us identify the user uniquely.  (yes user
-    // could use multiple devices, but this will at least help us gauge how many
-    // copies of our app are in use)
-    UIDevice *device = [UIDevice currentDevice];
-    NSString *udid = device.uniqueIdentifier;
-    [FlurryAPI setUserID:udid];
-    
-    NSLog(@"Flurry API version: %@", [FlurryAPI getFlurryAgentVersion]);
-    
-    NSMutableDictionary *eventParams = [NSMutableDictionary dictionaryWithCapacity:2];
-
-    // add app version to event
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSLog(@"App version is: %@", version);
-    
-    [eventParams setObject:version forKey:@"version"];
-    
-    // add time to event
-    NSDate *now = [NSDate date];
-    [eventParams setObject:now forKey:@"date"];
-    
-    [FlurryAPI logEvent:@"App Launch" withParameters:eventParams];
-}
-
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     /* stupid facebook sdk forces you to put this method in the application delegate */

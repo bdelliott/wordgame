@@ -10,6 +10,7 @@
 #import "HighScoresController.h"
 #import "Launch.h"
 #import "iRate.h"
+#import "FlurryAPI.h"
 
 NSString* const GameStateLoaded = @"GameStateLoaded";
 NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
@@ -26,11 +27,19 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 @synthesize ratingDelegate;
 @synthesize bragFacebook;
 
+void uncaughtExceptionHandler(NSException *exception) {
+    // log uncaught exceptions into flurry
+    [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window.rootViewController = [[[Launch alloc] init] autorelease];
     
+    // turn on flurry analytics:
+    [self configureFlurry];
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    NSLog(@"WSAD: Starting Flurry session:");
     [NSThread detachNewThreadSelector:@selector(loadGameState) toTarget:self withObject:nil];
     
     [self.window makeKeyAndVisible];
@@ -125,7 +134,14 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
 
-    //NSLog(@"WSAD: applicationWillEnterForeground");
+    NSLog(@"WSAD: applicationWillEnterForeground");
+
+    // log it:    
+    NSDate *now = [NSDate date];
+    
+    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:now, @"date", nil];
+    [FlurryAPI logEvent:@"App becoming active again" withParameters:eventParams];
+    
 
 }
 
@@ -220,7 +236,7 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 	irate.appStoreID = 442117507;   // app id from iTunes connect
 	irate.applicationName = @"Word du Jour";
     
-    irate.disabled = TRUE;  // disable automatic prompting upon application launch.
+    irate.disabled = FALSE;  // disable automatic prompting upon application launch.
     
     irate.daysUntilPrompt = 0.0001; // set it effectively to 0 days.  we're prompting by number of games
                                     // so this setting just effectively disables the time checking.
@@ -228,11 +244,12 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     irate.usesUntilPrompt = 0; // don't care how many times the app is launched.
     
     // do not prompt until 3 games played.  each game is manually flagged as an event:
+    // prompt will appear once a game is completed AND the app is re-launched.
     irate.eventsUntilPrompt = 1; 
     
     irate.remindPeriod = 7; // reminder after 7 days if they choose not to rate.
     
-    irate.debug = YES; // if YES, prompt is always shown. (above settings ignored)
+    irate.debug = NO; // if YES, prompt is always shown. (above settings ignored)
     
     // simple delegate to display any errors communicating with the app store
     self.ratingDelegate = [[RatingDelegate alloc] init];
@@ -240,10 +257,39 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     
 }
 
+- (void)configureFlurry {
+    
+    [FlurryAPI startSession:@"2HD76PJHK695MXQ7ZEAS"]; // unique key for WdJ
+    
+    // use the device identifier to help us identify the user uniquely.  (yes user
+    // could use multiple devices, but this will at least help us gauge how many
+    // copies of our app are in use)
+    UIDevice *device = [UIDevice currentDevice];
+    NSString *udid = device.uniqueIdentifier;
+    [FlurryAPI setUserID:udid];
+    
+    NSLog(@"Flurry API version: %@", [FlurryAPI getFlurryAgentVersion]);
+    
+    NSMutableDictionary *eventParams = [NSMutableDictionary dictionaryWithCapacity:2];
+
+    // add app version to event
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSLog(@"App version is: %@", version);
+    
+    [eventParams setObject:version forKey:@"version"];
+    
+    // add time to event
+    NSDate *now = [NSDate date];
+    [eventParams setObject:now forKey:@"date"];
+    
+    [FlurryAPI logEvent:@"App Launch" withParameters:eventParams];
+}
+
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     /* stupid facebook sdk forces you to put this method in the application delegate */
     return [bragFacebook application:application handleOpenURL:url]; 
-}
 
+}
 
 @end

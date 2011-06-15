@@ -10,6 +10,7 @@
 #import "wordsleuthAppDelegate.h"
 
 #import "ASIHTTPRequest.h"
+#import "FlurryAPI.h"
 #import "NSString+SBJSON.h"
 #import "WordURL.h"
 #import "UIButton+Gradient.h"
@@ -65,7 +66,7 @@
 - (void) loadBestScores {
     //NSLog(@"timer scheduled (%@)", self.timer);
     
-      NSLog(@"Loading high scores");
+    NSLog(@"Loading high scores");
     
     // load the high scores of the day
     NSURL *url = [WordURL getHighScoresURL];
@@ -172,6 +173,13 @@
     [self updateTimeLeftLabel];
     
     [self.playAgainButton styleWithGradientColor:[HighScoresController highlightColor]];
+    
+    // log it:    
+    NSDate *now = [NSDate date];
+    
+    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:now, @"date", nil];
+    [FlurryAPI logEvent:@"High scores shown" withParameters:eventParams];
+
 
 }
 
@@ -350,7 +358,7 @@
     // timer callback.  update the label and then go to a new game if timer
     // is up
     
-    NSLog(@"HSC:updateTimeLeft");
+    //NSLog(@"HSC:updateTimeLeft");
     
     int secondsUntilMidnight = [self updateTimeLeftLabel];
     
@@ -373,6 +381,7 @@
     // iphone date/time library is the poo.. the steaming kind
     
     NSDate *now = [NSDate date];    
+
     int secondsUntilMidnight = 0;
     if (debugTimer) {
         // should not be enabled for shipped version, debugging only.

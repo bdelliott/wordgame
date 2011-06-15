@@ -11,6 +11,7 @@
 #import "ASIFormDataRequest.h"
 #import "ASIHTTPRequest.h"
 #import "NSString+SBJSON.h"
+#import "FlurryAPI.h"
 
 #import "HighScoresController.h"
 #import "PostScoreTextFieldDelegate.h"
@@ -82,6 +83,12 @@
     
     NSLog(@"PGC:initGame");
     
+    // log start of a game:
+    NSDate *now = [NSDate date];
+    
+    NSDictionary *eventParams = [NSDictionary dictionaryWithObject:now forKey:@"date"];
+    [FlurryAPI logEvent:@"Starting a game" withParameters:eventParams];
+    
     shouldDismissKeyboard = NO;
     [guessTextField becomeFirstResponder]; // grab the editing focus
     
@@ -141,6 +148,12 @@
 - (void) endGame {
     // clean up
     
+    // log end of a game:
+    NSDate *now = [NSDate date];
+    
+    NSDictionary *eventParams = [NSDictionary dictionaryWithObject:now forKey:@"date"];
+    [FlurryAPI logEvent:@"Ending a game" withParameters:eventParams];
+
     int numGuesses = [self.guesses count];
     
     [word release];
@@ -270,6 +283,13 @@
 - (IBAction)gaveUp:(id)sender {
     // user gave up, just tell them the answer
     
+    // log it:    
+    NSDate *now = [NSDate date];
+    NSNumber *numGuessesObj = [NSNumber numberWithInt:[self.guesses count]];
+    
+    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:numGuessesObj, @"numGuesses", now, @"date", nil];
+    [FlurryAPI logEvent:@"User gave up" withParameters:eventParams];
+
     shouldDismissKeyboard = TRUE;
     
     [self saveLastPlayed:0];
@@ -364,8 +384,16 @@
     // do all the you-win stuff.
     NSLog(@"winner winner chicken dinner");
     
+    
     int numGuesses = [self.guesses count];
     [self saveLastPlayed:numGuesses];
+
+    // log it:    
+    NSDate *now = [NSDate date];
+    NSNumber *numGuessesObj = [NSNumber numberWithInt:numGuesses];
+    
+    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:numGuessesObj, @"numGuesses", now, @"date", nil];
+    [FlurryAPI logEvent:@"User solved it" withParameters:eventParams];
 
     
     shouldDismissKeyboard = YES;
@@ -444,6 +472,13 @@
     
     NSLog(@"postScore: %@", userName);
     
+    // log it:    
+    NSDate *now = [NSDate date];
+    
+    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:now, @"date", nil];
+    [FlurryAPI logEvent:@"Posting score" withParameters:eventParams];
+    
+    // show progress indicator
     hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
 	[self.navigationController.view addSubview:hud];
 	

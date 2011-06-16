@@ -29,23 +29,34 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window.rootViewController = [[[Launch alloc] init] autorelease];
+    // load application in background
+    [NSThread detachNewThreadSelector:@selector(loadApplication) toTarget:self withObject:nil];
+    
+    // display launch splash screens
+    self.window.rootViewController = [[[Launch alloc] init] autorelease];    
+    [self.window makeKeyAndVisible];
+    
+    // start time for launch screens; display app if load takes less time
+    launchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchDisplayCompleted) userInfo:nil repeats:NO];
+
+    return YES;
+}
+
+// all application initilization should take place here
+- (void) loadApplication {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // turn on analytics:
     [Analytics startAnalytics];
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    [self loadGameState];
 
-    [NSThread detachNewThreadSelector:@selector(loadGameState) toTarget:self withObject:nil];
-    
-    [self.window makeKeyAndVisible];
-    
     [self configureAppRating]; // configure prompting for app store ratings.
     
     self.bragFacebook = [[BragFacebook alloc] init];
     
-    launchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchDisplayCompleted) userInfo:nil repeats:NO];
-
-    return YES;
+    [pool release];    
 }
 
 - (void) launchDisplayCompleted {
@@ -54,8 +65,6 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 }
 
 - (void) loadGameState {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
     // first check if the user has already played today:
     playedToday = [self hasPlayedToday];
     hasGameState = YES;
@@ -63,10 +72,9 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     // BDE egregious testing hack:
     //playedToday = NO;
     
+    // display game view, in case load took longer than launch timer
     // all calls to UIKit must be from main thread
     [self performSelectorOnMainThread:@selector(loadGameView) withObject:nil waitUntilDone:NO];
-    
-    [pool release];
 }
 
 - (void) loadGameView {

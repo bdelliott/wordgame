@@ -369,7 +369,7 @@
     [self.view addSubview:afterLabel];
     afterTextField.text = closestAfterGuess;
     
-    NSString *message = [NSString stringWithFormat:@"Today's word is before \"%@\"; try guessing something earlier in the alphabet.", closestBeforeGuess];
+    NSString *message = [NSString stringWithFormat:@"Today's word is before \"%@\"; try guessing something earlier in the alphabet.", closestAfterGuess];
     [self showHelpForKey:@"hasSeenAfterWordHelp" title:@"Good guess!" message:message];
 }
 

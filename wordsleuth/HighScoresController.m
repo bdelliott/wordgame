@@ -51,6 +51,8 @@
     
     self.facebookBragPrompt = [[UIAlertView alloc] initWithTitle:@"Brag on Facebook?" message:@"Would you like to brag about your score on Facebook?" delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"Brag!", nil];
     
+    NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
+    lastFacebookBragDate = (NSDate *)[standardDefaults objectForKey:@"lastFacebookBragDate"];
     
     // DEBUG stuff:
     debugTimer = FALSE; // for debugging timer rollovers to the next day's word.  disable    
@@ -138,7 +140,7 @@
     
     [self loadBestScores];  
     
-    if (self.bragsEnabled) { 
+    if (self.bragsEnabled && ![self braggedToday]) { 
         self.bragLabel.hidden = NO;
         self.facebookBragButton.hidden = NO;
     }
@@ -407,6 +409,27 @@
 
 }
 
+- (BOOL)braggedToday {
+    
+    if (lastFacebookBragDate == nil)
+        return FALSE;
+    
+    
+    NSDate *today = [NSDate date];
+    
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:today];
+    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:lastFacebookBragDate];
+    
+    return [comp1 day] == [comp2 day] &&
+           [comp1 month] == [comp2 month] &&
+           [comp1 year]  == [comp2 year];
+    
+}
+
+
 - (IBAction)facebookBragPressed:(id)sender {
     
     // ask the user if they want to brag on facebook:
@@ -423,6 +446,16 @@
         wordsleuthAppDelegate *appDelegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
          
         [appDelegate.bragFacebook brag:self.numGuesses];
+        
+        // save last bragging datetime 
+        lastFacebookBragDate = [NSDate date];
+        
+        NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
+        [standardDefaults setObject:lastFacebookBragDate forKey:@"lastFacebookBragDate"];
+        [standardDefaults synchronize];
+        
+        self.bragLabel.hidden = YES;
+        self.facebookBragButton.hidden = YES;
     }
 }
 

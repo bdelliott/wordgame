@@ -23,6 +23,7 @@
     UIAlertView *facebookBragPrompt;
     IBOutlet UILabel *bragLabel;
     UIButton *facebookBragButton;
+    NSDate *lastFacebookBragDate;
     
     // DEBUG stuff
     BOOL debugTimer;
@@ -53,7 +54,7 @@
 - (void) loadBestScores;
 
 - (IBAction)facebookBragPressed:(id)sender;
-
+- (BOOL)braggedToday;
 
 
 + (UIColor*) highlightColor;

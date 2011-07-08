@@ -32,6 +32,12 @@
     
 }
  
+- (void)testFormatHourWithLessThan10Seconds {
+    
+    STAssertEqualObjects([controller formatTimeLeft:6], @"6", @"Incorrect format");
+    
+}
+
 - (void) tearDown {
     [controller release];
 }

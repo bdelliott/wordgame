@@ -338,7 +338,7 @@
     
     if (hours > 0) { 
         [timeLeft appendFormat:@"%d:%02d:", hours, minutes];
-    } else {
+    } else if (minutes > 0) {
         [timeLeft appendFormat:@"%d:", minutes]; 
     }
     

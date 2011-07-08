@@ -54,9 +54,11 @@
     NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
     lastFacebookBragDate = (NSDate *)[standardDefaults objectForKey:@"lastFacebookBragDate"];
     
-    // DEBUG stuff:
+#ifdef DEBUG
     debugTimer = YES; // for debugging timer rollovers to the next day's word.  disable    
                        // for app store builds!!!
+#endif
+    
     debugTimerExpiration = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadBestScores) name:ApplicationBecameActive object:nil];

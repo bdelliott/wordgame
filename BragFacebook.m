@@ -79,7 +79,7 @@
     [d setObject:linkName forKey:@"name"];
     
     // caption appears in small text below the link name:
-    NSString *caption = @"Try it!";
+    NSString *caption = @"Word du Jour is a fun word guessing game that helps build your vocabulary. Guess a new word every day and compete for the best score!";
     [d setObject:caption forKey:@"caption"];
     
 

@@ -32,9 +32,15 @@
     
 }
  
+- (void)testFormatHourWithZeroHours {
+    
+    STAssertEqualObjects([controller formatTimeLeft:66], @"1:06", @"Incorrect format");
+    
+}
+
 - (void)testFormatHourWithLessThan10Seconds {
     
-    STAssertEqualObjects([controller formatTimeLeft:6], @"6", @"Incorrect format");
+    STAssertEqualObjects([controller formatTimeLeft:6], @":06", @"Incorrect format");
     
 }
 

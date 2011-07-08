@@ -340,15 +340,11 @@
         [timeLeft appendFormat:@"%d:%02d:", hours, minutes];
     } else if (minutes > 0) {
         [timeLeft appendFormat:@"%d:", minutes]; 
+    } else {
+        [timeLeft appendString:@":"];
     }
     
-    NSString *secondsFormat = nil;
-    if (minutes > 0 || secsuntilmidnight > 60) { 
-        secondsFormat = @"%02d";
-    } else {
-        secondsFormat = @"%d";
-    }
-    [timeLeft appendFormat:secondsFormat, seconds];
+    [timeLeft appendFormat:@"%02d", seconds];
     
     return timeLeft;
 }

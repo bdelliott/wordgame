@@ -79,6 +79,16 @@
     }    
 }
 
+- (void) renderInitialView {
+    numGuessesLabel.text = nil;
+    guessTextField.text = nil;
+    beforeTextField.text = nil;
+    afterTextField.text = nil;
+    
+    [beforeLabel removeFromSuperview];
+    [afterLabel removeFromSuperview];
+
+}
 - (void)initGame {
     
     NSLog(@"PGC:initGame");
@@ -91,6 +101,8 @@
     
     closestBeforeGuess = nil;
     closestAfterGuess = nil;
+
+    [self renderInitialView];
     
     self.guesses = [NSMutableArray array];
 

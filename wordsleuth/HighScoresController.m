@@ -55,7 +55,7 @@
     lastFacebookBragDate = (NSDate *)[standardDefaults objectForKey:@"lastFacebookBragDate"];
     
     // DEBUG stuff:
-    debugTimer = FALSE; // for debugging timer rollovers to the next day's word.  disable    
+    debugTimer = YES; // for debugging timer rollovers to the next day's word.  disable    
                        // for app store builds!!!
     debugTimerExpiration = nil;
     

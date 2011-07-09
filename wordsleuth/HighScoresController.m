@@ -54,9 +54,8 @@
     NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
     lastFacebookBragDate = (NSDate *)[standardDefaults objectForKey:@"lastFacebookBragDate"];
     
-#ifdef TARGET_IPHONE_SIMULATOR 
-    debugTimer = YES; // for debugging timer rollovers to the next day's word.  disable    
-                       // for app store builds!!!
+#if TARGET_IPHONE_SIMULATOR 
+    debugTimer = YES; // for debugging timer rollovers to the next day's word.  
 #endif
     
     debugTimerExpiration = nil;

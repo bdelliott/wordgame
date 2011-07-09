@@ -35,7 +35,7 @@
 
     self.numGuesses = score;
 
-    NSArray* permissions =  [[NSArray arrayWithObjects:@"publish_stream", nil] retain];
+    NSArray* permissions =  [[NSArray arrayWithObjects:@"publish_stream", @"offline_access", nil] retain];
     
     // check for saved facebook credentials
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

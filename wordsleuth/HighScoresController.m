@@ -22,7 +22,7 @@
 @synthesize yourScoreLabel;
 @synthesize timer;
 @synthesize playAgainButton;
-@synthesize numGuesses;
+@synthesize lastPlayedNumGuesses;
 
 @synthesize debugGestureView;
 
@@ -44,7 +44,7 @@
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Best Scores";
     
-    self.numGuesses = 0;
+    self.lastPlayedNumGuesses = 0;
     
     // bragging should only be enabled once we're in the app store.
     self.bragsEnabled = FALSE;
@@ -60,7 +60,12 @@
     
     debugTimerExpiration = nil;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadBestScores) name:ApplicationBecameActive object:nil];
+    
+    // BDE commented this because this will fire any time the application
+    // becomes active, which might result in 2 fetches for scores overlapping.
+    // the results of 2 overlapping searches are unknown and may be harmful.
+    
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selecto(loadBestScores) name:ApplicationBecameActive object:nil];
     
     return self;
 }
@@ -117,12 +122,12 @@
     [self.view sendSubviewToBack:self.debugGestureView];
     
     // if they solved it, show the user's score.
-    if (self.numGuesses == 0) {
+    if (self.lastPlayedNumGuesses == 0) {
         self.yourScoreLabel.hidden = YES;
     } else {
         self.yourScoreLabel.hidden = NO;
         
-        NSString *yourScore = [NSString stringWithFormat:@"Your Score: %d", self.numGuesses];
+        NSString *yourScore = [NSString stringWithFormat:@"Your Score: %d", self.lastPlayedNumGuesses];
         self.yourScoreLabel.text = yourScore;
     }
     
@@ -291,16 +296,6 @@
     return numScores;
 }
 
-+ (void)goToHighScores:(int)numGuesses {
-    
-    wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
-    HighScoresController *highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
-    highScoresController.numGuesses = numGuesses;
-    
-    [delegate.navigationController pushViewController:highScoresController animated:TRUE];
-    [highScoresController release];
-}
-
 - (NSDate *) getNextMidnight:(NSDate *) now  {
     NSDateComponents *offset = [[NSDateComponents alloc] init];
     [offset setDay:1];
@@ -367,6 +362,10 @@
         
         [self.timer invalidate];
         self.timer = nil;
+        
+        // clear game state and pre-fetch next word
+        wordsleuthAppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+        [delegate resetGame];
         
         [self togglePlayAgainButton:YES];
         
@@ -442,7 +441,7 @@
         
         wordsleuthAppDelegate *appDelegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
          
-        [appDelegate.bragFacebook brag:self.numGuesses];
+        [appDelegate.bragFacebook brag:self.lastPlayedNumGuesses];
         
         // save last bragging datetime 
         lastFacebookBragDate = [NSDate date];

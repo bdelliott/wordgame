@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PostScoreTextFieldDelegate.h"
-#import "MBProgressHUD.h"
-#import "TSAlertView.h"
 
-@interface PlayGameController : UIViewController <MBProgressHUDDelegate, TSAlertViewDelegate> {
+#import "GameState.h"
+
+@class ScorePoster;
+
+@interface PlayGameController : UIViewController {
     
-    NSString *closestBeforeGuess;
-    NSString *closestAfterGuess;
+    GameState *gameState;
     
     UITextField *guessTextField;
     BOOL shouldDismissKeyboard;
@@ -26,18 +26,13 @@
     UILabel *afterLabel;
     
     UIAlertView *fetchWordErrorAlertView;
-    TSAlertView *alertView;
-    PostScoreTextFieldDelegate *alertViewDelegate;
 
-    MBProgressHUD *hud;
-
+    ScorePoster *scorePoster;
+    
+    NSCondition *wordLock; // lock until word is fetched
 }
 
-@property (nonatomic, retain) NSMutableArray *guesses;
-@property (nonatomic, retain) NSString *closestBeforeGuess;
-@property (nonatomic, retain) NSString *closestAfterGuess;
-
-@property (nonatomic, retain) NSString *word;
+@property (nonatomic, retain) GameState *gameState;
 
 @property (nonatomic, retain) IBOutlet UITextField *guessTextField;
 @property (nonatomic, retain) IBOutlet UILabel *numGuessesLabel;
@@ -51,30 +46,20 @@
 
 @property (nonatomic, retain) UIAlertView *fetchWordErrorAlertView;
 
-@property (nonatomic, retain) TSAlertView *alertView;
-
-- (void) initGame;
-- (NSString *) fetchWord;
-
 - (void) endGame;
 
 - (IBAction)guessMade:(id)sender;
 - (IBAction)gaveUp:(id)sender;
 
-
 - (void)checkGuess:(NSString *)guess;
 
-- (void)guessBeforeWord:(NSString *)guess;
-- (void)guessAfterWord:(NSString *)guess;
+- (void)updateAfterWord:(NSString *)guess;
+- (void)updateBeforeWord:(NSString *)guess;
+
 - (void)guessIsCorrect;
 
-- (NSString *)getSavedUserName;
-- (void)saveUserName:(NSString *)userName;
+- (void)resetGame;
 
-- (void)postScore:(NSString *)userName;
-- (void)doPostScore:(NSString *)userName;
-
-- (void)saveLastPlayed:(int)numGuesses;
 - (void) showHelpForKey:(NSString*)hasSeenHelpKey title:(NSString*)title message:(NSString*)message;
 
 @end

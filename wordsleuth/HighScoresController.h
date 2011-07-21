@@ -36,7 +36,7 @@
 
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, retain) IBOutlet UIButton *playAgainButton;
-@property (nonatomic, assign) int numGuesses;
+@property (nonatomic, assign) int lastPlayedNumGuesses;
 
 @property (nonatomic, retain) DebugGestureView *debugGestureView;
 
@@ -58,7 +58,5 @@
 
 
 + (UIColor*) highlightColor;
-
-+ (void)goToHighScores:(int)numGuesses;
 
 @end

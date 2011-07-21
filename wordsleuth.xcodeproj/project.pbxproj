@@ -87,6 +87,8 @@
 		71BA2BEF139E790F00B6482E /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 71BA2BEE139E790F00B6482E /* facebook.png */; };
 		71BA2BF3139E80A200B6482E /* BragFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA2BF2139E80A200B6482E /* BragFacebook.m */; };
 		71BB57F0138D2EF500DF35F1 /* DebugGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */; };
+		71F065FB13D714EB0075694C /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F065FA13D714EB0075694C /* GameState.m */; };
+		71F065FF13D718EF0075694C /* ScorePoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F065FE13D718EF0075694C /* ScorePoster.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +239,11 @@
 		71BA2BF2139E80A200B6482E /* BragFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BragFacebook.m; sourceTree = "<group>"; };
 		71BB57EE138D2EF500DF35F1 /* DebugGestureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugGestureView.h; sourceTree = "<group>"; };
 		71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugGestureView.m; sourceTree = "<group>"; };
+		71F065F913D714EB0075694C /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		71F065FA13D714EB0075694C /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
+		71F065FC13D715410075694C /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
+		71F065FD13D718EF0075694C /* ScorePoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorePoster.h; sourceTree = "<group>"; };
+		71F065FE13D718EF0075694C /* ScorePoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScorePoster.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -518,6 +525,9 @@
 				71B3B6C91357ADE6002EDD42 /* wordsleuthAppDelegate.h */,
 				71B3B6CA1357ADE6002EDD42 /* wordsleuthAppDelegate.m */,
 				71B3B6CC1357ADE6002EDD42 /* MainWindow.xib */,
+				71F065F913D714EB0075694C /* GameState.h */,
+				71F065FA13D714EB0075694C /* GameState.m */,
+				71F065FC13D715410075694C /* Notifications.h */,
 			);
 			path = wordsleuth;
 			sourceTree = "<group>";
@@ -564,6 +574,8 @@
 				71B3B6D01357ADE6002EDD42 /* PlayGameController.m */,
 				713BDC85137340BC00A4F5AC /* PostScoreTextFieldDelegate.h */,
 				713BDC86137340BC00A4F5AC /* PostScoreTextFieldDelegate.m */,
+				71F065FD13D718EF0075694C /* ScorePoster.h */,
+				71F065FE13D718EF0075694C /* ScorePoster.m */,
 			);
 			name = "Game view";
 			sourceTree = "<group>";
@@ -816,6 +828,8 @@
 				71BA2BE7139D75A000B6482E /* RatingDelegate.m in Sources */,
 				71BA2BF3139E80A200B6482E /* BragFacebook.m in Sources */,
 				7194176513A8DE0500969B63 /* Analytics.m in Sources */,
+				71F065FB13D714EB0075694C /* GameState.m in Sources */,
+				71F065FF13D718EF0075694C /* ScorePoster.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

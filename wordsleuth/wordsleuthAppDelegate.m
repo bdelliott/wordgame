@@ -6,11 +6,11 @@
 //  Copyright 2011 Sparkle Software. All rights reserved.
 //
 
-#import "wordsleuthAppDelegate.h"
-#import "HighScoresController.h"
-#import "Launch.h"
-#import "iRate.h"
 #import "Analytics.h"
+#import "iRate.h"
+#import "Launch.h"
+#import "Notifications.h"
+#import "wordsleuthAppDelegate.h"
 
 NSString* const GameStateLoaded = @"GameStateLoaded";
 NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
@@ -18,94 +18,111 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 
 @implementation wordsleuthAppDelegate
 
-@synthesize window=_window;
-
-@synthesize navigationController = _navigationController;
+@synthesize bragFacebook;
 
 @synthesize playGameController;
+@synthesize highScoresController;
+
+@synthesize navigationController = _navigationController;
+@synthesize window=_window;
 
 @synthesize ratingDelegate;
-@synthesize bragFacebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // load application in background
-    [NSThread detachNewThreadSelector:@selector(loadApplication) toTarget:self withObject:nil];
-    
     // display launch splash screens
     self.window.rootViewController = [[[Launch alloc] init] autorelease];    
     [self.window makeKeyAndVisible];
     
-    // start time for launch screens; display app if load takes less time
-    launchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchDisplayCompleted) userInfo:nil repeats:NO];
-
+    [self loadApplication];
+    
     return YES;
 }
 
 // all application initilization should take place here
 - (void) loadApplication {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // turn on analytics:
     [Analytics startAnalytics];
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
-    [self loadGameState];
-
     [self configureAppRating]; // configure prompting for app store ratings.
     
     self.bragFacebook = [[BragFacebook alloc] init];
+
+    // initialize main game play controller:
+    self.playGameController = [[PlayGameController alloc] initWithNibName:@"PlayGame" bundle:nil];
     
-    [pool release];    
+    // initialize high scores controller:
+    self.highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
+    
+    [self resetGame];
+    
+    // prompt for app reviews, if appropriate
+    [self promptForAppReviews];
+
 }
 
-- (void) launchDisplayCompleted {
-    launchDisplayCompleted = YES;
-    [self loadGameView];
+- (void)promptForAppReviews {
+    
+    // prompt for app ratings.    
+    if ([[iRate sharedInstance] shouldPromptForRating]) {
+        
+        // notify me when review popup is done:
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticateWithGameCenter) name:NOTIFICATION_DONE_APP_RATINGS object:nil];
+        
+        [[iRate sharedInstance] promptIfNetworkAvailable];
+        
+    } else {
+        [self loadGameView];
+    }
 }
 
-- (void) loadGameState {
-    // first check if the user has already played today:
-    playedToday = [self hasPlayedToday];
-    hasGameState = YES;
-    
-    // BDE egregious testing hack:
-    //playedToday = NO;
-    
-    // display game view, in case load took longer than launch timer
-    // all calls to UIKit must be from main thread
-    [self performSelectorOnMainThread:@selector(loadGameView) withObject:nil waitUntilDone:NO];
+- (void) resetGame {
+    // reset game state for next round:
+    [self.playGameController resetGame]; 
 }
+
 
 - (void) loadGameView {
-    if (hasGameState && launchDisplayCompleted) {
-        self.window.rootViewController = self.navigationController;
+
+    if ([self hasPlayedToday]) {
+        // skip to high scores screen with timer
+        NSLog(@"User already played today, going to high scores.");
+        int lastPlayedNumGuesses = [self getLastPlayedNumGuesses];
+        [self goToScores:lastPlayedNumGuesses];
         
-        if (playedToday) {
-            // skip to high scores screen with timer
-            NSLog(@"User already played today, going to high scores.");
-            int lastPlayedNumGuesses = [self getLastPlayedNumGuesses];
-            [HighScoresController goToHighScores:lastPlayedNumGuesses];            
-            
-        } else {
-            NSLog(@"User has not played yet today, initializing game.");
-            [self startGame];            
-        }
+    } else {
+        NSLog(@"User has not played yet today, initializing game.");
+        [self startGame];            
     }
+
+    // swap to nav controller as the root:
+    self.window.rootViewController = self.navigationController;
+
 }
 
 - (void)startGame {
 
     NSLog(@"wordsleuth:startGame");
-    if (!self.playGameController) {
-        // user has not played today:
-        self.playGameController = [[PlayGameController alloc] initWithNibName:@"PlayGame" bundle:nil];
-        [self.navigationController pushViewController:self.playGameController animated:TRUE];
-    }
     
-    [self.navigationController popToViewController:self.playGameController animated:TRUE];
+    NSArray *viewControllers = [[NSArray alloc] initWithObjects:self.playGameController, nil];
+    [self.navigationController setViewControllers:viewControllers animated:TRUE];
+    [viewControllers release];
+    
 
 }
+
+- (void)goToScores:(int)lastPlayedNumGuesses {
+    NSLog(@"WSAD: Going to high scores scroller view");
+    
+    self.highScoresController.lastPlayedNumGuesses = lastPlayedNumGuesses;
+
+    NSArray *viewControllers = [[NSArray alloc] initWithObjects:self.highScoresController, nil];
+    [self.navigationController setViewControllers:viewControllers animated:TRUE];
+    [viewControllers release];
+}
+
 
 
 
@@ -166,6 +183,7 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     [_window release];
     [_navigationController release];
     [playGameController release];
+    [highScoresController release];
     [ratingDelegate release];
     [super dealloc];
 }

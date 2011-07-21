@@ -70,9 +70,6 @@
     wordLock = [[NSCondition alloc] init];
     [wordLock lock];
     
-    //viewLock = [[NSCondition alloc] init];
-    //[viewLock lock];
-    
     // reset actual game state and trigger word fetch.
     [gameState resetGame];
     

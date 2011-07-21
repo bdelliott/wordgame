@@ -86,6 +86,9 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 
 - (void) loadGameView {
 
+    // swap to nav controller as the root:
+    self.window.rootViewController = self.navigationController;
+    
     if ([self hasPlayedToday]) {
         // skip to high scores screen with timer
         NSLog(@"User already played today, going to high scores.");
@@ -97,19 +100,19 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
         [self startGame];            
     }
 
-    // swap to nav controller as the root:
-    self.window.rootViewController = self.navigationController;
-
 }
 
 - (void)startGame {
 
     NSLog(@"wordsleuth:startGame");
     
-    NSArray *viewControllers = [[NSArray alloc] initWithObjects:self.playGameController, nil];
+    UIViewController *navRoot = [self.navigationController.viewControllers objectAtIndex:0];
+    
+    NSArray *viewControllers = [[NSArray alloc] initWithObjects:navRoot, self.playGameController, nil];
     [self.navigationController setViewControllers:viewControllers animated:TRUE];
     [viewControllers release];
     
+    //[self.navigationController pushViewController:self.playGameController animated:YES];
 
 }
 
@@ -118,9 +121,12 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     
     self.highScoresController.lastPlayedNumGuesses = lastPlayedNumGuesses;
 
-    NSArray *viewControllers = [[NSArray alloc] initWithObjects:self.highScoresController, nil];
+    UIViewController *navRoot = [self.navigationController.viewControllers objectAtIndex:0];
+    
+    NSArray *viewControllers = [[NSArray alloc] initWithObjects:navRoot, self.highScoresController, nil];
     [self.navigationController setViewControllers:viewControllers animated:TRUE];
     [viewControllers release];
+
 }
 
 

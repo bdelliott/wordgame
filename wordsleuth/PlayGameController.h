@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #import "GameState.h"
+#import "MBProgressHUD.h"
 
 @class ScorePoster;
 
-@interface PlayGameController : UIViewController {
+@interface PlayGameController : UIViewController <MBProgressHUDDelegate> {
     
     GameState *gameState;
     
@@ -30,6 +31,7 @@
     ScorePoster *scorePoster;
     
     NSCondition *wordLock; // lock until word is fetched
+    MBProgressHUD *wordFetchActivityHUD;
 }
 
 @property (nonatomic, retain) GameState *gameState;

@@ -101,6 +101,16 @@
         
     }
 }
+
+- (void)waitUntilWordFetched {
+    // this method will run in a background thread
+    // until any outstanding background word fetches
+    // are finished.
+    
+    NSLog(@"Poop");
+    sleep(5);
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"PGC:viewWillAppear");
     [super viewWillAppear:animated];
@@ -120,10 +130,28 @@
     // log start of a game:
     [Analytics logEvent:@"Starting a game"];
     
+    // show an activity indicator until the word fetching is done:
+    wordFetchActivityHUD = [[MBProgressHUD alloc] initWithView:self.view];
+    wordFetchActivityHUD.delegate = self;
+    wordFetchActivityHUD.labelText = @"Please wait";
+    wordFetchActivityHUD.detailsLabelText = @"while today's word is loaded";
+    wordFetchActivityHUD.yOffset = -50;
+    
+    [self.view addSubview:wordFetchActivityHUD];
+    
+    [wordFetchActivityHUD showWhileExecuting:@selector(waitUntilWordFetched) onTarget:self withObject:nil animated:YES];
+    
+}
+
+- (void)hudWasHidden {
+
+    [wordFetchActivityHUD removeFromSuperview];
+    [wordFetchActivityHUD release];
+    wordFetchActivityHUD = nil;
+    
     // keep keyboard up until play is done:
     shouldDismissKeyboard = NO;
     [guessTextField becomeFirstResponder]; // grab the editing focus
-    
 }
 
 - (void) showHelpForKey:(NSString*)hasSeenHelpKey title:(NSString*)title message:(NSString*)message {

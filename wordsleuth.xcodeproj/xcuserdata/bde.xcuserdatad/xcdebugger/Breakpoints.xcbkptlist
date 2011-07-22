@@ -28,7 +28,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "258"
          endingLineNumber = "258"
-         landmarkName = "-tableView:numberOfRowsInSection:"
+         landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -42,7 +42,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "166"
          endingLineNumber = "166"
-         landmarkName = "-viewDidLoad"
+         landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -51,12 +51,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "332996117.740935"
+         timestampString = "333056835.563023"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "289"
-         endingLineNumber = "289"
-         landmarkName = "-textFieldShouldEndEditing:"
+         startingLineNumber = "264"
+         endingLineNumber = "264"
+         landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -93,12 +93,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "332996117.740935"
+         timestampString = "333056835.563023"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "394"
-         endingLineNumber = "394"
-         landmarkName = "-saveUserName:"
+         startingLineNumber = "369"
+         endingLineNumber = "369"
+         landmarkName = "-guessIsCorrect"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -107,12 +107,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/wordsleuthAppDelegate.m"
-         timestampString = "332974224.928135"
+         timestampString = "333058281.058262"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
-         landmarkName = "-dealloc"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
+         landmarkName = "-applicationDidEnterBackground:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -121,12 +121,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "332996117.740935"
+         timestampString = "333056835.563023"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "265"
-         endingLineNumber = "265"
-         landmarkName = "-dealloc"
+         startingLineNumber = "241"
+         endingLineNumber = "241"
+         landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -135,12 +135,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "332996117.740935"
+         timestampString = "333056835.563023"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "217"
-         endingLineNumber = "217"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "193"
+         endingLineNumber = "193"
+         landmarkName = "-styleGiveUp"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -154,7 +154,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "345"
          endingLineNumber = "345"
-         landmarkName = "-updateTimeLeft"
+         landmarkName = "-formatTimeLeft:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -177,12 +177,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "332996117.740935"
+         timestampString = "333056835.563023"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "392"
-         endingLineNumber = "392"
-         landmarkName = "-alertView:didDismissWithButtonIndex:"
+         startingLineNumber = "367"
+         endingLineNumber = "367"
+         landmarkName = "-guessIsCorrect"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -196,7 +196,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "334"
          endingLineNumber = "334"
-         landmarkName = "-updateTimeLeft"
+         landmarkName = "-formatTimeLeft:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -219,11 +219,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "iRate.m"
-         timestampString = "329092628.066591"
+         timestampString = "333057399.850628"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "249"
-         endingLineNumber = "249"
+         startingLineNumber = "250"
+         endingLineNumber = "250"
          landmarkName = "-shouldPromptForRating"
          landmarkType = "5">
       </FileBreakpoint>
@@ -233,11 +233,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "iRate.m"
-         timestampString = "329092628.066591"
+         timestampString = "333057399.850628"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "294"
-         endingLineNumber = "294"
+         startingLineNumber = "295"
+         endingLineNumber = "295"
          landmarkName = "-promptForRating"
          landmarkType = "5">
       </FileBreakpoint>
@@ -247,11 +247,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "iRate.m"
-         timestampString = "329092945.942505"
+         timestampString = "333057399.850628"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "434"
-         endingLineNumber = "434"
+         startingLineNumber = "435"
+         endingLineNumber = "435"
          landmarkName = "-alertView:didDismissWithButtonIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -336,7 +336,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "362"
          endingLineNumber = "362"
-         landmarkName = "-updateTimeLeftLabel"
+         landmarkName = "-updateTimeLeft"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -350,7 +350,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "406"
          endingLineNumber = "406"
-         landmarkName = "-togglePlayAgainButton:"
+         landmarkName = "-pressedPlayAgain:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -378,7 +378,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "310"
          endingLineNumber = "310"
-         landmarkName = "-formatTimeLeft:"
+         landmarkName = "-getNextMidnight:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -387,11 +387,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "iRate.m"
-         timestampString = "329708205.363329"
+         timestampString = "333057399.850628"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "413"
-         endingLineNumber = "413"
+         startingLineNumber = "414"
+         endingLineNumber = "414"
          landmarkName = "-openRatingsPageInAppStore"
          landmarkType = "5">
       </FileBreakpoint>
@@ -427,12 +427,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "332996117.740935"
+         timestampString = "333056835.563023"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "307"
-         endingLineNumber = "307"
-         landmarkName = "-checkGuess:"
+         startingLineNumber = "282"
+         endingLineNumber = "282"
+         landmarkName = "-guessMade:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -441,11 +441,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/GameState.m"
-         timestampString = "332907986.44947"
+         timestampString = "333054770.754319"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "111"
-         endingLineNumber = "111"
+         startingLineNumber = "114"
+         endingLineNumber = "114"
          landmarkName = "-checkGuess:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -539,11 +539,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/wordsleuthAppDelegate.m"
-         timestampString = "332974224.928135"
+         timestampString = "333058281.058262"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "127"
-         endingLineNumber = "127"
+         startingLineNumber = "126"
+         endingLineNumber = "126"
          landmarkName = "-goToScores:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -553,12 +553,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/wordsleuthAppDelegate.m"
-         timestampString = "332973421.282089"
+         timestampString = "333058281.058262"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "92"
-         endingLineNumber = "92"
-         landmarkName = "-loadGameView"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
+         landmarkName = "-startGame"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -567,7 +567,21 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/wordsleuthAppDelegate.m"
-         timestampString = "332973462.582781"
+         timestampString = "333058281.058262"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "119"
+         endingLineNumber = "119"
+         landmarkName = "-goToScores:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "wordsleuth/wordsleuthAppDelegate.m"
+         timestampString = "333058281.058262"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "107"
@@ -580,27 +594,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "wordsleuth/wordsleuthAppDelegate.m"
-         timestampString = "332974175.130306"
+         filePath = "wordsleuth/PlayGameController.m"
+         timestampString = "333056835.563023"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "120"
-         endingLineNumber = "120"
-         landmarkName = "-goToScores:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "wordsleuth/wordsleuthAppDelegate.m"
-         timestampString = "332974302.507871"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "108"
-         endingLineNumber = "108"
-         landmarkName = "-startGame"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
+         landmarkName = "-wordFetchingDone"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -609,40 +609,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "332996041.385848"
+         timestampString = "333056835.563023"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "137"
-         endingLineNumber = "137"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "MBProgressHUD.h"
-         timestampString = "332996128.336768"
+         filePath = "iRate.m"
+         timestampString = "333057399.850628"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "203"
-         endingLineNumber = "203"
-         landmarkName = "opacity"
-         landmarkType = "19">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "332996135.720229"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "144"
-         endingLineNumber = "144"
-         landmarkName = "-hudWasHidden"
+         startingLineNumber = "369"
+         endingLineNumber = "369"
+         landmarkName = "-connection:didFailWithError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -650,27 +636,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "MBProgressHUD.h"
-         timestampString = "332996140.920455"
+         filePath = "iRate.m"
+         timestampString = "333057613.891933"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "194"
-         endingLineNumber = "194"
-         landmarkName = "@interface MBProgressHUD"
-         landmarkType = "2">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "wordsleuth/PlayGameController.m"
-         timestampString = "332996191.93775"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
-         landmarkName = "-waitUntilWordFetched"
+         startingLineNumber = "306"
+         endingLineNumber = "306"
+         landmarkName = "-promptForRating"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

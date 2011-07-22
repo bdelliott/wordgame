@@ -100,6 +100,9 @@
         
     }
     
+    //NSLog(@"adding fake wait to word fetch to test synchronization with ui layer");
+    //sleep(10);
+    
     // alert that background fetch is complete.
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WORD_FETCH_DONE object:nil];
     

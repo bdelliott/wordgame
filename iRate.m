@@ -7,6 +7,7 @@
 //
 
 #import "iRate.h"
+#import "Notifications.h"
 
 
 NSString * const iRateRatedVersionKey = @"iRateRatedVersionChecked";
@@ -433,6 +434,11 @@ static iRate *sharedInstance = nil;
 		//go to ratings page
 		[self openRatingsPageInAppStore];
 	}
+    
+    // BDE: let the app know when the dialog is actually dismissed.  seems like common
+    // courtesy, no?
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DONE_APP_RATINGS  object:nil];
+
 }
 
 #else

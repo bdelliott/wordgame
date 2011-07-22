@@ -69,7 +69,7 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     if ([[iRate sharedInstance] shouldPromptForRating]) {
         
         // notify me when review popup is done:
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticateWithGameCenter) name:NOTIFICATION_DONE_APP_RATINGS object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadGameView) name:NOTIFICATION_DONE_APP_RATINGS object:nil];
         
         [[iRate sharedInstance] promptIfNetworkAvailable];
         
@@ -82,7 +82,6 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     // reset game state for next round:
     [self.playGameController resetGame]; 
 }
-
 
 - (void) loadGameView {
 
@@ -259,7 +258,7 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 	irate.appStoreID = 442117507;   // app id from iTunes connect
 	irate.applicationName = @"Word du Jour";
     
-    irate.disabled = FALSE;  // disable automatic prompting upon application launch.
+    irate.disabled = TRUE;  // disable automatic prompting upon application launch.
     
     irate.daysUntilPrompt = 0.0001; // set it effectively to 0 days.  we're prompting by number of games
                                     // so this setting just effectively disables the time checking.

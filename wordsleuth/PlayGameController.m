@@ -60,24 +60,14 @@
     
     NSLog(@"PGC:resetGame");
     
-    [wordLock release];
-    
     shouldDismissKeyboard = NO;
     
-    // locking/unlocking both occur from main thread!  (NSLocks and their variants require
-    // same thread.)
-    
-    wordLock = [[NSCondition alloc] init];
-    [wordLock lock];
-    
+    wordFetchDone = FALSE;
+
     // reset actual game state and trigger word fetch.
     [gameState resetGame];
     
     
-}
-
-- (void)wordUnlock {
-    [wordLock unlock];
 }
 
 - (void)wordFetchingDone {
@@ -88,9 +78,7 @@
         // good to go
         NSLog(@"PGC:wordFetchingDone - got word.");
         
-        // unlock play from main thread
-        [self performSelectorOnMainThread:@selector(wordUnlock) withObject:nil waitUntilDone:NO];
-        
+        wordFetchDone = TRUE;
     } else {
         // no word - network connectivity failed repeatedly.  display error, etc.
         NSLog(@"PGC:wordFetchingDone - no word, doing error dialog.!");
@@ -107,8 +95,17 @@
     // until any outstanding background word fetches
     // are finished.
     
-    NSLog(@"Poop");
-    sleep(5);
+    while (!wordFetchDone) {
+        sleep(0.5); // sleep 500 ms.
+    }
+
+}
+
+- (void)grabKeyboard {
+    
+    // keep keyboard up until play is done:
+    shouldDismissKeyboard = NO;
+    [guessTextField becomeFirstResponder]; // grab the editing focus
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -130,16 +127,23 @@
     // log start of a game:
     [Analytics logEvent:@"Starting a game"];
     
-    // show an activity indicator until the word fetching is done:
-    wordFetchActivityHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    wordFetchActivityHUD.delegate = self;
-    wordFetchActivityHUD.labelText = @"Please wait";
-    wordFetchActivityHUD.detailsLabelText = @"while today's word is loaded";
-    wordFetchActivityHUD.yOffset = -50;
-    
-    [self.view addSubview:wordFetchActivityHUD];
-    
-    [wordFetchActivityHUD showWhileExecuting:@selector(waitUntilWordFetched) onTarget:self withObject:nil animated:YES];
+    // if word already fetched, no need to wait at all:
+    if (wordFetchDone) {
+        NSLog(@"PGC:viewWillAppear: word fetch was freakin' fast, skipping HUD altogether.");
+        [self grabKeyboard];
+    } else {
+        
+        // show an activity indicator until the word fetching is done:
+        wordFetchActivityHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        wordFetchActivityHUD.delegate = self;
+        wordFetchActivityHUD.labelText = @"Please wait";
+        wordFetchActivityHUD.detailsLabelText = @"while today's word is loaded";
+        wordFetchActivityHUD.yOffset = -50;
+        
+        [self.view addSubview:wordFetchActivityHUD];
+        
+        [wordFetchActivityHUD showWhileExecuting:@selector(waitUntilWordFetched) onTarget:self withObject:nil animated:YES];
+    }
     
 }
 
@@ -149,9 +153,7 @@
     [wordFetchActivityHUD release];
     wordFetchActivityHUD = nil;
     
-    // keep keyboard up until play is done:
-    shouldDismissKeyboard = NO;
-    [guessTextField becomeFirstResponder]; // grab the editing focus
+    [self grabKeyboard];
 }
 
 - (void) showHelpForKey:(NSString*)hasSeenHelpKey title:(NSString*)title message:(NSString*)message {
@@ -169,8 +171,6 @@
 
 - (void) endGame {
     // clean up
-    [wordLock release];
-    wordLock = nil;
     
     // log end of a game:
     [Analytics logEvent:@"Ending a game"];
@@ -254,7 +254,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [wordLock release];
     [numGuessesLabel release];
     [guessTextField release];
     [beforeTextField release];

@@ -30,7 +30,7 @@
 
     ScorePoster *scorePoster;
     
-    NSCondition *wordLock; // lock until word is fetched
+    BOOL wordFetchDone;
     MBProgressHUD *wordFetchActivityHUD;
 }
 

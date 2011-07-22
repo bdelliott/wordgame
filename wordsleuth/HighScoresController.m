@@ -146,6 +146,18 @@
     
     [self loadBestScores];  
     
+    if ([scores count] == 0) {
+        // show a message if nobody has submitted a score yet today:
+        CGRect frame = CGRectMake(80, 80, 150, 100);
+        UILabel *noScoresLabel = [[UILabel alloc] initWithFrame:frame];
+        noScoresLabel.textColor = [UIColor whiteColor];
+        noScoresLabel.backgroundColor = [UIColor clearColor];
+        noScoresLabel.text = @"Nobody has solved today's word yet!";
+        noScoresLabel.numberOfLines = 3;
+        [self.view addSubview:noScoresLabel];
+        [noScoresLabel release];
+    }
+
     if (self.bragsEnabled && ![self braggedToday]) { 
         self.bragLabel.hidden = NO;
         self.facebookBragButton.hidden = NO;

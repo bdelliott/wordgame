@@ -5,4 +5,4 @@ cron:
   
 - description: poke app to get keep code freshly loaded
   url: /service/get_scores?fromcron=yes
-  schedule: every 5 minutes
+  schedule: every 15 minutes

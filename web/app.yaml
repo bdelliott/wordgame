@@ -1,7 +1,5 @@
-# This file will be post-processed to generate the actual app.yaml use when deploying to 
-# Google App Engine.
 application: sparkleword
-version: 4
+version: 5
 runtime: python
 api_version: 1
 

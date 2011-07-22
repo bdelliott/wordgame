@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 
+import models
 from service.models import DailyWord
 
 def reminder(request):
@@ -39,3 +40,9 @@ def send_nag_mail():
     nag_msg += "\nThis nag reminder will be generated daily until at least 2 weeks of words in the future have been generated."
     send_mail('Daily Word nag reminder', nag_msg, 'brian@sparklesoftware.com',
             to_emails, fail_silently=False)
+
+    # save a log that we sent the outgoing mails:
+    job_entry = models.ScheduledJobEntry()
+    job_entry.job_type = models.JOB_TYPE_MAIL_REMINDER
+    job_entry.save()
+    

@@ -1,9 +1,10 @@
 application: sparkleword
-version: 5
+version: 6
 runtime: python
 api_version: 1
 
 builtins:
+- datastore_admin: on
 - remote_api: on
 
 handlers:

@@ -53,6 +53,8 @@
 - (void)togglePlayAgainButton:(BOOL)enabled;
 - (void) loadBestScores;
 
+- (void)showUserScore;
+
 - (IBAction)facebookBragPressed:(id)sender;
 - (BOOL)braggedToday;
 

@@ -122,14 +122,7 @@
     [self.view sendSubviewToBack:self.debugGestureView];
     
     // if they solved it, show the user's score.
-    if (self.lastPlayedNumGuesses == 0) {
-        self.yourScoreLabel.hidden = YES;
-    } else {
-        self.yourScoreLabel.hidden = NO;
-        
-        NSString *yourScore = [NSString stringWithFormat:@"Your Score: %d", self.lastPlayedNumGuesses];
-        self.yourScoreLabel.text = yourScore;
-    }
+    [self showUserScore];
     
     [self togglePlayAgainButton:NO];
     
@@ -379,6 +372,10 @@
         wordsleuthAppDelegate *delegate = [[UIApplication sharedApplication]delegate];
         [delegate resetGame];
         
+        // clear user's score. (issue #46)
+        self.lastPlayedNumGuesses = 0;
+        [self showUserScore];
+        
         [self togglePlayAgainButton:YES];
         
     }
@@ -489,5 +486,16 @@
     [self togglePlayAgainButton:YES];
 }
 
+- (void)showUserScore {
+    
+    if (self.lastPlayedNumGuesses == 0) {
+        self.yourScoreLabel.hidden = YES;
+    } else {
+        self.yourScoreLabel.hidden = NO;
+        
+        NSString *yourScore = [NSString stringWithFormat:@"Your Score: %d", self.lastPlayedNumGuesses];
+        self.yourScoreLabel.text = yourScore;
+    }
+}
 
 @end

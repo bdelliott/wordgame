@@ -5,3 +5,5 @@ syntax: glob
 *.orig
 *xcuserdata*
 .DS_Store
+
+wordsleuth.xcodeproj/project.xcworkspace/xcuserdata/bde.xcuserdatad/UserInterfaceState.xcuserstate

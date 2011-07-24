@@ -218,6 +218,8 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     // this any uglier?
     
     NSCalendar *cal = [NSCalendar currentCalendar];
+    NSTimeZone *gmt = [NSTimeZone timeZoneWithName:@"GMT"];
+    [cal setTimeZone:gmt];
     
     unsigned uglyDateComponentOrBits = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
     NSDateComponents *lastComponents = [cal components:uglyDateComponentOrBits fromDate:lastPlayed];

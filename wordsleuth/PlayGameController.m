@@ -101,13 +101,6 @@
 
 }
 
-- (void)grabKeyboard {
-    
-    // keep keyboard up until play is done:
-    shouldDismissKeyboard = NO;
-    [guessTextField becomeFirstResponder]; // grab the editing focus
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"PGC:viewWillAppear");
     [super viewWillAppear:animated];
@@ -123,6 +116,13 @@
     [beforeLabel removeFromSuperview];
     [afterLabel removeFromSuperview];
 
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    NSLog(@"PGC:viewDidAppear");
+    [super viewDidAppear:animated];
     
     // log start of a game:
     [Analytics logEvent:@"Starting a game"];
@@ -219,61 +219,6 @@
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
-}
-
-
-- (void)viewDidUnload
-{
-    [self setNumGuessesLabel:nil];
-    [self setGuessTextField:nil];
-
-    [self setBeforeTextField:nil];
-    [self setAfterTextField:nil];
-    [self setGiveUp:nil];
-    [self setBeforeLabel:nil];
-    [self setAfterLabel:nil];
-    [super viewDidUnload];
-
-}
-
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [numGuessesLabel release];
-    [guessTextField release];
-    [beforeTextField release];
-    [afterTextField release];
-    [giveUp release];
-    [beforeLabel release];
-    [afterLabel release];
-    
-    [scorePoster release];
-    [fetchWordErrorAlertView release];
-    
-    [super dealloc];
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    //NSLog(@"textFieldShouldEndEditing");
-    // stop keyboard from being dismissed when the Done button is touched
-    return shouldDismissKeyboard;
-}
-
 - (IBAction)guessMade:(id)sender {    
     NSString *guess = [[guessTextField.text lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSLog(@"user guessed '%@'", guess);
@@ -292,16 +237,10 @@
     NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:numGuessesObj, @"numGuesses", nil];
     [Analytics logEvent:@"User gave up" withParameters:eventParams];
 
-    shouldDismissKeyboard = TRUE;
-    
     [self.gameState saveLastPlayed:0];
     
-    [guessTextField resignFirstResponder];
-    
-    NSString *msg = [NSString stringWithFormat:@"The word of the day is '%@'.  Better luck next time!", self.gameState.word];
-
-    UIAlertView *gaveUpAlertView = [[[UIAlertView alloc] initWithTitle:@"No luck, eh?" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil] autorelease];
-    [gaveUpAlertView show];
+    giveUpConfirmAlertView = [[UIAlertView alloc] initWithTitle:@"Giving up?" message:@"Are you sure you want to give up?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Give up", nil];
+    [giveUpConfirmAlertView show];
 
 }
 
@@ -374,23 +313,139 @@
     [Analytics logEvent:@"User solved it" withParameters:eventParams];
     
     
-    shouldDismissKeyboard = YES;
-    [guessTextField resignFirstResponder];
+    [self releaseKeyboard];
     
     [scorePoster post]; // do score posting mojo.
 }
 
-- (void)alertView:(TSAlertView *)aView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    if ((UIAlertView *)aView == fetchWordErrorAlertView) {
+    if (alertView == fetchWordErrorAlertView) {
         // just retry fetching today's view
         [self.gameState fetchWord];
         [fetchWordErrorAlertView release];
         
-    } else {
-        // give up popup
+    } else if (alertView == giveUpConfirmAlertView) {
+        // give up confirmation popup
+        
+        [giveUpConfirmAlertView release];
+        giveUpConfirmAlertView = nil;
+
+        if (buttonIndex == 1) {
+            
+            NSString *msg = [NSString stringWithFormat:@"The word of the day is '%@'.  Better luck next time!", self.gameState.word];
+
+            giveUpAlertView = [[UIAlertView alloc] initWithTitle:@"No luck, eh?" message:msg delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil];
+            [giveUpAlertView show];
+        }
+    } else if (alertView == giveUpAlertView) {
+        
+        // user confirmed they want to give up
+        NSLog(@"give up confirmed");
+        
+        [self releaseKeyboard];
         [self endGame];
+        
+        [giveUpAlertView release];
+        giveUpAlertView = nil;
     }
 }
+
+// Keyboard handling methods:
+- (void)grabKeyboard {
+    
+    // keep keyboard up until play is done:
+    shouldDismissKeyboard = NO;
+    
+    if ([guessTextField isFirstResponder]) {
+        NSLog(@"PGC:grabKeyboard: guessTextField is already first responder.");
+    }
+    
+    if (![guessTextField canBecomeFirstResponder]) {
+        NSLog(@"PGC:grabKeyboard: guessTextField cannot BECOME first responder.");
+    }
+    // grab the editing focus:
+    if (![guessTextField becomeFirstResponder]) { 
+        NSLog(@"PGC:grabKeyboard: guessTextField failed to BECOME first responder.");
+    }
+}
+
+
+- (void)releaseKeyboard {
+    shouldDismissKeyboard = YES;
+    
+    if (![guessTextField canResignFirstResponder]) {
+        NSLog(@"PGC:releaseKeyboard: guessTextField cannot RESIGN first responder.");
+    }
+    // grab the editing focus:
+    if (![guessTextField resignFirstResponder]) { 
+        NSLog(@"PGC:releaseKeyboard: guessTextField failed to RESIGN first responder.");
+    }
+    
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    //NSLog(@"textFieldShouldEndEditing");
+    // stop keyboard from being dismissed when the Done button is touched
+    return shouldDismissKeyboard;
+}
+
+// Misc stuff:
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc. that aren't in use.
+}
+
+// Cleanup methods:
+
+- (void)viewDidUnload
+{
+    [self setNumGuessesLabel:nil];
+    [self setGuessTextField:nil];
+    
+    [self setBeforeTextField:nil];
+    [self setAfterTextField:nil];
+    [self setGiveUp:nil];
+    [self setBeforeLabel:nil];
+    [self setAfterLabel:nil];
+    [super viewDidUnload];
+    
+}
+
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [numGuessesLabel release];
+    [guessTextField release];
+    [beforeTextField release];
+    [afterTextField release];
+    [giveUp release];
+    [beforeLabel release];
+    [afterLabel release];
+    
+    [scorePoster release];
+    [fetchWordErrorAlertView release];
+    
+    [giveUpAlertView release];
+    [giveUpConfirmAlertView release];
+    
+    [super dealloc];
+}
+
+
+
 
 @end

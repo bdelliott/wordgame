@@ -32,6 +32,9 @@
     
     BOOL wordFetchDone;
     MBProgressHUD *wordFetchActivityHUD;
+        
+    UIAlertView *giveUpAlertView;
+    UIAlertView *giveUpConfirmAlertView;
 }
 
 @property (nonatomic, retain) GameState *gameState;
@@ -63,5 +66,8 @@
 - (void)resetGame;
 
 - (void) showHelpForKey:(NSString*)hasSeenHelpKey title:(NSString*)title message:(NSString*)message;
+
+- (void)grabKeyboard;
+- (void)releaseKeyboard;
 
 @end

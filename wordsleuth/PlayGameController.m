@@ -136,8 +136,7 @@
         // show an activity indicator until the word fetching is done:
         wordFetchActivityHUD = [[MBProgressHUD alloc] initWithView:self.view];
         wordFetchActivityHUD.delegate = self;
-        wordFetchActivityHUD.labelText = @"Please wait";
-        wordFetchActivityHUD.detailsLabelText = @"while today's word is loaded";
+        wordFetchActivityHUD.labelText = @"Loading word...";
         wordFetchActivityHUD.yOffset = -50;
         
         [self.view addSubview:wordFetchActivityHUD];

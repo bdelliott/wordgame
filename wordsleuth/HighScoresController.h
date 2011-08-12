@@ -58,7 +58,12 @@
 - (IBAction)facebookBragPressed:(id)sender;
 - (BOOL)braggedToday;
 
++ (UIColor *) highlightColor;
 
-+ (UIColor*) highlightColor;
+- (void)cancelLocalNotification;
+- (void)scheduleLocalNotification;
+
+
+- (NSDate *) getNextMidnight:(NSDate *) date;
 
 @end

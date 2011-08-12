@@ -60,6 +60,12 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     
     // prompt for app reviews, if appropriate
     [self promptForAppReviews];
+    
+    // set app version in the settings pane:
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *version = [bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:version forKey:@"app_version"];
 
 }
 
@@ -150,7 +156,7 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
      */
 
     //NSLog(@"WSAD: applicationDidEnterBackground");
-
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -286,5 +292,6 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     return [bragFacebook application:application handleOpenURL:url]; 
 
 }
+
 
 @end

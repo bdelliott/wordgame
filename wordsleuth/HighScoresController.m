@@ -136,6 +136,8 @@
     [self updateTimeLeft];
     
     [self enableTimer];
+    [self scheduleLocalNotification];
+    
     
     [self loadBestScores];  
     
@@ -164,6 +166,7 @@
     // schedule the timer:
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
     //NSLog(@"timer scheduled (%@)", self.timer);
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -172,7 +175,7 @@
     
     [self.timer invalidate];
     self.timer = nil;
-        
+    
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -301,12 +304,27 @@
     return numScores;
 }
 
-- (NSDate *) getNextMidnight:(NSDate *) now  {
+- (NSDate *) getNextMidnight:(NSDate *) date  {
+    // return next midnight (GMT) after the given date.
+    
+    // NSDates are points in time and are NOT specific to any type of 
+    // calendar!  It's better to think NSDate == timestamp, rather than
+    // associate it with a mental image of a calendar of any sort.
+    
+    // However, when you get into the business of doing arithmetic with
+    // actual dates, the NSDate needs to be interpreted in the context
+    // of a specific calendar.  It's muy importante to make sure you
+    // use a calendar with the time zone set properly, otherwise the
+    // dates get interpreted as being in the local time zone.ß
+    
     NSDateComponents *offset = [[NSDateComponents alloc] init];
     [offset setDay:1];
     
     NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDate *tomorrow = [cal dateByAddingComponents:offset toDate:now options:0];
+    NSTimeZone *gmt = [NSTimeZone timeZoneWithName:@"GMT"];
+    [cal setTimeZone:gmt];
+    
+    NSDate *tomorrow = [cal dateByAddingComponents:offset toDate:date options:0];
     
     [offset release];
     
@@ -406,7 +424,7 @@
 - (IBAction)pressedPlayAgain:(id)sender {
     
     //NSLog(@"play again pressed");
-    
+
     // restart the game
     
     wordsleuthAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -497,5 +515,58 @@
         self.yourScoreLabel.text = yourScore;
     }
 }
+
+- (void)scheduleLocalNotification {
+    // schedule a notification to let user know when the next day's word is available
+    
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    if (notification == nil) {
+        NSLog(@"scheduleLocalNotification: failed to alloc local notification");
+        return;
+    }
+    
+    NSDate *now = [NSDate date];
+
+#if TARGET_IPHONE_SIMULATOR
+
+    // simulator, just fire the notification in 30 seconds!
+    
+    NSTimeInterval secondsFromNow = 15;
+    NSDate *debugFireDate = [now dateByAddingTimeInterval:secondsFromNow];
+    
+    NSLog(@"debug fire date == %@", debugFireDate);
+    notification.fireDate = debugFireDate;
+    
+#else
+    // fire notification when new GMT midnight comes around:
+    NSDate *midnight = [self getNextMidnight:now];
+    NSLog(@"midnight == %@", midnight);
+    
+    notification.fireDate = midnight;
+    
+#endif
+    
+    notification.timeZone = nil; // interprets fire time as an absolute GMT time
+    notification.alertBody = @"New word now available!";
+    notification.alertAction = @"Play Now";
+    notification.soundName = nil;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
+    [notification release];
+}
+
+- (void)cancelLocalNotification {
+    // cancel scheduled notification about rollover to next day's word
+    
+    // TODO BDE not used yet!
+    NSArray *notifs = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    
+    for (UILocalNotification *notification in notifs) {
+        [[UIApplication sharedApplication] cancelLocalNotification:notification];
+    }
+}
+
+
 
 @end

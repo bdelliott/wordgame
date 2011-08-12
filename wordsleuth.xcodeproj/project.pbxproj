@@ -62,6 +62,7 @@
 		711F835713672A14000CD08C /* TSAlertViewMessageListViewShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F835013672A14000CD08C /* TSAlertViewMessageListViewShadow.png */; };
 		711F835A13674DDF000CD08C /* WordURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 711F835913674DDF000CD08C /* WordURL.m */; };
 		713BDC87137340BC00A4F5AC /* PostScoreTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 713BDC86137340BC00A4F5AC /* PostScoreTextFieldDelegate.m */; };
+		7183768413F3483D00C51300 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7183768313F3483D00C51300 /* Settings.bundle */; };
 		7194175713A6E87300969B63 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7194175613A6E87300969B63 /* libFlurry.a */; };
 		7194176513A8DE0500969B63 /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 7194176413A8DE0500969B63 /* Analytics.m */; };
 		71B3B6BB1357ADE6002EDD42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3B6BA1357ADE6002EDD42 /* UIKit.framework */; };
@@ -199,6 +200,7 @@
 		711F835913674DDF000CD08C /* WordURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordURL.m; path = ../WordURL.m; sourceTree = "<group>"; };
 		713BDC85137340BC00A4F5AC /* PostScoreTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostScoreTextFieldDelegate.h; sourceTree = "<group>"; };
 		713BDC86137340BC00A4F5AC /* PostScoreTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostScoreTextFieldDelegate.m; sourceTree = "<group>"; };
+		7183768313F3483D00C51300 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		7194175213A6E87300969B63 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
 		7194175313A6E87300969B63 /* FlurryAPI+AppCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlurryAPI+AppCircle.h"; sourceTree = "<group>"; };
 		7194175413A6E87300969B63 /* FlurryOffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryOffer.h; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 				71B3B6C31357ADE6002EDD42 /* InfoPlist.strings */,
 				71B3B6C61357ADE6002EDD42 /* wordsleuth-Prefix.pch */,
 				71B3B6C71357ADE6002EDD42 /* main.m */,
+				7183768313F3483D00C51300 /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			path = wordsleuth;
@@ -549,9 +552,9 @@
 			children = (
 				71B3B6ED1357ADE6002EDD42 /* wordsleuthTests.h */,
 				71B3B6EF1357ADE6002EDD42 /* wordsleuthTests.m */,
-				71B3B6E71357ADE6002EDD42 /* Supporting Files */,
 				343D9D5C137E9A640017380A /* HighScoresControllerTest.h */,
 				343D9D5D137E9A640017380A /* HighScoresControllerTest.m */,
+				71B3B6E71357ADE6002EDD42 /* Supporting Files */,
 			);
 			path = wordsleuthTests;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				343D9DA5137ECC190017380A /* PlayGameBackground.png in Resources */,
 				343D9DA6137ECC190017380A /* SparkleSoftware.png in Resources */,
 				71BA2BEF139E790F00B6482E /* facebook.png in Resources */,
+				7183768413F3483D00C51300 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

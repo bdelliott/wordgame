@@ -115,43 +115,65 @@ def get_time(request):
     return HttpResponse(content=now_json, mimetype='application/javascript')
     
 def get_word(request):
-    ''' get today's word '''
+    ''' Get the requested word of the day.
     
-    now = datetime.datetime.now()
-    logger.info("now=%s" % now)
-    today = now.date()
+        Clients of versions <= 1.2 flip over to the new word at midnight GMT time.  
+        
+        In 1.3+, switching to midnight, PST (pacific) so the word flips overnight for Americans, who are our main audience anyway.
+        This is accomodated by adding a client version parameter.
+    ''' 
     
+    year = request.GET.get("y")
+    month = request.GET.get("m")
+    day = request.GET.get("d")
+    client_version = request.GET.get("v", "pre-1.3") # default to old version if parameter not present.
+    
+    if client_version == "pre-1.3":
+        # old clients expect the word to flip at midnight UTC, so we need to respect that:
+        utcnow = datetime.datetime.utcnow()
+    
+        word_date = utcnow.date()
+        logger.info("Get word: old client, using word date %s" % utcnow.strftime("%m/%d/%Y"))
+        
+        
+    else:
+        # Note: newer clients supply the date for the word they want.  letting the client supply the date
+        # avoids any midnight clock synch race conditions between client and server with respect to fetching the word
+        # and its corresponding high scores.  
+
+        if not year:
+            raise Exception("Get word: 'y' is a required parameter.")
+        if not month:
+            raise Exception("Get word: 'm' is a required parameter.")
+        if not day:
+            raise Exception("Get word: 'd' is a required parameter.")
+        year = int(year)
+        month = int(month)
+        day = int(day)
+
+        word_date = datetime.date(year, month, day)
+        logger.info("Get word: new client (%s), using word date %s" % (client_version, word_date.strftime("%m/%d/%Y")))
+        
+        
     try:
-        daily_word = DailyWord.objects.get(date=today)
+        daily_word = DailyWord.objects.get(date=word_date)
         
     except DailyWord.DoesNotExist:
+        logger.error("Get word: No word available for date %s" % word_date.strftime("%m/%d/%Y"))
         # administrator fail.  better choose a word randomly 
         # and save it so people can use the app today.
-        w = word.generate_daily_word(today)
+        w = word.generate_daily_word(word_date)
         daily_word = DailyWord()
         daily_word.word = w
-        daily_word.date = today
+        daily_word.date = word_date
         daily_word.save()
         
-    # calculate time in seconds until next word will be available to replace this one:    
-    tomorrow = today + datetime.timedelta(days=1)
-    new_word_time = datetime.date(tomorrow.year, tomorrow.month, tomorrow.day)
-    
-    logger.info("new_word_time: %s" % new_word_time)
-    
-    # convert to epoch
-    now_epoch = time.mktime(now.timetuple())
-    new_word_epoch = time.mktime(new_word_time.timetuple())
-    
-    secs_until_next_word = new_word_epoch - now_epoch
-    
     # return daily word as json.
     d = {
         "year" : daily_word.date.year,
         "month" : daily_word.date.month,
         "day" : daily_word.date.day,
         "word" : daily_word.word,
-        "timeleft" : secs_until_next_word,
     }
     dw_json = json.dumps(d)
     return HttpResponse(content=dw_json, mimetype='application/javascript')

@@ -10,6 +10,9 @@ from .models import DailyWord, Word
 def generate_daily_word(date):
     
     num_words = Word.objects.count()
+    if num_words == 0:
+        raise Exception("generate_daily_word: No words in the fallback wordlist!")
+
     
     while True:
         x = random.randint(0, num_words-1) # 1 <= x <= num_words

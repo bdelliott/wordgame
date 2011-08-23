@@ -16,9 +16,12 @@
 + (NSString *)getBaseURL;
 + (NSURL *)getServiceURL:(NSString *)function;
 
-+ (NSURL *)getHighScoresURL;
++ (NSURL *)getHighScoresURL:(int)year withMonth:(int)month andDay:(int)day;
+
 + (NSURL *)getTimeURL;
-+ (NSURL *)getWordURL;
+
++ (NSURL *)getWordURL:(int)year withMonth:(int)month andDay:(int)day;
+
 + (NSURL *)postScoreURL:(NSString *)userName;
 
 + (NSString *)getWallPostIconURL;

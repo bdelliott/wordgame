@@ -10,6 +10,7 @@
 #import "iRate.h"
 #import "Launch.h"
 #import "Notifications.h"
+#import "TimeUtil.h"
 #import "wordsleuthAppDelegate.h"
 
 NSString* const GameStateLoaded = @"GameStateLoaded";
@@ -216,35 +217,15 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
         return FALSE;
     }
     
-    // get current date/time
-    NSDate *now = [NSDate date]; // returns the UTC date/time
+    // get last reset date/time
+    NSDate *lastReset = [TimeUtil getLastResetDate:nil];
     
-    // test if the two are the same day using the truly odd
-    // NSCalendar and NSDateComponent classes!  could they make
-    // this any uglier?
+    NSTimeInterval diff = [lastPlayed timeIntervalSinceDate:lastReset];
     
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSTimeZone *gmt = [NSTimeZone timeZoneWithName:@"GMT"];
-    [cal setTimeZone:gmt];
+    // if negative, the last play was before the most recent word reset
+    // i.e. safe to play again.
     
-    unsigned uglyDateComponentOrBits = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-    NSDateComponents *lastComponents = [cal components:uglyDateComponentOrBits fromDate:lastPlayed];
-    NSDateComponents *nowComponents = [cal components:uglyDateComponentOrBits fromDate:now];
-    
-    NSInteger lastYear = [lastComponents year];
-    NSInteger lastMonth = [lastComponents month];
-    NSInteger lastDay = [lastComponents day];
-    
-    NSInteger nowYear = [nowComponents year];
-    NSInteger nowMonth = [nowComponents month];
-    NSInteger nowDay = [nowComponents day];
-    
-    if (lastYear != nowYear)
-        return FALSE;
-    if (lastMonth != nowMonth)
-        return FALSE;
-    return (lastDay == nowDay);
-    
+    return (diff >= 0); // positive means user played since reset
 }
 
 - (int)getLastPlayedNumGuesses {

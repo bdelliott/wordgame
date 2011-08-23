@@ -63,7 +63,4 @@
 - (void)cancelLocalNotification;
 - (void)scheduleLocalNotification;
 
-
-- (NSDate *) getNextMidnight:(NSDate *) date;
-
 @end

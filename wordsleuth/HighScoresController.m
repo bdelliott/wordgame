@@ -12,8 +12,9 @@
 #import "ASIHTTPRequest.h"
 #import "Analytics.h"
 #import "NSString+SBJSON.h"
-#import "WordURL.h"
+#import "TimeUtil.h"
 #import "UIButton+Gradient.h"
+#import "WordURL.h"
 
 @implementation HighScoresController
 
@@ -75,9 +76,28 @@
     //NSLog(@"timer scheduled (%@)", self.timer);
     
     NSLog(@"Loading high scores");
+
+    NSDate *lastResetDate = [TimeUtil getLastResetDate:nil];
     
+    // interpret last reset as gmt
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSTimeZone *gmt = [NSTimeZone timeZoneWithName:@"GMT"];
+    [cal setTimeZone:gmt];
+    
+    // word rolls over at GMT + 8 hours. (8:00 am)  This allows the word
+    // to flip past midnight in all US time zones, with the word flipping
+    // at exactly 12:00 am on the west coast. (US PST/daylight savings)
+    unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | 
+    NSDayCalendarUnit | NSHourCalendarUnit;
+    NSDateComponents *comps = [cal components:flags fromDate:lastResetDate];
+    
+    int year = [comps year];
+    int month = [comps month];
+    int day = [comps day];
+
     // load the high scores of the day
-    NSURL *url = [WordURL getHighScoresURL];
+    NSURL *url = [WordURL getHighScoresURL:year withMonth:month andDay:day];
+    
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request startSynchronous];
     NSError *error = [request error];
@@ -304,49 +324,6 @@
     return numScores;
 }
 
-- (NSDate *) getNextMidnight:(NSDate *) date  {
-    // return next midnight (GMT) after the given date.
-    
-    // NSDates are points in time and are NOT specific to any type of 
-    // calendar!  It's better to think NSDate == timestamp, rather than
-    // associate it with a mental image of a calendar of any sort.
-    
-    // However, when you get into the business of doing arithmetic with
-    // actual dates, the NSDate needs to be interpreted in the context
-    // of a specific calendar.  It's muy importante to make sure you
-    // use a calendar with the time zone set properly, otherwise the
-    // dates get interpreted as being in the local time zone.ß
-    
-    NSDateComponents *offset = [[NSDateComponents alloc] init];
-    [offset setDay:1];
-    
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSTimeZone *gmt = [NSTimeZone timeZoneWithName:@"GMT"];
-    [cal setTimeZone:gmt];
-    
-    NSDate *tomorrow = [cal dateByAddingComponents:offset toDate:date options:0];
-    
-    [offset release];
-    
-    unsigned flags = (NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit);
-    NSDateComponents *comps = [cal components:flags fromDate:tomorrow];
-    NSInteger d = [comps day];
-    NSInteger m = [comps month];
-    NSInteger y = [comps year];
-
-    // now build tomorrow with hour set to 12am when the word rolls over
-    comps = [[NSDateComponents alloc] init];
-    [comps setYear:y];
-    [comps setMonth:m];
-    [comps setDay:d];
-    [comps setHour:0];
-    
-    NSDate *midnight = [cal dateFromComponents:comps];
-    [comps release];
-    
-    return midnight;
-}
-
 - (NSMutableString *) formatTimeLeft: (int) secsuntilmidnight  {
     int hours = secsuntilmidnight / 3600;
     int remainder = secsuntilmidnight % 3600;
@@ -374,12 +351,12 @@
     
     //NSLog(@"HSC:updateTimeLeft");
     
-    int secondsUntilMidnight = [self updateTimeLeftLabel];
+    int secondsUntilReset = [self updateTimeLeftLabel];
     
     // BDE testing hack:
-    //secondsUntilMidnight = 0;
+    //secondsUntilReset = 0;
     
-    if (secondsUntilMidnight <= 0) {
+    if (secondsUntilReset <= 0) {
         
         // disable time countdown.  show play button.
         
@@ -404,21 +381,21 @@
     
     NSDate *now = [NSDate date];    
 
-    int secondsUntilMidnight = 0;
+    int secondsUntilReset = 0;
     if (debugTimer) {
         // should not be enabled for shipped version, debugging only.
         // pretend remaining time is very short so we can test game rollover.
-        secondsUntilMidnight = (int)[debugTimerExpiration timeIntervalSinceDate:now];
+        secondsUntilReset = (int)[debugTimerExpiration timeIntervalSinceDate:now];
         
     } else {
         wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSDate *midnight = [self getNextMidnight: [delegate lastPlayedDate]];    
-        secondsUntilMidnight = (int)[midnight timeIntervalSinceDate:now];
+        NSDate *nextReset = [TimeUtil getNextResetDate:[delegate lastPlayedDate]];;
+        secondsUntilReset = (int)[nextReset timeIntervalSinceDate:now];
     }
     
-    self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilMidnight]];
+    self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilReset]];
     
-    return secondsUntilMidnight;
+    return secondsUntilReset;
 }
 
 - (IBAction)pressedPlayAgain:(id)sender {
@@ -525,24 +502,23 @@
         return;
     }
     
-    NSDate *now = [NSDate date];
-
 #if TARGET_IPHONE_SIMULATOR
 
     // simulator, just fire the notification in 30 seconds!
     
     NSTimeInterval secondsFromNow = 15;
+    NSDate *now = [NSDate date];
     NSDate *debugFireDate = [now dateByAddingTimeInterval:secondsFromNow];
     
     NSLog(@"debug fire date == %@", debugFireDate);
     notification.fireDate = debugFireDate;
     
 #else
-    // fire notification when new GMT midnight comes around:
-    NSDate *midnight = [self getNextMidnight:now];
-    NSLog(@"midnight == %@", midnight);
+    // fire notification when word reset happens:
+    NSDate *nextReset = [TimeUtil getNextResetDate:nil];
+    NSLog(@"nextReset == %@", nextReset);
     
-    notification.fireDate = midnight;
+    notification.fireDate = nextReset;
     
 #endif
     

@@ -59,14 +59,44 @@ def choosewords(request):
             
             
 def get_scores(request):
-    # TODO this may need a date parameter due to possible race condition with the clock flipping over midnight.
+    ''' get the best scores of the day that go with the given date '''
     
-    # get today's top scores
-    today = datetime.date.today()
-    logger.info("Getting scores for %s" % today)
+    client_version = request.GET.get("v", "pre-1.3") # default to old version if parameter not present.
+
+    if client_version == "pre-1.3":
+        # old client, just return scores for today, going by UTC time
+        utcnow = datetime.datetime.utcnow()
     
-    dw = DailyWord.objects.get(date=today)
+        word_date = utcnow.date()
+        logger.info("Get scores: old client, using word date %s" % utcnow.strftime("%m/%d/%Y"))
+        
+    else:
+        # new client, use date supplied by the client:
+        year = request.GET.get("y")
+        month = request.GET.get("m")
+        day = request.GET.get("d")
+        
+        if not year:
+            raise Exception("Get word: 'y' is a required parameter.")
+        if not month:
+            raise Exception("Get word: 'm' is a required parameter.")
+        if not day:
+            raise Exception("Get word: 'd' is a required parameter.")
+        year = int(year)
+        month = int(month)
+        day = int(day)
+        
+        word_date = datetime.date(year, month, day)
+        logger.info("Get scores: new client (%s), using word date %s" % (client_version, word_date.strftime("%m/%d/%Y")))
+
+    dw = None
     
+    try:
+        dw = DailyWord.objects.get(date=word_date)
+    except DailyWord.DoesNotExist:
+        logger.error("Get scores: requested word for date %s does not exist!" % word_date.strftime("%m/%d/%Y"))
+        raise Exception("No such word!")
+        
     top_scores = Score.objects.filter(daily_word=dw).order_by("num_guesses")[:50]
     
     logger.info("Return %d top scores" % len(top_scores))

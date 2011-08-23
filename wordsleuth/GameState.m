@@ -10,6 +10,7 @@
 #import "GameState.h"
 #import "Notifications.h"
 #import "NSString+SBJSON.h"
+#import "TimeUtil.h"
 #import "WordURL.h"
 
 
@@ -73,7 +74,25 @@
     
     numFetchFails = 0;
     
-    NSURL *url = [WordURL getWordURL];
+    NSDate *lastResetDate = [TimeUtil getLastResetDate:nil];
+    
+    // interpret last reset as gmt
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSTimeZone *gmt = [NSTimeZone timeZoneWithName:@"GMT"];
+    [cal setTimeZone:gmt];
+    
+    // word rolls over at GMT + 8 hours. (8:00 am)  This allows the word
+    // to flip past midnight in all US time zones, with the word flipping
+    // at exactly 12:00 am on the west coast. (US PST/daylight savings)
+    unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | 
+    NSDayCalendarUnit | NSHourCalendarUnit;
+    NSDateComponents *comps = [cal components:flags fromDate:lastResetDate];
+    
+    int year = [comps year];
+    int month = [comps month];
+    int day = [comps day];
+    
+    NSURL *url = [WordURL getWordURL:year withMonth:month andDay:day];
     
     while (numFetchFails < MAX_FETCH_FAILS) {
         

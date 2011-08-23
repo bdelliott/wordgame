@@ -26,35 +26,6 @@
     controller = [[HighScoresController alloc] init];
 }
 
-- (void)testGetNextMidnight {
-    
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    [cal setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    
-    NSDateComponents *comps = [NSDateComponents new];
-    
-    [comps setYear:2011];
-    [comps setMonth:8];
-    [comps setDay:10];
-    
-    NSDate *d = [cal dateFromComponents:comps];
-    
-    [comps release];
-    
-    comps = [NSDateComponents new];
-    
-    [comps setYear:2011];
-    [comps setMonth:8];
-    [comps setDay:11];
-
-    NSDate *d2 = [cal dateFromComponents:comps];
-
-    NSDate *midnight = [controller getNextMidnight:d];
-    
-    STAssertEqualObjects(d2, midnight, @"Not equal to 8/11/2011 midnight GMT!", midnight);
-    NSLog(@"midnight == %@", midnight);
-}
-
 - (void)testFormatHourWithZeroMinutes {
     
     STAssertEqualObjects([controller formatTimeLeft:3600], @"1:00:00", @"Incorrect format");

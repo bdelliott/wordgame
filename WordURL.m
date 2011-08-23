@@ -11,6 +11,13 @@
 
 @implementation WordURL
 
++ (NSString *)getAppVersion {
+    
+    // set app version in the settings pane:
+    NSBundle *bundle = [NSBundle mainBundle];
+    return [bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
+}
+   
 + (NSString *)getBaseURL {
     return @"http://sparkleword.appspot.com";
 }
@@ -19,14 +26,24 @@
     return [NSString stringWithFormat:@"%@/service", [self getBaseURL]];
 }
 
++ (NSString *)getServiceURLString:(NSString *)function {
+    return [NSString stringWithFormat:@"%@/%@", [self getBaseServiceURL], function];    
+}
+
 + (NSURL *)getServiceURL:(NSString *)function {
     
-    NSString *url = [NSString stringWithFormat:@"%@/%@", [self getBaseServiceURL], function];
+    NSString *url = [self getServiceURLString:function];
     return [NSURL URLWithString:url];
 }
 
-+ (NSURL *)getHighScoresURL {
-    return [self getServiceURL:@"get_scores"];
++ (NSURL *)getHighScoresURL:(int)year withMonth:(int)month andDay:(int)day { 
+    NSString *baseURL = [self getServiceURLString:@"get_scores"];
+
+    NSString *appVersion = [self getAppVersion];
+    
+    NSString *url = [NSString stringWithFormat:@"%@?v=%@&y=%d&m=%d&d=%d", baseURL, appVersion, year, month, day];
+    //NSLog(@"url=%@", url);
+    return [NSURL URLWithString:url];
 }
 
 
@@ -35,9 +52,15 @@
     return [self getServiceURL:@"get_time"];
 }
 
-+ (NSURL *)getWordURL {
++ (NSURL *)getWordURL:(int)year withMonth:(int)month andDay:(int)day {
     
-    return [self getServiceURL:@"get_word"];
+    NSString *baseURL = [self getServiceURLString:@"get_word"];
+    
+    NSString *appVersion = [self getAppVersion];
+    
+    NSString *url = [NSString stringWithFormat:@"%@?v=%@&y=%d&m=%d&d=%d", baseURL, appVersion, year, month, day];
+    //NSLog(@"url=%@", url);
+    return [NSURL URLWithString:url];
 }
 
 + (NSURL *)postScoreURL:(NSString *)userName {

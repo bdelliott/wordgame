@@ -19,6 +19,8 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 
 @implementation wordsleuthAppDelegate
 
+@synthesize gameState;
+
 @synthesize bragFacebook;
 
 @synthesize playGameController;
@@ -50,11 +52,14 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     [self configureAppRating]; // configure prompting for app store ratings.
     self.bragFacebook = [[BragFacebook alloc] init];
     
+    // game state information:
+    self.gameState = [[GameState alloc] init];
+    
     // initialize main game play controller:
-    self.playGameController = [[PlayGameController alloc] initWithNibName:@"PlayGame" bundle:nil];
+    self.playGameController = [[PlayGameController alloc] initWithGameState:self.gameState];
     
     // initialize high scores controller:
-    self.highScoresController = [[HighScoresController alloc] initWithNibName:@"HighScores" bundle:nil];
+    self.highScoresController = [[HighScoresController alloc] initWithGameState:self.gameState];
     
     [self resetGame];
     
@@ -94,10 +99,10 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     // swap to nav controller as the root:
     self.window.rootViewController = self.navigationController;
     
-    if ([self hasPlayedToday]) {
+    if ([self.gameState hasPlayedToday]) {
         // skip to high scores screen with timer
         NSLog(@"User already played today, going to high scores.");
-        int lastPlayedNumGuesses = [self getLastPlayedNumGuesses];
+        int lastPlayedNumGuesses = [self.gameState lastPlayedNumGuesses];
         [self goToScores:lastPlayedNumGuesses];
         
     } else {
@@ -117,8 +122,6 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     [self.navigationController setViewControllers:viewControllers animated:TRUE];
     [viewControllers release];
     
-    //[self.navigationController pushViewController:self.playGameController animated:YES];
-
 }
 
 - (void)goToScores:(int)lastPlayedNumGuesses {
@@ -199,44 +202,6 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     [highScoresController release];
     [ratingDelegate release];
     [super dealloc];
-}
-
-- (NSDate *) lastPlayedDate {
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    return [standardUserDefaults objectForKey:@"lastPlayed"];
-}
-
-- (BOOL)hasPlayedToday {
-    
-    NSDate *lastPlayed;
-    lastPlayed = [self lastPlayedDate];
-
-    NSLog(@"Game last played on: %@", lastPlayed);
-    
-    if (!lastPlayed) {
-        // user has never played
-        return FALSE;
-    }
-    
-    // get last reset date/time
-    NSDate *lastReset = [TimeUtil getLastResetDate:nil];
-    
-    NSTimeInterval diff = [lastPlayed timeIntervalSinceDate:lastReset];
-    
-    // if negative, the last play was before the most recent word reset
-    // i.e. safe to play again.
-    
-    return (diff >= 0); // positive means user played since reset
-}
-
-- (int)getLastPlayedNumGuesses {
-
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    
-    
-    // returns 0 if int not found.
-    int lastPlayedNumGuesses = [standardUserDefaults integerForKey:@"lastPlayedNumGuesses"];
-    return lastPlayedNumGuesses;
 }
 
 - (void)configureAppRating {

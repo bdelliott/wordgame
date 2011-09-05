@@ -51,6 +51,8 @@
 
 @property (nonatomic, retain) UIAlertView *fetchWordErrorAlertView;
 
+- (id) initWithGameState:(GameState *)gState;
+
 - (void) endGame;
 
 - (IBAction)guessMade:(id)sender;

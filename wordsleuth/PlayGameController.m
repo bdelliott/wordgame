@@ -31,9 +31,9 @@
 
 @synthesize fetchWordErrorAlertView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id) initWithGameState:(GameState *)gState {
     
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"PlayGame" bundle:nil];
     if (!self)
         return nil;
     
@@ -42,7 +42,7 @@
     
     NSLog(@"initializing play game controller");
     
-    gameState = [[GameState alloc] init];
+    self.gameState = gState;
     
     scorePoster = [[ScorePoster alloc] init];
     scorePoster.playGameController = self;
@@ -53,7 +53,7 @@
     return self;
     
 }
-
+ 
 - (void)resetGame {
     // play is locked down until word is finished fetching and viewDidLoad sets up all the
     // UI stuff.
@@ -228,15 +228,7 @@
 }
 
 - (IBAction)gaveUp:(id)sender {
-    // user gave up, just tell them the answer
-    
-    // log it:    
-    NSNumber *numGuessesObj = [NSNumber numberWithInt:self.gameState.numGuesses];
-    
-    NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:numGuessesObj, @"numGuesses", nil];
-    [Analytics logEvent:@"User gave up" withParameters:eventParams];
-
-    [self.gameState saveLastPlayed:0];
+    // user touched the 'give up' button, confirm their intention:
     
     giveUpConfirmAlertView = [[UIAlertView alloc] initWithTitle:@"Giving up?" message:@"Are you sure you want to give up?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Give up", nil];
     [giveUpConfirmAlertView show];
@@ -341,6 +333,14 @@
         
         // user confirmed they want to give up
         NSLog(@"give up confirmed");
+        
+        // log it:    
+        NSNumber *numGuessesObj = [NSNumber numberWithInt:self.gameState.numGuesses];
+        
+        NSDictionary *eventParams = [NSDictionary dictionaryWithObjectsAndKeys:numGuessesObj, @"numGuesses", nil];
+        [Analytics logEvent:@"User gave up" withParameters:eventParams];
+        
+        [self.gameState saveLastPlayed:0];
         
         [self releaseKeyboard];
         [self endGame];

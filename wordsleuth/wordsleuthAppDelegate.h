@@ -18,6 +18,8 @@ extern NSString* const ApplicationBecameActive;
 
 @interface wordsleuthAppDelegate : NSObject <UIApplicationDelegate> {
 
+    GameState *gameState;
+    
     // brag stuff
     BragFacebook *bragFacebook;
 
@@ -31,6 +33,8 @@ extern NSString* const ApplicationBecameActive;
     RatingDelegate *ratingDelegate;
     
 }
+
+@property (nonatomic, retain) GameState *gameState;
 
 @property (nonatomic, retain) BragFacebook *bragFacebook;
 
@@ -50,10 +54,6 @@ extern NSString* const ApplicationBecameActive;
 - (void)promptForAppReviews;
 
 - (void)resetGame;
-
-- (BOOL)hasPlayedToday;
-- (NSDate *) lastPlayedDate;
-- (int)getLastPlayedNumGuesses;
 
 - (void)goToScores:(int)lastPlayedNumGuesses;
 - (void)startGame;

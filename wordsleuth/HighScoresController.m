@@ -18,6 +18,8 @@
 
 @implementation HighScoresController
 
+@synthesize gameState;
+
 @synthesize highScoresTableView;
 @synthesize timeLeftLabel;
 @synthesize yourScoreLabel;
@@ -36,11 +38,13 @@
     return [UIColor colorWithRed:.91f green:.67f blue:.15f alpha:1.0f];
 }
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithGameState:(GameState *)gState {
+
+    self = [super initWithNibName:@"HighScores" bundle:nil];
     if (!self)
         return nil;
+    
+    self.gameState = gState;
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Best Scores";
@@ -206,7 +210,8 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"FullBackground.png"]];
     self.highScoresTableView.backgroundColor = [UIColor clearColor];    
     self.highScoresTableView.rowHeight = 34.0f;
-    [self updateTimeLeftLabel];
+
+    //[self updateTimeLeftLabel];
     
     [self.playAgainButton styleWithGradientColor:[HighScoresController highlightColor]];
     
@@ -324,6 +329,44 @@
     return numScores;
 }
 
+- (int)getSecondsUntilNextPlay {
+    // figure out how long until user can play a word:
+
+    NSDate *now = [NSDate date];    
+    
+    int secondsUntilNextPlay = 0;
+    if (debugTimer) {
+        // should not be enabled for shipped version, debugging only.
+        // pretend remaining time is very short so we can test game rollover.
+        secondsUntilNextPlay = (int)[debugTimerExpiration timeIntervalSinceDate:now];
+        
+    } else {
+        // only give them a wait period if they haven't played today's yet.  they
+        // might have just finished a previous day's word at this point.
+        
+        NSDate *lastPlayedDate = [self.gameState lastPlayedDate];
+        NSDate *lastResetDate = [TimeUtil getLastResetDate:lastPlayedDate];
+        
+        // if the last play is before this most recent reset, they can play now.
+        // this is the case if someone finishes a previous day's word after the
+        // reset:
+        
+        int diff = (int)[lastResetDate timeIntervalSinceDate:lastPlayedDate];
+        if (diff > 0) {
+            // last reset is after the last play
+            return 0; // allow immediate play.
+        }
+        
+        // so user needs to wait on a countdown until next reset:
+        NSDate *nextResetDate = [TimeUtil getNextResetDate:lastPlayedDate];
+        
+        secondsUntilNextPlay = (int)[nextResetDate timeIntervalSinceDate:now];
+    }
+    return secondsUntilNextPlay;
+    
+}
+
+
 - (NSMutableString *) formatTimeLeft: (int) secsuntilmidnight  {
     int hours = secsuntilmidnight / 3600;
     int remainder = secsuntilmidnight % 3600;
@@ -345,57 +388,53 @@
     return timeLeft;
 }
 
+- (void)enableNextPlay {
+    // enable next round of play:
+
+    // disable time countdown.  show play button.
+    
+    [self.timer invalidate];
+    self.timer = nil;
+    
+    // clear game state and pre-fetch next word
+    wordsleuthAppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    [delegate resetGame];
+    
+    // clear user's score. (issue #46)
+    self.lastPlayedNumGuesses = 0;
+    [self showUserScore];
+    
+    [self togglePlayAgainButton:YES];
+
+}
+
+
 - (void)updateTimeLeft {
     // timer callback.  update the label and then go to a new game if timer
     // is up
     
     //NSLog(@"HSC:updateTimeLeft");
     
-    int secondsUntilReset = [self updateTimeLeftLabel];
+    // calculate time until next word is available
+    int secondsUntilNextPlay = [self getSecondsUntilNextPlay];
     
     // BDE testing hack:
-    //secondsUntilReset = 0;
+    //secondsUntilNextPlay = 0;
     
-    if (secondsUntilReset <= 0) {
+    if (secondsUntilNextPlay <= 0) {
+        [self enableNextPlay];
         
-        // disable time countdown.  show play button.
-        
-        [self.timer invalidate];
-        self.timer = nil;
-        
-        // clear game state and pre-fetch next word
-        wordsleuthAppDelegate *delegate = [[UIApplication sharedApplication]delegate];
-        [delegate resetGame];
-        
-        // clear user's score. (issue #46)
-        self.lastPlayedNumGuesses = 0;
-        [self showUserScore];
-        
-        [self togglePlayAgainButton:YES];
-        
+    } else {
+        // update the time left countdown
+        [self updateTimeLeftLabel:secondsUntilNextPlay];
     }
     
 }
-- (int)updateTimeLeftLabel {
+
+- (void)updateTimeLeftLabel:(int)secondsUntilNextPlay {
     // iphone date/time library is the poo.. the steaming kind
     
-    NSDate *now = [NSDate date];    
-
-    int secondsUntilReset = 0;
-    if (debugTimer) {
-        // should not be enabled for shipped version, debugging only.
-        // pretend remaining time is very short so we can test game rollover.
-        secondsUntilReset = (int)[debugTimerExpiration timeIntervalSinceDate:now];
-        
-    } else {
-        wordsleuthAppDelegate *delegate = (wordsleuthAppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSDate *nextReset = [TimeUtil getNextResetDate:[delegate lastPlayedDate]];;
-        secondsUntilReset = (int)[nextReset timeIntervalSinceDate:now];
-    }
-    
-    self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilReset]];
-    
-    return secondsUntilReset;
+    self.timeLeftLabel.text = [NSString stringWithFormat:@"Play again in just %@!", [self formatTimeLeft: secondsUntilNextPlay]];
 }
 
 - (IBAction)pressedPlayAgain:(id)sender {
@@ -475,10 +514,8 @@
 
 
 -(void) debugGestureDetected {
-    [self.timer invalidate];
-    self.timer = nil;
-
-    [self togglePlayAgainButton:YES];
+    
+    [self enableNextPlay];
 }
 
 - (void)showUserScore {

@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "DebugGestureView.h"
+#import "GameState.h"
 
 @interface HighScoresController : UIViewController <DebugViewDelegate> {
+    
+    GameState *gameState;
     
     IBOutlet UITableView *highScoresTableView;
     IBOutlet UILabel *yourScoreLabel;
@@ -30,6 +33,8 @@
     NSDate *debugTimerExpiration;  
 }
 
+@property (nonatomic, retain) GameState *gameState;
+
 @property (nonatomic, retain) IBOutlet UITableView *highScoresTableView;
 @property (nonatomic, retain) IBOutlet UILabel *timeLeftLabel;
 @property (nonatomic, retain) IBOutlet UILabel *yourScoreLabel;
@@ -45,10 +50,15 @@
 @property (nonatomic, retain) UIAlertView *facebookBragPrompt;
 @property (nonatomic, retain) IBOutlet UIButton *facebookBragButton;
 
+- (id)initWithGameState:(GameState *)gState;
+
 - (void)enableTimer;
 - (NSMutableString *) formatTimeLeft:(int) secsuntilmidnight;
+- (int)getSecondsUntilNextPlay;
+- (void)enableNextPlay;
 - (void)updateTimeLeft;
-- (int)updateTimeLeftLabel;
+- (void)updateTimeLeftLabel:(int)secondsUntilNextPlay;
+
 - (IBAction)pressedPlayAgain:(id)sender;
 - (void)togglePlayAgainButton:(BOOL)enabled;
 - (void) loadBestScores;

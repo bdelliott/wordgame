@@ -23,6 +23,7 @@
 @synthesize closestAfterGuess;
 
 @synthesize word;
+@synthesize wordDate;
 
 - (id)init {
     
@@ -112,6 +113,7 @@
             NSDictionary *dictionary = [response JSONValue];
             
             self.word = [dictionary objectForKey:@"word"];
+            self.wordDate = [self wordDateFromDict:dictionary];
             
             NSLog(@"Finished loading word: %@", word);
             break;
@@ -127,6 +129,37 @@
     
     [pool release];
 }
+
+- (NSDate *) wordDateFromDict:(NSDictionary *)dictionary {
+    // pull out the word's date from "get_word" response dictionary
+    
+    NSString *tmp = [dictionary objectForKey:@"year"];
+    NSInteger year = [tmp integerValue];
+    
+    tmp = [dictionary objectForKey:@"month"];
+    NSInteger month = [tmp integerValue];
+    
+    tmp = [dictionary objectForKey:@"day"];
+    NSInteger day = [tmp integerValue];
+    
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    [cal setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setYear:year];
+    [comps setMonth:month];
+    [comps setDay:day];
+    [comps setHour:8];  // 8 am GMT is our rollover time.
+    [comps date];
+    [comps setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [comps setCalendar:cal];
+     
+    NSDate *wDate = [comps date];
+    [comps release];
+    
+    return wDate;     
+}
+
 
 - (WordComparison)checkGuess:(NSString *)guess {
     

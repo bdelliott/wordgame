@@ -25,7 +25,8 @@ typedef enum {
     BOOL hasPlayedToday;
     int lastPlayedNumGuesses;
     
-    NSString *word; // today's word.
+    NSString *word; // word being played
+    NSDate *wordDate; // date of word being played
     
     NSString *closestBeforeGuess;
     NSString *closestAfterGuess;
@@ -38,6 +39,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL hasPlayedToday;
 
 @property (nonatomic, retain) NSString *word;
+@property (nonatomic, retain) NSDate *wordDate;
 
 @property (nonatomic, retain) NSMutableArray *guesses;
 @property (nonatomic, retain) NSString *closestBeforeGuess;
@@ -50,6 +52,7 @@ typedef enum {
 
 - (void)doFetchWord; // private
 - (void)fetchWord;
+- (NSDate *) wordDateFromDict:(NSDictionary *)dictionary;
 
 - (BOOL)hasPlayedToday;
 - (NSDate *) lastPlayedDate;

@@ -48,9 +48,8 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
     [self configureAppRating]; // configure prompting for app store ratings.
-    
     self.bragFacebook = [[BragFacebook alloc] init];
-
+    
     // initialize main game play controller:
     self.playGameController = [[PlayGameController alloc] initWithNibName:@"PlayGame" bundle:nil];
     
@@ -175,6 +174,8 @@ NSString* const ApplicationBecameActive = @"ApplicationBecameActive";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    NSLog(@"WSAD: applicationDidBecomeActive");
+
     [[NSNotificationCenter defaultCenter] postNotificationName:ApplicationBecameActive object:nil];
 }
 

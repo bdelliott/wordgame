@@ -4,6 +4,7 @@ syntax: glob
 *.pyc
 *.orig
 *xcuserdata*
+xcuserdata
 .DS_Store
 .gaedata
 

@@ -1,0 +1,25 @@
+# Word du Jour #
+
+*Description*: Word du Jour is an iPhone daily word guessing game.  You can find it on the App Store
+here: http://itunes.apple.com/gb/app/word-du-jour/id442117507?mt=8
+
+*Author*: Sparkle Software, LLC
+
+Brian Elliott <brian@sparklesoftware.com>
+Matthew Botos <matthew@sparklesoftware.com>
+
+*License*: MIT
+
+*Structure*
+
+This code consists of 2 major functional elements:
+
+** XCode Project **
+
+This piece, written in Objective-C, is the client piece developed for the iPhone
+
+** Django Backend **
+
+A Django (Python) webapp backend for collecting scores, etc.
+
+                  is added as a remote called "hg" in the base repo

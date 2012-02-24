@@ -13,6 +13,7 @@
 
 @class ScorePoster;
 
+// test 
 @interface PlayGameController : UIViewController <MBProgressHUDDelegate> {
     
     GameState *gameState;

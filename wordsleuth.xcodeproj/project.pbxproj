@@ -51,7 +51,6 @@
 		7112216B135E15AF0067C7DB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7112216A135E15AF0067C7DB /* CFNetwork.framework */; };
 		7112216D135E15BD0067C7DB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7112216C135E15BD0067C7DB /* SystemConfiguration.framework */; };
 		7112216F135E15C70067C7DB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7112216E135E15C70067C7DB /* MobileCoreServices.framework */; };
-		71122172135E15D40067C7DB /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 71122171135E15D40067C7DB /* libz.1.2.3.dylib */; };
 		71184923137C91BB007EA87E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 71184922137C91BB007EA87E /* MBProgressHUD.m */; };
 		711F835113672A14000CD08C /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 711F834A13672A14000CD08C /* TSAlertView.m */; };
 		711F835213672A14000CD08C /* TSAlertViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 711F834B13672A14000CD08C /* TSAlertViewBackground.png */; };
@@ -90,6 +89,7 @@
 		71BA2BEF139E790F00B6482E /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 71BA2BEE139E790F00B6482E /* facebook.png */; };
 		71BA2BF3139E80A200B6482E /* BragFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA2BF2139E80A200B6482E /* BragFacebook.m */; };
 		71BB57F0138D2EF500DF35F1 /* DebugGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */; };
+		71E9378D14F7243E0014A068 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 71E9378C14F7243E0014A068 /* libz.1.2.5.dylib */; };
 		71F065FB13D714EB0075694C /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F065FA13D714EB0075694C /* GameState.m */; };
 		71F065FF13D718EF0075694C /* ScorePoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F065FE13D718EF0075694C /* ScorePoster.m */; };
 /* End PBXBuildFile section */
@@ -247,6 +247,7 @@
 		71BA2BF2139E80A200B6482E /* BragFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BragFacebook.m; sourceTree = "<group>"; };
 		71BB57EE138D2EF500DF35F1 /* DebugGestureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugGestureView.h; sourceTree = "<group>"; };
 		71BB57EF138D2EF500DF35F1 /* DebugGestureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugGestureView.m; sourceTree = "<group>"; };
+		71E9378C14F7243E0014A068 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		71F065F913D714EB0075694C /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
 		71F065FA13D714EB0075694C /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
 		71F065FC13D715410075694C /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
@@ -259,7 +260,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71122172135E15D40067C7DB /* libz.1.2.3.dylib in Frameworks */,
+				71E9378D14F7243E0014A068 /* libz.1.2.5.dylib in Frameworks */,
 				71B3B6BF1357ADE6002EDD42 /* CoreGraphics.framework in Frameworks */,
 				7112216F135E15C70067C7DB /* MobileCoreServices.framework in Frameworks */,
 				7112216D135E15BD0067C7DB /* SystemConfiguration.framework in Frameworks */,
@@ -484,6 +485,7 @@
 		71B3B6AB1357ADE6002EDD42 = {
 			isa = PBXGroup;
 			children = (
+				71E9378C14F7243E0014A068 /* libz.1.2.5.dylib */,
 				71BA2BE9139E789A00B6482E /* 3rd party code */,
 				7194175813A8DD2900969B63 /* Analytics */,
 				71BA2BE8139E788D00B6482E /* Brags */,
@@ -701,6 +703,7 @@
 		71B3B6AD1357ADE6002EDD42 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Sparkle Software";
 			};
 			buildConfigurationList = 71B3B6B01357ADE6002EDD42 /* Build configuration list for PBXProject "wordsleuth" */;
@@ -960,6 +963,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wordsleuth/wordsleuth-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					ASI,
 					HTTP,
@@ -985,6 +989,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wordsleuth/wordsleuth-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					ASI,
 					HTTP,
@@ -1014,6 +1019,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wordsleuthTests/wordsleuthTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "wordsleuthTests/wordsleuthTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1036,6 +1042,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wordsleuthTests/wordsleuthTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "wordsleuthTests/wordsleuthTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1073,6 +1080,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wordsleuth/wordsleuth-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					ASI,
 					HTTP,
@@ -1102,6 +1110,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wordsleuthTests/wordsleuthTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "wordsleuthTests/wordsleuthTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",

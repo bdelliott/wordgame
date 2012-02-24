@@ -22,4 +22,3 @@ This piece, written in Objective-C, is the client piece developed for the iPhone
 
 A Django (Python) webapp backend for collecting scores, etc.
 
-                  is added as a remote called "hg" in the base repo

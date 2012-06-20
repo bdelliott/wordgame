@@ -1,20 +1,25 @@
 application: sparkleword
-version: 7
-runtime: python
+version: 8
+runtime: python27
 api_version: 1
+threadsafe: yes
 
 builtins:
-- datastore_admin: on
+#- datastore_admin: on
 - remote_api: on
+
+libraries:
+- name: django
+  version: latest
 
 handlers:
 
-- url: /remote_api
-  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
-
 - url: /_ah/queue/deferred
-  script: djangoappengine/deferred/handler.py
+  script: djangoappengine.deferred.handler.application
   login: admin
+
+- url: /_ah/stats/.*
+  script: djangoappengine.appstats.application
 
 # mapping to the Django admin site's static files.
 - url: /media/admin
@@ -22,12 +27,12 @@ handlers:
   expiration: '0'
 
 # helper to get logged out of your app engine session
-- url: /logout
-  script: util/logout.py
+#- url: /logout
+#script: util/logout.py
 
 # cronjob.
 - url: /cron/.*
-  script: djangoappengine/main/main.py
+  script: djangoappengine.main.application
   login: admin
 
 # miscellaneous static files.
@@ -37,4 +42,4 @@ handlers:
 
 # main site.
 - url: /.*
-  script: djangoappengine/main/main.py
+  script: djangoappengine.main.application

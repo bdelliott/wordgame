@@ -5,6 +5,10 @@ from djangoappengine.settings_base import *
 
 import os
 
+DATABASES['native'] = DATABASES['default']
+DATABASES['default'] = {'ENGINE': 'dbindexer', 'TARGET': 'native'}
+AUTOLOAD_SITECONF = 'indexes'
+
 # the project directory
 ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,6 +35,8 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.sessions',
     'djangotoolbox',
+    'autoload',
+    'dbindexer',
 
     # web service application
     'service',
@@ -43,6 +49,9 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    # This loads the index definitions, so it has to come first
+    'autoload.middleware.AutoloadMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -68,18 +77,6 @@ TEMPLATE_DIRS = (
     os.path.join(ROOT_PATH, "cron", "templates"),
 )
 
-# Activate django-dbindexer if available
-try:
-    import dbindexer
-    DATABASES['native'] = DATABASES['default']
-    DATABASES['default'] = {'ENGINE': 'dbindexer', 'TARGET': 'native'}
-    INSTALLED_APPS += ('dbindexer',)
-    DBINDEXER_SITECONF = 'dbindexes'
-    MIDDLEWARE_CLASSES = ('dbindexer.middleware.DBIndexerMiddleware',) + \
-                         MIDDLEWARE_CLASSES
-except ImportError:
-    pass
-    
 # profiling - use with care.
 ENABLE_PROFILER = False
 SORT_PROFILE_RESULTS_BY = "cumulative" # http://docs.python.org/release/2.5.4/lib/profile-stats.html
